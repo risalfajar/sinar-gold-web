@@ -1,0 +1,33 @@
+{
+    "name": "routify-starter",
+    "private": true,
+    "scripts": {
+        "dev": "run-p dev:*",
+        "dev:routify": "routify",
+        "dev:vite": "vite",
+        "preview": "vite preview",
+        "build": "run-s build:*",
+        "build:routify": "routify -b",
+        "build:vite": "vite build"
+    },
+    "devDependencies": {
+        "@roxi/routify": "^2.18.8",
+        "@skeletonlabs/skeleton": "^0.80.9",
+        "@sveltejs/vite-plugin-svelte": "^2.0.2",
+        "@tailwindcss/forms": "^0.5.3",
+        "@tsconfig/svelte": "^3.0.0",
+        "autoprefixer": "^10.4.13",
+        "npm-run-all": "^4.1.5",
+        "postcss": "^8.4.20",
+        "postcss-import": "^15.1.0",
+        "svelte": "^3.55.0",
+        "svelte-preprocess": "^5.0.0",
+        "tailwindcss": "^3.2.4",
+        "typescript": "^4.9.4",
+        "vite": "^4.0.3",
+        "vite-tsconfig-paths": "^4.0.3"
+    },
+    "dependencies": {
+        "firebase": "^9.15.0"
+    }
+}

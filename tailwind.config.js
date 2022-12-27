@@ -15,6 +15,9 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Manrope', ...defaultTheme.fontFamily.sans]
+            },
+            transitionProperty: {
+                'width': 'width'
             }
         },
     },

@@ -1,10 +1,17 @@
 <script lang="ts">
     import {onMount} from "svelte"
     import {listenUser} from "src/lib/auth/authManager"
-    import {isActive, redirect} from "@roxi/routify"
+    import {isActive, redirect, url} from "@roxi/routify"
     import {Toast} from "@skeletonlabs/skeleton"
+    import {User} from "firebase/auth"
 
-    onMount(() => listenUser(user => {
+    let user: User | null
+
+    $: $url() && verifyAccess(user)
+
+    onMount(() => listenUser(value => user = value))
+
+    function verifyAccess(user: User | null) {
         const isLoggedIn = user != null
 
         if ($isActive("/dashboard") && !isLoggedIn)
@@ -16,7 +23,7 @@
                 $redirect('/dashboard')
             else
                 $redirect('/login')
-    }))
+    }
 </script>
 
 <Toast/>

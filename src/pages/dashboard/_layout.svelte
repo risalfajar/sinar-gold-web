@@ -4,6 +4,6 @@
 </script>
 
 <AppShell>
-    <Sidebar slot="sidebarLeft">Sidebar Left</Sidebar>
+    <Sidebar slot="sidebarLeft"/>
     <slot/>
 </AppShell>

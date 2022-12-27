@@ -3,7 +3,7 @@ import {connectAuthEmulator, getAuth} from 'firebase/auth'
 import {connectFirestoreEmulator, getFirestore} from 'firebase/firestore'
 import {connectStorageEmulator, getStorage} from 'firebase/storage'
 import {connectFunctionsEmulator, getFunctions} from 'firebase/functions'
-import {CloudFunctionConstants} from 'src/features/common/constants'
+import {CLOUD_FUNCTIONS_DEFAULT_REGION} from 'src/features/common/constants'
 
 const firebaseConfig = {
     apiKey: "AIzaSyCBQ6c9z6x77zXFR_VDYzs87wM88mMibAs",
@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig)
 const Auth = getAuth(app)
 const Firestore = getFirestore(app)
 const Storage = getStorage(app)
-const Functions = getFunctions(app, CloudFunctionConstants.DEFAULT_REGION)
+const Functions = getFunctions(app, CLOUD_FUNCTIONS_DEFAULT_REGION)
 
 const isDevelopment = import.meta.env.DEV
 if (isDevelopment) {

@@ -1,19 +1,18 @@
 import type firebase from 'firebase/auth'
 import {NextOrObserver, onAuthStateChanged, signInWithEmailAndPassword, signOut as authSignOut, Unsubscribe, User} from 'firebase/auth'
 import {Auth} from 'src/config/firebase'
-import {AuthConstants} from "src/features/common/constants"
-
-const {CUSTOM_CLAIMS_ROLE, USERNAME_EMAIL_SUFFIX} = AuthConstants
+import {CUSTOM_CLAIMS_ROLE, USERNAME_SUFFIX} from "src/features/common/constants"
+import {Role} from "src/features/user/types/role"
 
 export function signIn(username: string, password: string) {
-    return signInWithEmailAndPassword(Auth, username + USERNAME_EMAIL_SUFFIX, password)
+    return signInWithEmailAndPassword(Auth, username + USERNAME_SUFFIX, password)
 }
 
 export async function getUserId(): Promise<string | undefined> {
     return (await getUser())?.uid
 }
 
-export async function getRole(): Promise<string | object | undefined> {
+export async function getRole(): Promise<Role> {
     const claims = await getCustomClaims()
     return claims?.[CUSTOM_CLAIMS_ROLE]
 }

@@ -5,5 +5,7 @@
 
 <AppShell>
     <Sidebar slot="sidebarLeft"/>
-    <slot/>
+    <div class="w-full h-full max-w-full max-h-full p-6">
+        <slot/>
+    </div>
 </AppShell>

@@ -3,6 +3,7 @@
     import Illustration from "src/features/dashboard/Illustration.svelte"
     import {signOut} from "src/lib/auth/authManager"
     import {errorToast} from "src/lib/utils/toastUtils"
+    import Button from "src/lib/ui/button/Button.svelte"
 
     let isSigningOut = false
 
@@ -58,7 +59,7 @@
                 <!-- TODO sales results -->
                 <p class="unstyled text-caption">Tidak ada penjualan hari ini</p>
             </div>
-            <button class="self-end btn text-primary-500 hoverable">lihat semua...</button>
+            <Button class="self-end font-normal text-primary-500">lihat semua...</Button>
         </div>
     </div>
 </div>

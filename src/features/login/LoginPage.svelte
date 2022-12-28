@@ -17,7 +17,6 @@
         isLoading = true
         try {
             await signIn(username, password)
-            // $goto('/')
         } catch (err) {
             console.error(err)
             errorToast('Login gagal, periksa kembali username dan password anda')
@@ -28,7 +27,7 @@
 
 <div class="w-screen h-screen flex justify-center items-center">
     <form class="w-full max-w-[75%] lg:max-w-[50%] xl:max-w-[30%] bg-accent-500 rounded-3xl shadow-lg flex flex-col items-center justify-between gap-y-4 p-8"
-          on:submit|preventDefault={login}>
+          on:submit|preventDefault={isFormValid && login}>
         <AppLogo logoText class="mb-12"/>
         <TextInput dark label="Username" bind:value={username}/>
         <PasswordInput dark label="Password" bind:value={password}/>

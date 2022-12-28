@@ -28,7 +28,7 @@
                 on:input={(e) => value = e.target.value}
                 {...$$restProps}/>
         <span class="absolute inset-y-0 right-0 z-10 pr-2">
-            <button class="btn-icon" on:click={() => showPassword = !showPassword}>
+            <button type="button" class="btn-icon" on:click={() => showPassword = !showPassword}>
                 <i class="material-icons">{showPassword ? "visibility" : "visibility_off"}</i>
             </button>
         </span>

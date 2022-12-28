@@ -4,7 +4,7 @@ import {throwError} from 'svelte-preprocess/dist/modules/errors'
 import {User, userConverter} from "src/features/user/types/user"
 import {FirestoreRepository} from "src/lib/data/firestoreRepository"
 import {getUserId} from "src/lib/auth/authManager"
-import {COLLECTION_USERS} from "src/features/common/constants"
+import {COLLECTION_USERS} from "src/lib/constants"
 
 export class UserRepository extends FirestoreRepository<User> {
 

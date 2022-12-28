@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {Icon} from "src/features/common/types/icon"
+    import {Icon} from "src/lib/types/icon"
 
     const logos: Icon[] = [
         {

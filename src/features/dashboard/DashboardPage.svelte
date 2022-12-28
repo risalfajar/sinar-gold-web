@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {currentUser} from "src/features/common/stores"
+    import {currentUser} from "src/lib/stores"
     import Illustration from "src/features/dashboard/Illustration.svelte"
     import {signOut} from "src/lib/auth/authManager"
     import {errorToast} from "src/lib/utils/toastUtils"

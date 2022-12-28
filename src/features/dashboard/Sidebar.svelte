@@ -1,7 +1,7 @@
 <script lang="ts">
-    import AppLogo from "src/features/common/ui/AppLogo.svelte"
+    import AppLogo from "src/lib/ui/AppLogo.svelte"
     import {menus} from "src/features/dashboard/data/menus"
-    import Icon from "src/features/common/ui/icon/Icon.svelte"
+    import Icon from "src/lib/ui/icon/Icon.svelte"
     import {AccordionItem} from "@skeletonlabs/skeleton"
     import {fly} from "svelte/transition"
     import {goto} from "@roxi/routify"

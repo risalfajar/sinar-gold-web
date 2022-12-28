@@ -1,7 +1,7 @@
 import type firebase from 'firebase/auth'
 import {NextOrObserver, onAuthStateChanged, signInWithEmailAndPassword, signOut as authSignOut, Unsubscribe, User} from 'firebase/auth'
 import {Auth} from 'src/config/firebase'
-import {CUSTOM_CLAIMS_ROLE, USERNAME_SUFFIX} from "src/features/common/constants"
+import {CUSTOM_CLAIMS_ROLE, USERNAME_SUFFIX} from "src/lib/constants"
 import {Role} from "src/features/user/types/role"
 
 export function signIn(username: string, password: string) {

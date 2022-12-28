@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {icons} from "src/features/common/ui/icon/icons"
+    import {icons} from "src/lib/ui/icon/icons"
 
     export let name: string
 
@@ -8,6 +8,6 @@
     $: height = icon?.height ?? 24
 </script>
 
-<svg {width} {height} focusable="false" viewBox="0 0 {width} {height}" {...$$restProps}>
+<svg {width} {height} focusable="false" viewBox="0 0 {width} {height}" class="fill-white {$$props.class}" {...$$restProps}>
     {@html icon?.vector ?? ''}
 </svg>

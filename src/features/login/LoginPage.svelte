@@ -1,8 +1,8 @@
 <script lang="ts">
-    import AppLogo from "src/features/common/ui/AppLogo.svelte"
+    import AppLogo from "src/lib/ui/AppLogo.svelte"
     import TextInput from "src/lib/ui/form/TextInput.svelte"
     import PasswordInput from "src/lib/ui/form/PasswordInput.svelte"
-    import {MIN_PASSWORD_LENGTH} from "src/features/common/constants"
+    import {MIN_PASSWORD_LENGTH} from "src/lib/constants"
     import Button from "src/lib/ui/button/Button.svelte"
     import {signIn} from "src/lib/auth/authManager"
     import {errorToast} from "src/lib/utils/toastUtils"

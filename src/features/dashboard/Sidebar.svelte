@@ -9,7 +9,7 @@
     let isExpanded = true
 </script>
 
-<div class="flex flex-col h-screen items-center gap-4 bg-accent-500 p-6 rounded-r-xl transition-width {isExpanded ? 'w-[20em]' : 'w-[6em]'}">
+<div class="flex flex-col h-screen items-center gap-4 bg-accent-500 p-6 rounded-r-3xl transition-width {isExpanded ? 'w-[20em]' : 'w-[6em]'}">
     {#key isExpanded}
         <div class="w-full flex flex-row justify-center items-center gap-2" in:fly={{x: 100}}>
             <AppLogo class="flex-none"/>

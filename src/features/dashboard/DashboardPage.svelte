@@ -4,6 +4,7 @@
     import {signOut} from "src/lib/auth/authManager"
     import {errorToast} from "src/lib/utils/toastUtils"
     import Button from "src/lib/ui/button/Button.svelte"
+    import IconButton from "src/lib/ui/button/IconButton.svelte"
 
     let isSigningOut = false
 
@@ -47,9 +48,9 @@
                     <p class="unstyled text-accent-500">{$currentUser?.name}</p>
                     <p class="unstyled text-caption">Role: {$currentUser?.role}</p>
                 </div>
-                <button class="btn-icon hoverable" on:click={logout}>
+                <IconButton isLoading={isSigningOut} on:click={logout}>
                     <i class="material-icons">logout</i>
-                </button>
+                </IconButton>
             </div>
         </div>
 

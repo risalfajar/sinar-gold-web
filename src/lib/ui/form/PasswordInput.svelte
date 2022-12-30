@@ -1,10 +1,4 @@
-<script lang="ts" context="module">
-    let globalId = 0
-</script>
-
 <script lang="ts">
-    const id = "password-input-" + globalId++
-
     export let value
     export let label: string = ''
     export let hint: string = 'Masukkan ' + label
@@ -17,12 +11,11 @@
 </script>
 
 <div class="w-full {$$props.class}">
-    <label for={id} class="font-bold text-base mb-2 {dark && 'text-on-accent-token'}">{label}</label>
+    <label class="font-bold text-base mb-2 {dark && 'text-on-accent-token'}">{label}</label>
     <div class="relative w-full">
         <input
                 {value}
                 {type}
-                {id}
                 placeholder={hint}
                 on:keydown
                 on:input={(e) => value = e.target.value}

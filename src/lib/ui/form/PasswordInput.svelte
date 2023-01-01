@@ -26,6 +26,6 @@
         </button>
     </TextInput>
     {#if showHelperText}
-        <p class="pt-2 !text-xs !text-gray-300">Minimal 7 karakter</p>
+        <p class="pt-2 !text-xs {dark ? '!text-gray-300' : '!text-gray-700'}">Minimal 7 karakter</p>
     {/if}
 </div>

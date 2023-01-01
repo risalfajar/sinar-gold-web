@@ -30,7 +30,7 @@
           on:submit|preventDefault={isFormValid && login}>
         <AppLogo logoText class="mb-12"/>
         <TextInput dark label="Username" bind:value={username}/>
-        <PasswordInput dark label="Password" bind:value={password}/>
+        <PasswordInput dark bind:value={password}/>
         <Button action="submit" class="mt-4 btn-filled-primary" disabled={!isFormValid} {isLoading}>Masuk</Button>
     </form>
 </div>

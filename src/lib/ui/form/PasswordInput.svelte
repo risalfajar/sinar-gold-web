@@ -2,7 +2,7 @@
     import TextInput from "src/lib/ui/form/TextInput.svelte"
 
     export let value
-    export let label: string = ''
+    export let label: string = 'Password'
     export let hint: string = 'Masukkan ' + label
     export let dark: boolean = false
     export let showHelperText: boolean = true

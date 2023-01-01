@@ -2,7 +2,7 @@
     import {onMount} from "svelte"
     import {listenUser} from "src/lib/auth/authManager"
     import {isActive, redirect, url} from "@roxi/routify"
-    import {ProgressRadial, Toast} from "@skeletonlabs/skeleton"
+    import {ProgressRadial} from "@skeletonlabs/skeleton"
     import {User} from "firebase/auth"
     import {debounce} from "lodash-es"
 
@@ -32,7 +32,6 @@
     }
 </script>
 
-<Toast/>
 {#if isLoading}
     <div class="w-screen h-screen flex justify-center items-center">
         <ProgressRadial class="w-16"/>

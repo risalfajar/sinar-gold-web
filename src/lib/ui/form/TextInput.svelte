@@ -21,7 +21,7 @@
                on:input
                on:keydown
                {...$$restProps}
-               class="bg-white shadow-none border border-gray-400 placeholder:text-gray-400"
+               class="bg-white shadow-none border border-gray-300 placeholder:text-gray-400"
                class:pl-10={$$slots.start}
                class:pr-10={$$slots.end}>
         {#if $$slots.end}

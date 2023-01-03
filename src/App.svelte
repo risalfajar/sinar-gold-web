@@ -1,8 +1,9 @@
 <script>
     import {Router} from "@roxi/routify"
     import {routes} from "../.routify/routes"
-    import {Toast} from "@skeletonlabs/skeleton"
+    import {Modal, Toast} from "@skeletonlabs/skeleton"
 </script>
 
-<Toast/>
+<Modal background="bg-white" rounded="rounded-xl" regionHeader="text-xl font-bold"/>
+<Toast buttonDismiss="btn-ringed-surface"/>
 <Router {routes}/>

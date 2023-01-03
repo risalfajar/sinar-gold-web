@@ -9,7 +9,7 @@
     let isExpanded = true
 </script>
 
-<div class="flex flex-col h-screen items-center gap-4 bg-accent-500 p-6 rounded-r-3xl transition-width {isExpanded ? 'w-[20em]' : 'w-[6em]'}">
+<div class="flex flex-col h-screen items-center gap-4 bg-secondary-500 p-6 rounded-r-3xl transition-width {isExpanded ? 'w-[20em]' : 'w-[6em]'}">
     {#key isExpanded}
         <div class="w-full flex flex-row justify-center items-center gap-2" in:fly={{x: 100}}>
             <AppLogo class="flex-none"/>
@@ -57,7 +57,7 @@
     {/key}
 
     <button class="btn-icon btn-filled-primary" on:click={() => isExpanded = !isExpanded}>
-        <i class="material-icons text-accent-500 transition-all duration-300" class:rotate-180={isExpanded}>chevron_right</i>
+        <i class="material-icons text-secondary-500 transition-all duration-300" class:rotate-180={isExpanded}>chevron_right</i>
     </button>
 </div>
 

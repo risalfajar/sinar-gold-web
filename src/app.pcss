@@ -9,6 +9,14 @@ html, body {
     @apply h-full overflow-hidden;
 }
 
+*::-webkit-scrollbar-thumb {
+    @apply bg-surface-600 hover:bg-surface-700 transition-colors;
+}
+
+*::-webkit-scrollbar-track {
+    @apply bg-surface-400;
+}
+
 .hoverable {
     @apply hover:bg-gray-300;
 }

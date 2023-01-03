@@ -42,10 +42,10 @@
 
     <div class="flex flex-col col-span-2 gap-6">
         <div class="bg-white card">
-            <p class="unstyled text-accent-500 font-bold text-lg">Profil</p>
+            <p class="unstyled text-secondary-500 font-bold text-lg">Profil</p>
             <div class="mt-4 [&_p]:font-semibold flex flex-row justify-between items-center">
                 <div>
-                    <p class="unstyled text-accent-500">{$currentUser?.name}</p>
+                    <p class="unstyled text-secondary-500">{$currentUser?.name}</p>
                     <p class="unstyled text-caption">Role: {$currentUser?.role}</p>
                 </div>
                 <IconButton isLoading={isSigningOut} on:click={logout}>
@@ -55,7 +55,7 @@
         </div>
 
         <div class="card bg-white flex flex-col">
-            <p class="unstyled text-accent-500 font-bold text-lg">Hasil Penjualan Sales</p>
+            <p class="unstyled text-secondary-500 font-bold text-lg">Hasil Penjualan Sales</p>
             <div class="max-h-full overflow-y-auto my-4">
                 <!-- TODO sales results -->
                 <p class="unstyled text-caption">Tidak ada penjualan hari ini</p>

@@ -6,6 +6,7 @@ export type User = {
     password: string
     name: string
     role: Role
+    pages: string[]
     created?: Date
 }
 

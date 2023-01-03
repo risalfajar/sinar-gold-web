@@ -3,5 +3,6 @@ export enum Role {
     SUPERVISOR = "SUPERVISOR",
     ADMIN = "ADMIN",
     CASHIER = "CASHIER",
-    SALES = "SALES"
+    SALES = "SALES",
+    TUKANG = "TUKANG"
 }

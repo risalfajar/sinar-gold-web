@@ -1,6 +1,6 @@
 <script>
     import {AppShell} from "@skeletonlabs/skeleton"
-    import Sidebar from "src/features/dashboard/Sidebar.svelte"
+    import Sidebar from "./dashboard/Sidebar.svelte"
 </script>
 
 <AppShell>

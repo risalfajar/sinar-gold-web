@@ -1,10 +1,10 @@
 <script lang="ts">
-    import {currentUser} from "src/lib/stores"
-    import Illustration from "src/features/dashboard/Illustration.svelte"
-    import {signOut} from "src/lib/auth/authManager"
-    import {errorToast} from "src/lib/utils/toastUtils"
-    import Button from "src/lib/ui/button/Button.svelte"
-    import IconButton from "src/lib/ui/button/IconButton.svelte"
+    import {currentUser} from "$lib/stores"
+    import {signOut} from "$lib/auth/authManager"
+    import {errorToast} from "$lib/utils/toastUtils"
+    import Button from "$lib/ui/button/Button.svelte"
+    import IconButton from "$lib/ui/button/IconButton.svelte"
+    import Illustration from "./dashboard/Illustration.svelte"
 
     let isSigningOut = false
 

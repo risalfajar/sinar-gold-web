@@ -1,6 +1,6 @@
 <script lang="ts">
     import {debounce} from 'lodash-es'
-    import TextInput from "src/lib/ui/form/TextInput.svelte"
+    import TextInput from "$lib/ui/form/TextInput.svelte"
 
     export let value = ''
     export let hint = 'Cari Item'

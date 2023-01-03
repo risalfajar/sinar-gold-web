@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Checkbox from "src/lib/ui/form/Checkbox.svelte"
+    import Checkbox from "$lib/ui/form/Checkbox.svelte"
 
     export let label
     export let group = []

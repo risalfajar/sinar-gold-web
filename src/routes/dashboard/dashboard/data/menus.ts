@@ -1,9 +1,9 @@
-import {Menu} from "src/features/dashboard/types/menu"
+import {Menu} from "../types/menu"
 
 export const menus: Menu[] = [
     {
         title: 'Beranda',
-        link: '/dashboard/index'
+        link: '/dashboard'
     },
     {
         title: 'Berlian',

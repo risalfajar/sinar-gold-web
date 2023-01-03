@@ -1,10 +1,10 @@
 <script lang="ts">
-    import AppLogo from "src/lib/ui/AppLogo.svelte"
-    import {menus} from "src/features/dashboard/data/menus"
-    import Icon from "src/lib/ui/icon/Icon.svelte"
+    import AppLogo from "$lib/ui/AppLogo.svelte"
+    import Icon from "$lib/ui/icon/Icon.svelte"
     import {AccordionItem} from "@skeletonlabs/skeleton"
     import {fly} from "svelte/transition"
-    import {goto} from "@roxi/routify"
+    import {menus} from "./data/menus.js"
+    import {goto} from "$app/navigation"
 
     let isExpanded = true
 </script>
@@ -35,20 +35,20 @@
                             <span slot="summary" class="font-semibold -m-1">{menu.title}</span>
                             <div slot="content" class="space-y-2">
                                 {#each menu.subMenus as subMenu (subMenu.title)}
-                                    <button class="w-full btn py-1 !justify-start hover:bg-primary-400" on:click={() => $goto(subMenu.link)}>
+                                    <button class="w-full btn py-1 !justify-start hover:bg-primary-400" on:click={() => goto(subMenu.link)}>
                                         <span class="font-semibold">{subMenu.title}</span>
                                     </button>
                                 {/each}
                             </div>
                         </AccordionItem>
                     {:else}
-                        <button class="btn !justify-start hover:bg-primary-400" on:click={() => $goto(menu.link)}>
+                        <button class="btn !justify-start hover:bg-primary-400" on:click={() => goto(menu.link)}>
                             <Icon name={menu.title}/>
                             <span class="pl-1 font-semibold">{menu.title}</span>
                         </button>
                     {/if}
                 {:else }
-                    <button class="btn btn-icon p-0" on:click={() => $goto(menu.link)}>
+                    <button class="btn btn-icon p-0" on:click={() => goto(menu.link)}>
                         <Icon name={menu.title}/>
                     </button>
                 {/if}

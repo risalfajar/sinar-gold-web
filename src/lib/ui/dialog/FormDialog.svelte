@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Button from "src/lib/ui/button/Button.svelte"
+    import Button from "$lib/ui/button/Button.svelte"
     import {modalStore} from "@skeletonlabs/skeleton"
     import {createEventDispatcher} from "svelte"
 

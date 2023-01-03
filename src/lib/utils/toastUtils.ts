@@ -5,7 +5,7 @@ export function successToast(message: string) {
         message,
         autohide: true,
         timeout: 3000,
-        classes: "bg-success-500 text-on-success-token"
+        classes: "!bg-success-500 !text-on-success-token"
     }
     toastStore.trigger(t)
 }
@@ -15,7 +15,7 @@ export function errorToast(message: string) {
         message,
         autohide: true,
         timeout: 5000,
-        classes: "bg-error-500 text-on-warning-token"
+        classes: "!bg-error-500 !text-on-warning-token"
     }
     toastStore.trigger(t)
 }

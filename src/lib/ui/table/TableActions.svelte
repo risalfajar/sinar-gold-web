@@ -1,6 +1,6 @@
 <script lang="ts">
     import {createEventDispatcher} from 'svelte'
-    import IconButton from "src/lib/ui/button/IconButton.svelte"
+    import IconButton from "$lib/ui/button/IconButton.svelte"
 
     const dispatch = createEventDispatcher()
 

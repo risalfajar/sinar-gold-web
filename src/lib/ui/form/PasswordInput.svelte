@@ -21,7 +21,7 @@
             {dark}
             on:input={(e) => value = e.target.value}
             {...$$restProps}>
-        <button slot="end" type="button" class="btn-icon" on:click={() => showPassword = !showPassword}>
+        <button tabindex="-1" slot="end" type="button" class="btn-icon" on:click={() => showPassword = !showPassword}>
             <i class="material-icons">{showPassword ? "visibility" : "visibility_off"}</i>
         </button>
     </TextInput>

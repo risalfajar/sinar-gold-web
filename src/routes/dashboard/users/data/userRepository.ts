@@ -22,8 +22,13 @@ export class UserRepository extends ReadOnlyFirestoreRepository<User> {
         return this.listen(uid, onChange)
     }
 
-    save(user: User): Promise<HttpsCallableResult> {
+    create(user: User): Promise<HttpsCallableResult> {
         const callable = httpsCallable(Functions, 'createUser')
+        return callable(user)
+    }
+
+    update(user: User): Promise<HttpsCallableResult> {
+        const callable = httpsCallable(Functions, 'updateUser')
         return callable(user)
     }
 }

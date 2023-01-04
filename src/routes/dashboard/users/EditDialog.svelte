@@ -37,7 +37,7 @@
     $: isEditMode = dataArgs != null
     $: isFormValid = data.username.length > 0
         && data.name.length > 0
-        && data.password.length >= MIN_PASSWORD_LENGTH
+        && (isEditMode || data.password.length >= MIN_PASSWORD_LENGTH)
         && data.password === passwordConfirmation
         && Object.values(Role).includes(data.role)
 
@@ -63,12 +63,15 @@
     async function save() {
         isSaving = true
         try {
-            await repository.save(data as User)
-            successToast('Berhasil membuat user')
+            if (isEditMode)
+                await repository.update(data as User)
+            else
+                await repository.create(data as User)
+            successToast('Berhasil menyimpan user')
             modalStore.close()
         } catch (err) {
             console.error(err)
-            errorToast('Gagal membuat user')
+            errorToast('Gagal menyimpan user')
         }
         isSaving = false
     }

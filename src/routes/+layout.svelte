@@ -35,8 +35,8 @@
     }
 </script>
 
-<Modal background="bg-white" rounded="rounded-xl" regionHeader="text-xl font-bold"/>
 <Toast buttonDismiss="btn-ringed-surface"/>
+<Modal background="bg-white" rounded="rounded-xl" regionHeader="text-xl font-bold"/>
 
 {#if isLoading}
     <div class="w-screen h-screen flex justify-center items-center">

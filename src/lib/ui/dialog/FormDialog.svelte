@@ -17,8 +17,8 @@
         <slot></slot>
     </form>
     <div class="flex flex-row justify-end gap-2 mt-4 mx-1">
-        <Button on:click={() => modalStore.close()}>Kembali</Button>
-        <Button isLoading={isSaving} on:click={() => dispatch('save')} disabled={!isFormValid} type="submit" class="btn-filled-secondary">Tambah
+        <Button on:click={() => isSaving || modalStore.close()}>Kembali</Button>
+        <Button isLoading={isSaving} on:click={() => dispatch('save')} disabled={!isFormValid} type="submit" class="btn-filled-secondary">Simpan
         </Button>
     </div>
 </div>

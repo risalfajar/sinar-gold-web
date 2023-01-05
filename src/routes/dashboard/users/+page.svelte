@@ -13,12 +13,15 @@
     import {UserRepository} from "./data/userRepository"
     import EditDialog from "./EditDialog.svelte"
     import {User} from "./types/user"
+    import {deleteConfirmationModal} from "$lib/utils/dialogUtils"
+    import {errorToast, successToast} from "$lib/utils/toastUtils"
 
     const repository = new UserRepository()
     const data: Readable<User[]> = readable([], function start(set: Subscriber<User[]>) {
         return repository.listenAll(users => set(users ?? []))
     })
     const table = createTable(data)
+
     const columns = table.createColumns([
         table.column({
             header: 'Nama Lengkap',
@@ -37,6 +40,7 @@
             header: 'Actions',
             cell: (cell, state) => createRender(TableActions)
                 .on('edit', () => openEditDialog(get(state.data)[cell.row.id]))
+                .on('delete', () => showDeleteConfirmationDialog(get(state.data)[cell.row.id]))
         })
     ])
 
@@ -52,6 +56,24 @@
             title: `${data ? 'Edit' : 'Tambah'} Data Pengguna`
         }
         modalStore.trigger(dialog)
+    }
+
+    function showDeleteConfirmationDialog(user: User) {
+        modalStore.trigger({
+            ...deleteConfirmationModal,
+            body: `Apakah kamu yakin ingin menghapus akun ${user.name}?`,
+            response: (r) => r && deleteUser(user.username),
+        })
+    }
+
+    async function deleteUser(username: string) {
+        try {
+            await repository.delete(username)
+            successToast('Berhasil menghapus user')
+        } catch (err) {
+            console.error(err)
+            errorToast('Gagal menghapus user')
+        }
     }
 </script>
 

@@ -31,4 +31,9 @@ export class UserRepository extends ReadOnlyFirestoreRepository<User> {
         const callable = httpsCallable(Functions, 'updateUser')
         return callable(user)
     }
+
+    async delete(username: string) {
+        const callable = httpsCallable(Functions, 'deleteUser')
+        return callable(username)
+    }
 }

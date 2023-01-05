@@ -1,12 +1,13 @@
 <script lang="ts">
     import "../app.pcss"
     import {onMount} from "svelte"
-    import {Modal, ProgressRadial, Toast} from "@skeletonlabs/skeleton"
+    import {ProgressRadial, Toast} from "@skeletonlabs/skeleton"
     import {debounce} from "lodash-es"
     import {page} from '$app/stores'
     import {goto} from '$app/navigation'
     import {listenUser} from "$lib/auth/authManager"
     import type {User} from "firebase/auth"
+    import Modal from "$lib/ui/dialog/Modal.svelte"
 
     const debounceVerify = debounce(verifyAccess, 300)
 

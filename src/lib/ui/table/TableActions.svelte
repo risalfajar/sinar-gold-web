@@ -2,7 +2,7 @@
     import {createEventDispatcher} from 'svelte'
     import IconButton from "$lib/ui/button/IconButton.svelte"
 
-    const dispatch = createEventDispatcher()
+    const dispatch = createEventDispatcher<{ edit: never, delete: never }>()
 
     export let disableDeleteButton = false
 </script>

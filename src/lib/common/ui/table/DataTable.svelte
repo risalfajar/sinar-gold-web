@@ -19,9 +19,9 @@
                                 <span class="flex flex-row items-center gap-2" in:fade>
                                     <Render of={cell.render()}/>
                                     {#if props.sort.order === 'asc'}
-                                        <i class="material-icons text-gray-500 text-lg">arrow_downward</i>
+                                        <i class="material-icons text-gray-500 text-base">arrow_downward</i>
                                     {:else if props.sort.order === 'desc'}
-                                        <i class="material-icons text-gray-500 text-lg">arrow_upward</i>
+                                        <i class="material-icons text-gray-500 text-base">arrow_upward</i>
                                     {/if}
                                 </span>
                             {/key}

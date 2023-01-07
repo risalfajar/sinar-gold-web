@@ -15,7 +15,7 @@
     import {User} from "$lib/users/types/user"
     import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import {addSortBy} from "svelte-headless-table/plugins"
+    import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
 
     const repository = new UserRepository()
     const data: Readable<User[]> = readable([], function start(set: Subscriber<User[]>) {
@@ -24,11 +24,12 @@
 
     const table = createTable(data, {
         sort: addSortBy({initialSortKeys: [{id: 'name', order: 'asc'}]}),
+        tableFilter: addTableFilter()
     })
     const columns = table.createColumns([
         table.column({
             header: 'Nama Lengkap',
-            accessor: 'name'
+            accessor: 'name',
         }),
         table.column({
             header: 'Username',
@@ -46,6 +47,8 @@
                 .on('delete', () => showDeleteConfirmationDialog(get(state.data)[cell.row.id]))
         })
     ])
+    const tableViewModel = table.createViewModel(columns)
+    const {filterValue} = tableViewModel.pluginStates.tableFilter
 
     function openEditDialog(data?: User) {
         const component: ModalComponent = {
@@ -84,9 +87,9 @@
     <ContainerTitle slot="title" title="Manajemen User"/>
     <ContainerCard title="Data Pengguna">
         <TableContainer>
-            <SearchInput slot="search"/>
+            <SearchInput slot="search" bind:value={$filterValue}/>
             <Button slot="buttons" class="btn-filled-primary" on:click={() => openEditDialog()}>Tambah Data</Button>
-            <DataTable model={table.createViewModel(columns)}/>
+            <DataTable model={tableViewModel}/>
         </TableContainer>
     </ContainerCard>
 </Container>

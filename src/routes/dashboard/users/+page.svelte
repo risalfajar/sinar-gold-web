@@ -15,13 +15,16 @@
     import {User} from "$lib/users/types/user"
     import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+    import {addSortBy} from "svelte-headless-table/plugins"
 
     const repository = new UserRepository()
     const data: Readable<User[]> = readable([], function start(set: Subscriber<User[]>) {
         return repository.listenAll(users => set(users ?? []))
     })
-    const table = createTable(data)
 
+    const table = createTable(data, {
+        sort: addSortBy({initialSortKeys: [{id: 'name', order: 'asc'}]}),
+    })
     const columns = table.createColumns([
         table.column({
             header: 'Nama Lengkap',

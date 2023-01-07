@@ -11,9 +11,9 @@
     import {difference, uniq} from "lodash-es"
     import {AccordionItem, modalStore} from "@skeletonlabs/skeleton"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import {Role} from "./types/role"
-    import {UserRepository} from "./data/userRepository"
-    import {User} from "./types/user"
+    import {Role} from "$lib/users/types/role"
+    import {UserRepository} from "$lib/users/data/userRepository"
+    import {User} from "$lib/users/types/user"
     import {menus as menusSource} from "../dashboard/data/menus"
 
     const repository = new UserRepository()

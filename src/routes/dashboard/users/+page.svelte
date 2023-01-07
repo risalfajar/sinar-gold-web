@@ -10,9 +10,9 @@
     import TableActions from "$lib/common/ui/table/TableActions.svelte"
     import {ModalComponent, ModalSettings, modalStore} from "@skeletonlabs/skeleton"
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
-    import {UserRepository} from "./data/userRepository"
+    import {UserRepository} from "$lib/users/data/userRepository"
     import EditDialog from "./EditDialog.svelte"
-    import {User} from "./types/user"
+    import {User} from "$lib/users/types/user"
     import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 

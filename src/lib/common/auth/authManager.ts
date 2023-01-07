@@ -1,6 +1,6 @@
 import {type NextOrObserver, onAuthStateChanged, type ParsedToken, signInWithEmailAndPassword, signOut as authSignOut, type User} from 'firebase/auth'
-import {USERNAME_SUFFIX} from "$lib/constants"
-import {Auth} from '$lib/firebase'
+import {USERNAME_SUFFIX} from "$lib/common/constants"
+import {Auth} from '$lib/common/firebase'
 import type {Unsubscribe} from "firebase/firestore"
 
 export function signIn(username: string, password: string) {

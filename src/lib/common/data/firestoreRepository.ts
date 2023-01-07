@@ -1,4 +1,4 @@
-import {ReadOnlyFirestoreRepository} from "$lib/data/readOnlyFirestoreRepository"
+import {ReadOnlyFirestoreRepository} from "$lib/common/data/readOnlyFirestoreRepository"
 import {deleteDoc, doc, setDoc, SetOptions, UpdateData, updateDoc, writeBatch,} from 'firebase/firestore'
 import {Firestore} from 'src/config/firebase'
 

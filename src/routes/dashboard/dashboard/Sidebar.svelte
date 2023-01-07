@@ -1,6 +1,6 @@
 <script lang="ts">
-    import AppLogo from "$lib/ui/AppLogo.svelte"
-    import Icon from "$lib/ui/icon/Icon.svelte"
+    import AppLogo from "$lib/common/ui/AppLogo.svelte"
+    import Icon from "$lib/common/ui/icon/Icon.svelte"
     import {AccordionItem} from "@skeletonlabs/skeleton"
     import {fly} from "svelte/transition"
     import {menus} from "./data/menus.js"

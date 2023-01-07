@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {icons} from "$lib/ui/icon/icons"
+    import {icons} from "$lib/common/ui/icon/icons"
 
     export let name: string
 

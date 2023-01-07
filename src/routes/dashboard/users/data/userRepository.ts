@@ -1,11 +1,11 @@
 import {collection, CollectionReference, Unsubscribe,} from 'firebase/firestore'
 import {throwError} from 'svelte-preprocess/dist/modules/errors'
-import {getUserId} from "$lib/auth/authManager"
-import {COLLECTION_USERS} from "$lib/constants"
-import {ReadOnlyFirestoreRepository} from "$lib/data/readOnlyFirestoreRepository"
+import {getUserId} from "$lib/common/auth/authManager"
+import {COLLECTION_USERS} from "$lib/common/constants"
+import {ReadOnlyFirestoreRepository} from "$lib/common/data/readOnlyFirestoreRepository"
 import {httpsCallable, HttpsCallableResult} from 'firebase/functions'
 import {User, userConverter} from "../types/user"
-import {Firestore, Functions} from '$lib/firebase'
+import {Firestore, Functions} from '$lib/common/firebase'
 
 export class UserRepository extends ReadOnlyFirestoreRepository<User> {
 

@@ -3,7 +3,7 @@ import {connectAuthEmulator, getAuth} from 'firebase/auth'
 import {connectFirestoreEmulator, getFirestore} from 'firebase/firestore'
 import {connectStorageEmulator, getStorage} from 'firebase/storage'
 import {connectFunctionsEmulator, getFunctions} from 'firebase/functions'
-import {CLOUD_FUNCTIONS_DEFAULT_REGION} from "$lib/constants"
+import {CLOUD_FUNCTIONS_DEFAULT_REGION} from "$lib/common/constants"
 
 const firebaseConfig = {
     apiKey: "AIzaSyCBQ6c9z6x77zXFR_VDYzs87wM88mMibAs",

@@ -5,9 +5,9 @@
     import {debounce} from "lodash-es"
     import {page} from '$app/stores'
     import {goto} from '$app/navigation'
-    import {listenUser} from "$lib/auth/authManager"
+    import {listenUser} from "$lib/common/auth/authManager"
     import type {User} from "firebase/auth"
-    import Modal from "$lib/ui/dialog/Modal.svelte"
+    import Modal from "$lib/common/ui/dialog/Modal.svelte"
 
     const debounceVerify = debounce(verifyAccess, 300)
 

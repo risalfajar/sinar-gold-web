@@ -1,11 +1,11 @@
 <script lang="ts">
-    import AppLogo from "$lib/ui/AppLogo.svelte"
-    import TextInput from "$lib/ui/form/TextInput.svelte"
-    import PasswordInput from "$lib/ui/form/PasswordInput.svelte"
-    import {MIN_PASSWORD_LENGTH} from "$lib/constants"
-    import Button from "$lib/ui/button/Button.svelte"
-    import {signIn} from "$lib/auth/authManager"
-    import {errorToast} from "$lib/utils/toastUtils"
+    import AppLogo from "$lib/common/ui/AppLogo.svelte"
+    import TextInput from "$lib/common/ui/form/TextInput.svelte"
+    import PasswordInput from "$lib/common/ui/form/PasswordInput.svelte"
+    import {MIN_PASSWORD_LENGTH} from "$lib/common/constants"
+    import Button from "$lib/common/ui/button/Button.svelte"
+    import {signIn} from "$lib/common/auth/authManager"
+    import {errorToast} from "$lib/common/utils/toastUtils"
 
     let username = ''
     let password = ''

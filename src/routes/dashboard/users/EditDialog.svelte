@@ -3,7 +3,7 @@
     import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
     import PasswordInput from "$lib/common/ui/form/PasswordInput.svelte"
     import {onMount} from "svelte"
-    import {MIN_PASSWORD_LENGTH} from "$lib/common/constants"
+    import {MIN_PASSWORD_LENGTH} from "$lib/constants"
     import Select from "$lib/common/ui/form/Select.svelte"
     import Label from "$lib/common/ui/form/Label.svelte"
     import Checkbox from "$lib/common/ui/form/Checkbox.svelte"

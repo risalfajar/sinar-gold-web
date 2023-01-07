@@ -1,7 +1,7 @@
 import {Readable, readable, Subscriber} from "svelte/store"
 import {Unsubscribe} from "firebase/firestore"
-import {UserRepository} from "./users/data/userRepository"
-import {User} from "./users/types/user"
+import {UserRepository} from "$lib/users/data/userRepository"
+import {User} from "$lib/users/types/user"
 
 export const currentUser: Readable<User | null> = readable(null, function start(set: Subscriber<User | null>) {
     const repository = new UserRepository()

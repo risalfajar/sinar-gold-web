@@ -15,8 +15,8 @@
             <AppLogo class="flex-none"/>
             {#if isExpanded}
                 <div class="w-full">
-                    <p class="font-black">Beranda</p>
-                    <p>Sinar Gold</p>
+                    <p class="unstyled font-black">Beranda</p>
+                    <p class="unstyled">Sinar Gold</p>
                 </div>
             {/if}
         </div>

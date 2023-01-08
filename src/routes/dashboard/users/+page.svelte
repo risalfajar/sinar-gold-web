@@ -53,7 +53,7 @@
     function openEditDialog(data?: User) {
         const component: ModalComponent = {
             ref: EditDialog,
-            props: {data, background: 'bg-white'}
+            props: {data}
         }
         const dialog: ModalSettings = {
             type: 'component',

@@ -32,6 +32,7 @@
         </Subscribe>
     {/each}
     </thead>
+
     <tbody {...$tableBodyAttrs}>
     {#each $rows as row (row.id)}
         <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
@@ -45,6 +46,10 @@
                 {/each}
             </tr>
         </Subscribe>
+    {:else}
+        <tr>
+            <td colspan={$headerRows?.[0]?.cells?.length ?? 1} class="text-center">Tidak ada data</td>
+        </tr>
     {/each}
     </tbody>
 </table>

@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@egjs/svelte-conveyer': ^1.4.7
   '@skeletonlabs/skeleton': ^0.86.9
   '@sveltejs/adapter-auto': ^1.0.0
   '@sveltejs/adapter-static': ^1.0.0
@@ -18,12 +19,14 @@ specifiers:
   svelte-check: ^2.9.2
   svelte-headless-table: ^0.16.1
   svelte-preprocess: ^4.10.7
+  tailwind-scrollbar: ^2.1.0
   tailwindcss: ^3.1.5
   tslib: ^2.4.1
   typescript: ^4.9.3
   vite: ^4.0.0
 
 dependencies:
+  '@egjs/svelte-conveyer': 1.4.7
   firebase: 9.15.0
   lodash-es: 4.17.21
   luxon: 3.2.0
@@ -43,12 +46,62 @@ devDependencies:
   svelte-check: 2.10.3_7tgmgw23w4ankk7vtabgm5xtbu
   svelte-headless-table: 0.16.1_svelte@3.55.0
   svelte-preprocess: 4.10.7_4pbnl6cqae4gmabfifuvcfaifu
+  tailwind-scrollbar: 2.1.0_tailwindcss@3.2.4
   tailwindcss: 3.2.4_postcss@8.4.20
   tslib: 2.4.1
   typescript: 4.9.4
   vite: 4.0.4
 
 packages:
+
+  /@cfcs/core/0.0.13:
+    resolution: { integrity: sha512-V6lVn99xFoyqVkwls/wADSncrminhRtEVlXcIP9qMj7EWLOaZq67MBJGOBuzmaWKQ7rmbZHzt7adUJnz3ZxJ3g== }
+    dependencies:
+      '@egjs/component': 3.0.4
+    dev: false
+
+  /@cfcs/core/0.0.4:
+    resolution: { integrity: sha512-Y/BD2l+XpGtx2LT/ehdqUyvJ6OpI3F6yAQMNKj1t57WhzQX1AS6uEQRLmgPWd75fzsyV7u4Aia/+5KeCqgHuNg== }
+    dependencies:
+      '@egjs/component': 3.0.4
+    dev: false
+
+  /@cfcs/svelte/0.0.13:
+    resolution: { integrity: sha512-fiWh1M4eZNsbs8J9gbcFbRoBBg9tFdDHEPiwX2V/GXy4kLOtyHXvTedXLCa7JqXArdwMmdNjFlEn5YydTvRqSg== }
+    dependencies:
+      '@cfcs/core': 0.0.13
+    dev: false
+
+  /@egjs/agent/2.4.3:
+    resolution: { integrity: sha512-XvksSENe8wPeFlEVouvrOhKdx8HMniJ3by7sro2uPF3M6QqWwjzVcmvwoPtdjiX8O1lfRoLhQMp1a7NGlVTdIA== }
+    dev: false
+
+  /@egjs/axes/3.8.3:
+    resolution: { integrity: sha512-T0+71+glVCxSRnJim7smdGLrmsGmEuoJ62RXBMy7lpsePbXlKmtnFFKgr1tkJJyghJXW3zZNHefCC4nrzEjfEg== }
+    dependencies:
+      '@cfcs/core': 0.0.4
+      '@egjs/agent': 2.4.3
+      '@egjs/component': 3.0.4
+    dev: false
+
+  /@egjs/component/3.0.4:
+    resolution: { integrity: sha512-sXA7bGbIeLF2OAw/vpka66c6QBBUPcA4UUhR4WGJfnp2XWdiI8QrnJGJMr/UxpE/xnevX9tN3jvNPlW8WkHl3g== }
+    dev: false
+
+  /@egjs/conveyer/1.4.7:
+    resolution: { integrity: sha512-n9+GZHqNULGj45TrPm6PUp1CibEGpYAtTyOs9RVVrLG9ceS2bE3xdW8XzQgwOBwKimlFkrgucJqtgLCgQDLtwA== }
+    dependencies:
+      '@cfcs/core': 0.0.13
+      '@egjs/axes': 3.8.3
+      '@egjs/component': 3.0.4
+    dev: false
+
+  /@egjs/svelte-conveyer/1.4.7:
+    resolution: { integrity: sha512-aw4N8B+9/gjwmoTcWXLLEKY+mAhYJa4L0Y6bUeHNgLzFsrZzUt6Zn7D4kIt6Tf/jQX3b1x4psqNHlY3bJVxcNA== }
+    dependencies:
+      '@cfcs/svelte': 0.0.13
+      '@egjs/conveyer': 1.4.7
+    dev: false
 
   /@esbuild/android-arm/0.16.13:
     resolution: { integrity: sha512-JmtqThupn9Yf+FzANE+GG73ASUkssnPwOsndUElhp23685QzRK+MO1UompOlBaXV9D5FTuYcPnw7p4mCq2YbZQ== }
@@ -1979,9 +2032,18 @@ packages:
     engines: { node: '>= 8' }
     dev: true
 
+  /tailwind-scrollbar/2.1.0_tailwindcss@3.2.4:
+    resolution: { integrity: sha512-zpvY5mDs0130YzYjZKBiDaw32rygxk5RyJ4KmeHjGnwkvbjm/PszON1m4Bbt2DkMRIXlXsfNevykAESgURN4KA== }
+    engines: { node: '>=12.13.0' }
+    peerDependencies:
+      tailwindcss: 3.x
+    dependencies:
+      tailwindcss: 3.2.4_postcss@8.4.20
+    dev: true
+
   /tailwindcss/3.2.4_postcss@8.4.20:
-    resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
-    engines: {node: '>=12.13.0'}
+    resolution: { integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ== }
+    engines: { node: '>=12.13.0' }
     hasBin: true
     peerDependencies:
       postcss: ^8.0.9

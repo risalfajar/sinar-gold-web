@@ -5,7 +5,7 @@
     import TableContainer from "$lib/common/ui/container/table/TableContainer.svelte"
     import SearchInput from "$lib/common/ui/form/SearchInput.svelte"
     import Button from "$lib/common/ui/button/Button.svelte"
-    import {get, readable, Readable, Subscriber} from "svelte/store"
+    import {readable, Readable, Subscriber} from "svelte/store"
     import {createRender, createTable} from "svelte-headless-table"
     import TableActions from "$lib/common/ui/table/TableActions.svelte"
     import {ModalComponent, ModalSettings, modalStore} from "@skeletonlabs/skeleton"
@@ -16,6 +16,7 @@
     import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
+    import {getRowData} from "$lib/common/utils/tableUtils"
 
     const repository = new UserRepository()
     const data: Readable<User[]> = readable([], function start(set: Subscriber<User[]>) {
@@ -43,8 +44,8 @@
             id: 'actions',
             header: 'Actions',
             cell: (cell, state) => createRender(TableActions)
-                .on('edit', () => openEditDialog(get(state.data)[cell.row.id]))
-                .on('delete', () => showDeleteConfirmationDialog(get(state.data)[cell.row.id]))
+                .on('edit', () => openEditDialog(getRowData(state, cell)))
+                .on('delete', () => showDeleteConfirmationDialog(getRowData(state, cell)))
         })
     ])
     const tableViewModel = table.createViewModel(columns)

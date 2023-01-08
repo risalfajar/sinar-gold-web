@@ -1,6 +1,6 @@
 <script lang="ts">
     import {debounce} from 'lodash-es'
-    import TextInput from "$lib/common/ui/form/TextInput.svelte"
+    import InputWrapper from "$lib/common/ui/form/InputWrapper.svelte"
 
     export let value = ''
     export let hint = 'Cari Item'
@@ -15,8 +15,7 @@
     }
 </script>
 
-<div class="flex flex-row flex-wrap justify-between gap-y-2 {$$props.class}">
-    <TextInput {hint} bind:value={tempValue} on:keydown={debounceChangeValue}>
-        <i slot="start" class="material-icons">search</i>
-    </TextInput>
-</div>
+<InputWrapper class="max-w-[360px] {$$props.class}" let:classes>
+    <input type="text" placeholder={hint} bind:value={tempValue} on:keydown={debounceChangeValue} class={classes}/>
+    <i slot="start" class="material-icons">search</i>
+</InputWrapper>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import TextInput from "$lib/common/ui/form/TextInput.svelte"
+    import InputWrapper from "$lib/common/ui/form/InputWrapper.svelte"
 
     export let value
     export let label: string = 'Password'
@@ -12,20 +12,15 @@
     $: type = showPassword ? 'text' : 'password'
 </script>
 
-<div class="w-full {$$props.class}">
-    <TextInput
+<InputWrapper {label} {dark} class={$$props.class} let:classes helper={showHelperText ? 'Minimal 7 karakter' : ''}>
+    <input
             {value}
             {type}
-            {label}
-            {hint}
-            {dark}
+            placeholder={hint}
             on:input={(e) => value = e.target.value}
-            {...$$restProps}>
-        <button tabindex="-1" slot="end" type="button" class="btn-icon" on:click={() => showPassword = !showPassword}>
-            <i class="material-icons">{showPassword ? "visibility" : "visibility_off"}</i>
-        </button>
-    </TextInput>
-    {#if showHelperText}
-        <p class="pt-2 !text-xs {dark ? '!text-gray-300' : '!text-gray-700'}">Minimal 7 karakter</p>
-    {/if}
-</div>
+            {...$$restProps}
+            class={classes}>
+    <button tabindex="-1" slot="end" type="button" class="btn-icon" on:click={() => showPassword = !showPassword}>
+        <i class="material-icons">{showPassword ? "visibility" : "visibility_off"}</i>
+    </button>
+</InputWrapper>

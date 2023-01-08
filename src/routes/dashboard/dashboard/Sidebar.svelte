@@ -3,7 +3,7 @@
     import Icon from "$lib/common/ui/icon/Icon.svelte"
     import {AccordionItem} from "@skeletonlabs/skeleton"
     import {fly} from "svelte/transition"
-    import {menus} from "./data/menus.js"
+    import {menus} from "$lib/dashboard/menus.js"
     import {goto} from "$app/navigation"
 
     let isExpanded = true

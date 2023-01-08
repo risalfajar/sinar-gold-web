@@ -14,7 +14,7 @@
     import {Role} from "$lib/users/types/role"
     import {UserRepository} from "$lib/users/data/userRepository"
     import {User} from "$lib/users/types/user"
-    import {menus as menusSource} from "../dashboard/data/menus"
+    import {menus as menusSource} from "$lib/dashboard/menus"
 
     const repository = new UserRepository()
     const menus = menusSource.filter(it => it.title !== 'Beranda')

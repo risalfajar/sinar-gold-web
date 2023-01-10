@@ -44,7 +44,7 @@
     /** Provide arbitrary classes to modal footer region. */
     export let regionFooter = 'flex justify-end space-x-2'
     // Base Styles
-    const cBackdrop = 'fixed top-0 left-0 right-0 bottom-0 z-[999] flex justify-center items-center p-4'
+    const cBackdrop = 'fixed top-0 left-0 right-0 bottom-0 z-[700] flex justify-center items-center p-4'
     const cModalImage = 'w-full h-auto'
     // Local
     let promptValue

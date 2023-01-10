@@ -11,6 +11,7 @@ export const NODE_MASTER_DATA = 'masterData'
 export const NODE_GROUP = 'group'
 export const NODE_KIND = 'kind'
 export const NODE_WAREHOUSE = 'warehouse'
+export const NODE_ITEM_TYPE = 'itemType'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

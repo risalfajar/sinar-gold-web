@@ -3,11 +3,13 @@ import {connectAuthEmulator, getAuth} from 'firebase/auth'
 import {connectFirestoreEmulator, getFirestore} from 'firebase/firestore'
 import {connectStorageEmulator, getStorage} from 'firebase/storage'
 import {connectFunctionsEmulator, getFunctions} from 'firebase/functions'
+import {connectDatabaseEmulator, getDatabase} from 'firebase/database'
 import {CLOUD_FUNCTIONS_DEFAULT_REGION} from "$lib/constants"
 
 const firebaseConfig = {
     apiKey: "AIzaSyCBQ6c9z6x77zXFR_VDYzs87wM88mMibAs",
     authDomain: "sinar-gold.firebaseapp.com",
+    databaseURL: "https://sinar-gold-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "sinar-gold",
     storageBucket: "sinar-gold.appspot.com",
     messagingSenderId: "693665883369",
@@ -18,6 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const Auth = getAuth(app)
 const Firestore = getFirestore(app)
+const Database = getDatabase(app)
 const Storage = getStorage(app)
 const Functions = getFunctions(app, CLOUD_FUNCTIONS_DEFAULT_REGION)
 
@@ -27,8 +30,9 @@ const isDevelopment = import.meta.env.DEV
 if (isDevelopment) {
     connectAuthEmulator(Auth, 'http://localhost:9099', {disableWarnings: true})
     connectFirestoreEmulator(Firestore, 'localhost', 8080)
+    connectDatabaseEmulator(Database, 'localhost', 9000)
     connectStorageEmulator(Storage, 'localhost', 9199)
     connectFunctionsEmulator(Functions, 'localhost', 5001)
 }
 
-export {Auth, Firestore, Storage, Functions}
+export {Auth, Firestore, Database, Storage, Functions}

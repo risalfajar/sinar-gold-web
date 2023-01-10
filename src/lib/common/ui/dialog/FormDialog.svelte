@@ -3,7 +3,6 @@
     import {modalStore} from "@skeletonlabs/skeleton"
     import {createEventDispatcher} from "svelte"
 
-    export let title: string
     export let isFormValid: boolean = true
     export let isSaving: boolean = false
 

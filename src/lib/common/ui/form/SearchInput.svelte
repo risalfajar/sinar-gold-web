@@ -15,7 +15,7 @@
     }
 </script>
 
-<InputWrapper class="max-w-[360px] {$$props.class}" let:classes>
+<InputWrapper class={$$props.class} let:classes>
     <input type="text" placeholder={hint} bind:value={tempValue} on:keydown={debounceChangeValue} class={classes}/>
     <i slot="start" class="material-icons">search</i>
 </InputWrapper>

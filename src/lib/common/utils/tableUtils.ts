@@ -10,7 +10,7 @@ export function getRowData<T>(state: TableState<T>, cell: DisplayBodyCell<T>): T
     return list[id]
 }
 
-export function createTableFromSchema(schema: Schema, data: Readable<any[]>) {
+export function createSimpleTable(schema: Schema, data: Readable<any[]>) {
     const columnTitles = Object.keys(schema)
     const accessors = Object.values(schema).map(it => it.prop)
 
@@ -19,8 +19,8 @@ export function createTableFromSchema(schema: Schema, data: Readable<any[]>) {
     })
     const columns = table.createColumns(
         columnTitles.map((title, index) => table.column({
-                header: title,
-                accessor: accessors[index]
+            header: title,
+            accessor: accessors[index]
             })
         )
     )

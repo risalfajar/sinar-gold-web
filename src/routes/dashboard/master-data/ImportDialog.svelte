@@ -1,21 +1,20 @@
 <script lang="ts">
     import {onMount} from "svelte"
-    import readXlsxFile from "read-excel-file"
-    import {Group} from "$lib/master-data/group/group"
-    import GroupRepository from "$lib/master-data/group/groupRepository"
+    import readXlsxFile, {Schema} from "read-excel-file"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import {Writable, writable} from "svelte/store"
     import {createSimpleTable} from "$lib/common/utils/tableUtils"
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
     import {modalStore} from "@skeletonlabs/skeleton"
-    import {schema} from "./schema"
-
-    const repository = new GroupRepository()
-    const data: Writable<Group[]> = writable([])
-    const table = createSimpleTable(schema, data)
+    import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
 
     export let file: File
+    export let schema: Schema
+    export let repository: MapDatabaseRepository<any>
+
+    const data: Writable<any[]> = writable([])
+    const table = createSimpleTable(schema, data)
 
     let isSaving: boolean = false
 
@@ -31,13 +30,13 @@
         }
 
         $data = rows.map(row => {
-            return {...row} as Group
+            return {...row} as any
         })
     }
 
     async function save() {
         isSaving = true
-        const failedItems: Group[] = []
+        const failedItems: any[] = []
         await saveItems()
         handleFailedItems()
         isSaving = false

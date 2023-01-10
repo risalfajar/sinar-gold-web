@@ -9,7 +9,7 @@
     import GroupRepository from "$lib/master-data/group/groupRepository"
     import {Group} from "$lib/master-data/group/group"
     import EditDialog from './EditDialog.svelte'
-    import ImportDialog from "./ImportDialog.svelte"
+    import ImportDialog from "../ImportDialog.svelte"
     import Icon from "$lib/common/ui/icon/Icon.svelte"
     import {createMasterDataTable} from "../createTable"
     import {schema} from "./schema"
@@ -19,12 +19,32 @@
         return repository.listenChildren(items => set(items ?? []))
     })
 
-    const tableViewModel = createMasterDataTable(data, schema, 'name', openEditDialog, showDeleteConfirmationDialog)
+    const tableViewModel = createMasterDataTable(data, schema, 'name', showEditDialog, showDeleteConfirmationDialog)
     const {filterValue} = tableViewModel.pluginStates.tableFilter
 
     let fileInput: HTMLInputElement
 
-    function openEditDialog(data?: Group) {
+    function showImportDialog() {
+        const fileToImport = fileInput.files?.[0]
+        // make user able to select the same file again
+        fileInput.value = ''
+
+        const dialog: ModalSettings = {
+            type: 'component',
+            title: 'Import Data',
+            component: {
+                ref: ImportDialog,
+                props: {
+                    file: fileToImport,
+                    repository: new GroupRepository(),
+                    schema
+                }
+            }
+        }
+        modalStore.trigger(dialog)
+    }
+
+    function showEditDialog(data?: Group) {
         const dialog: ModalSettings = {
             type: 'component',
             title: `${data ? 'Edit' : 'Tambah'} Group`,
@@ -53,22 +73,6 @@
             errorToast('Gagal menghapus group')
         }
     }
-
-    function importData() {
-        const fileToImport = fileInput.files?.[0]
-        // make user able to select the same file again
-        fileInput.value = ''
-
-        const dialog: ModalSettings = {
-            type: 'component',
-            title: 'Import Data',
-            component: {
-                ref: ImportDialog,
-                props: {file: fileToImport}
-            }
-        }
-        modalStore.trigger(dialog)
-    }
 </script>
 
 <TableContainer>
@@ -78,8 +82,8 @@
             <Icon name="Excel" class="mr-2"/>
             Import Excel
         </button>
-        <button class="btn btn-filled-primary" on:click={() => openEditDialog()}>Tambah Data</button>
-        <input class="hidden" type="file" accept=".xls, .xlsx" bind:this={fileInput} on:change={importData}/>
+        <button class="btn btn-filled-primary" on:click={() => showEditDialog()}>Tambah Data</button>
+        <input class="hidden" type="file" accept=".xls, .xlsx" bind:this={fileInput} on:change={showImportDialog}/>
     </svelte:fragment>
     <DataTable model={tableViewModel}/>
 </TableContainer>

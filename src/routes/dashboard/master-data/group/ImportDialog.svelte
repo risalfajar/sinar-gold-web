@@ -1,50 +1,19 @@
 <script lang="ts">
     import {onMount} from "svelte"
-    import readXlsxFile, {Schema} from "read-excel-file"
+    import readXlsxFile from "read-excel-file"
     import {Group} from "$lib/master-data/group/group"
     import GroupRepository from "$lib/master-data/group/groupRepository"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import {Writable, writable} from "svelte/store"
-    import {createTableFromSchema} from "$lib/common/utils/tableUtils"
+    import {createSimpleTable} from "$lib/common/utils/tableUtils"
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
     import {modalStore} from "@skeletonlabs/skeleton"
+    import {schema} from "./schema"
 
     const repository = new GroupRepository()
-    const schema: Schema = {
-        'Kode Group': {
-            prop: 'code',
-            type: String,
-            required: true
-        },
-        'Nama Group': {
-            prop: 'name',
-            type: String,
-            required: true
-        },
-        'Jenis Group': {
-            prop: 'type',
-            type: String,
-            required: true
-        },
-        'Harga': {
-            prop: 'price',
-            type: Number,
-            required: true
-        },
-        'Harga Modal': {
-            prop: 'capital',
-            type: Number,
-            required: true
-        },
-        'Berlian': {
-            prop: 'diamond',
-            type: String,
-            required: true
-        },
-    }
     const data: Writable<Group[]> = writable([])
-    const table = createTableFromSchema(schema, data)
+    const table = createSimpleTable(schema, data)
 
     export let file: File
 

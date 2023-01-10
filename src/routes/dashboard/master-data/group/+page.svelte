@@ -2,43 +2,24 @@
     import TableContainer from "$lib/common/ui/container/table/TableContainer.svelte"
     import SearchInput from "$lib/common/ui/form/SearchInput.svelte"
     import {readable, Readable, Subscriber} from "svelte/store"
-    import {createRender, createTable} from "svelte-headless-table"
-    import TableActions from "$lib/common/ui/table/TableActions.svelte"
     import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
     import GroupRepository from "$lib/master-data/group/groupRepository"
     import {Group} from "$lib/master-data/group/group"
-    import {getRowData} from "$lib/common/utils/tableUtils"
     import EditDialog from './EditDialog.svelte'
     import ImportDialog from "./ImportDialog.svelte"
     import Icon from "$lib/common/ui/icon/Icon.svelte"
+    import {createMasterDataTable} from "../createTable"
+    import {schema} from "./schema"
 
     const repository = new GroupRepository()
     const data: Readable<Group[]> = readable([], function start(set: Subscriber<Group[]>) {
         return repository.listenChildren(items => set(items ?? []))
     })
 
-    const table = createTable(data, {
-        sort: addSortBy({initialSortKeys: [{id: 'name', order: 'asc'}]}),
-        tableFilter: addTableFilter()
-    })
-    const columns = table.createColumns([
-        table.column({
-            header: 'Nama Group',
-            accessor: 'name',
-        }),
-        table.display({
-            id: 'actions',
-            header: 'Actions',
-            cell: (cell, state) => createRender(TableActions)
-                .on('edit', () => openEditDialog(getRowData(state, cell)))
-                .on('delete', () => showDeleteConfirmationDialog(getRowData(state, cell)))
-        })
-    ])
-    const tableViewModel = table.createViewModel(columns)
+    const tableViewModel = createMasterDataTable(data, schema, 'name', openEditDialog, showDeleteConfirmationDialog)
     const {filterValue} = tableViewModel.pluginStates.tableFilter
 
     let fileInput: HTMLInputElement

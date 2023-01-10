@@ -151,7 +151,7 @@ export const menus: Menu[] = [
             },
             {
                 title: 'Master Jenis',
-                link: '/dashboard/master-data/item-kind'
+                link: '/dashboard/master-data/kind'
             },
             {
                 title: 'Master Tipe Barang',

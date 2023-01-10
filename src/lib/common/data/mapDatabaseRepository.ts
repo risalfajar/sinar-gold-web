@@ -1,5 +1,5 @@
 import DatabaseRepository from "$lib/common/data/databaseRepository"
-import {child, remove, set, Unsubscribe} from "firebase/database"
+import {child, push, remove, set, Unsubscribe} from "firebase/database"
 
 export default abstract class MapDatabaseRepository<T> extends DatabaseRepository<Record<string, T>> {
     protected abstract getId(item: T): string
@@ -25,9 +25,9 @@ export default abstract class MapDatabaseRepository<T> extends DatabaseRepositor
     protected getChildRef(item: T) {
         const itemId = this.getId(item)
 
-        if (itemId.length === 0)
-            throw Error("Item Id can't be blank")
-
-        return child(this.getDocumentReference(), itemId)
+        if (itemId.length > 0)
+            return child(this.getDocumentReference(), itemId)
+        else
+            return push(this.getDocumentReference())
     }
 }

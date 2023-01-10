@@ -6,11 +6,11 @@ export default abstract class MapDatabaseRepository<T> extends DatabaseRepositor
 
     async getChildren(): Promise<T[]> {
         const data = await this.get()
-        return Object.values(data)
+        return Object.values(data ?? {})
     }
 
     listenChildren(onChange: (document: T[]) => unknown): Unsubscribe {
-        return this.listen(document => onChange(Object.values(document)))
+        return this.listen(document => onChange(Object.values(document ?? {})))
     }
 
     set(item: T) {

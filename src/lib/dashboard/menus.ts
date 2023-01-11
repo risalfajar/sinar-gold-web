@@ -170,8 +170,8 @@ export const menus: Menu[] = [
                 link: '/dashboard/master-data/chamfer'
             },
             {
-                title: 'Master Brondol',
-                link: '/dashboard/master-data/brondol'
+                title: 'Master Bandrol',
+                link: '/dashboard/master-data/tag'
             },
             {
                 title: 'Master Sales',

@@ -2,6 +2,7 @@ import {Readable, readable, Subscriber} from "svelte/store"
 import {Unsubscribe} from "firebase/firestore"
 import {UserRepository} from "$lib/users/data/userRepository"
 import {User} from "$lib/users/types/user"
+import GroupRepository from "$lib/master-data/group/groupRepository"
 
 export const currentUser: Readable<User | null> = readable(null, function start(set: Subscriber<User | null>) {
     const repository = new UserRepository()
@@ -13,4 +14,11 @@ export const currentUser: Readable<User | null> = readable(null, function start(
     return function stop() {
         unsubscribe?.()
     }
+})
+
+export const groups = readable<string[]>([], (set) => {
+    const groupRepository = new GroupRepository()
+    groupRepository
+        .getChildren()
+        .then(groups => set(groups.map(it => it.name)))
 })

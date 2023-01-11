@@ -30,6 +30,5 @@
     <TextInput label="Kode Intern" bind:value={data.code}/>
     <PriceInput label="Nominal" bind:value={data.amount}/>
     <NumberInput label="Persentase" max="100" bind:value={data.percentage}/>
-    <!--  TODO Clarify  -->
-    <Select label="Tipe Ongkos" options={[]} bind:value={data.type}/>
+    <Select label="Tipe Ongkos" options={["Nominal", "Gram"]} bind:value={data.type}/>
 </MasterDataEditDialog>

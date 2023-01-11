@@ -19,41 +19,31 @@
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import KindRepository from "$lib/master-data/kind/kindRepository"
     import {Kind} from "$lib/master-data/kind/kind"
+    import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
+    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
 
-    const repository = new KindRepository()
-    const defaultData: Kind = {
+    type T = Kind
+
+    const defaultData: T = {
         code: "",
         name: "",
         groupCode: ""
     }
 
     export {dataArgs as data}
+    export let repository: MapDatabaseRepository<T>
 
-    let dataArgs: Kind | null = null
-    let data = dataArgs ? {...dataArgs} as Kind : defaultData
-    let isSaving = false
+    let dataArgs: T | null = null
+    let data = dataArgs ? {...dataArgs} as T : defaultData
 
     $: isEditMode = dataArgs != null
     $: isFormValid = data.code.length > 0
         && data.name.length > 0
         && data.groupCode.length > 0
-
-    async function save() {
-        isSaving = true
-        try {
-            await repository.set(data)
-            successToast('Berhasil menyimpan data')
-            modalStore.close()
-        } catch (err) {
-            console.error(err)
-            errorToast('Gagal menyimpan data')
-        }
-        isSaving = false
-    }
 </script>
 
-<FormDialog {isFormValid} {isSaving} on:save={save}>
+<MasterDataEditDialog {isFormValid} {data} {repository}>
     <TextInput label="Kode Jenis" disabled={isEditMode} bind:value={data.code}/>
     <TextInput label="Nama Jenis" bind:value={data.name}/>
     <Select label="Kode Grup" options={$groups} bind:value={data.groupCode}/>
-</FormDialog>
+</MasterDataEditDialog>

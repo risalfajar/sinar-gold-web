@@ -19,38 +19,28 @@
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import {ItemType} from "$lib/master-data/item-type/itemType"
     import ItemTypeRepository from "$lib/master-data/item-type/itemTypeRepository"
+    import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
+    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
 
-    const repository = new ItemTypeRepository()
-    const defaultData: ItemType = {
+    type T = ItemType
+
+    const defaultData: T = {
         id: "",
         name: "",
         groupCode: ""
     }
 
     export {dataArgs as data}
+    export let repository: MapDatabaseRepository<T>
 
-    let dataArgs: ItemType | null = null
-    let data = dataArgs ? {...dataArgs} as ItemType : defaultData
-    let isSaving = false
+    let dataArgs: T | null = null
+    let data = dataArgs ? {...dataArgs} as T : defaultData
 
     $: isEditMode = dataArgs != null
     $: isFormValid = data.name.length > 0 && data.groupCode.length > 0
-
-    async function save() {
-        isSaving = true
-        try {
-            await repository.set(data)
-            successToast('Berhasil menyimpan data')
-            modalStore.close()
-        } catch (err) {
-            console.error(err)
-            errorToast('Gagal menyimpan data')
-        }
-        isSaving = false
-    }
 </script>
 
-<FormDialog {isFormValid} {isSaving} on:save={save}>
+<MasterDataEditDialog {isFormValid} {data} {repository}>
     <Select label="Kode Group" options={$groups} bind:value={data.groupCode}/>
     <TextInput label="Tipe Barang" bind:value={data.name}/>
-</FormDialog>
+</MasterDataEditDialog>

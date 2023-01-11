@@ -20,9 +20,13 @@
     import ChamferRepository from "$lib/master-data/chamfer/chamferRepository"
     import {Chamfer} from "$lib/master-data/chamfer/chamfer"
     import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
+    import {Salesman} from "$lib/master-data/salesman/salesman"
+    import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
+    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
 
-    const repository = new ChamferRepository()
-    const defaultData: Chamfer = {
+    type T = Chamfer
+
+    const defaultData: T = {
         code: "",
         name: "",
         weight: 0,
@@ -31,34 +35,21 @@
     }
 
     export {dataArgs as data}
+    export let repository: MapDatabaseRepository<T>
 
-    let dataArgs: Chamfer | null = null
-    let data = dataArgs ? {...dataArgs} as Chamfer : defaultData
-    let isSaving = false
+    let dataArgs: T | null = null
+    let data = dataArgs ? {...dataArgs} as T : defaultData
 
     $: isEditMode = dataArgs != null
     $: isFormValid = data.code.length > 0
         && data.name.length > 0
         && data.warehouseCode.length > 0
-
-    async function save() {
-        isSaving = true
-        try {
-            await repository.set(data)
-            successToast('Berhasil menyimpan data')
-            modalStore.close()
-        } catch (err) {
-            console.error(err)
-            errorToast('Gagal menyimpan data')
-        }
-        isSaving = false
-    }
 </script>
 
-<FormDialog {isFormValid} {isSaving} on:save={save}>
+<MasterDataEditDialog {isFormValid} {data} {repository}>
     <Select label="Kode Gudang" options={$warehouses} bind:value={data.warehouseCode}/>
     <TextInput label="Kode Talang" disabled={isEditMode} bind:value={data.code}/>
     <TextInput label="Nama Talang" bind:value={data.name}/>
     <WeightInput label="Berat Talang" bind:value={data.weight}/>
     <WeightInput label="Berat Bandrol" bind:value={data.tagWeight}/>
-</FormDialog>
+</MasterDataEditDialog>

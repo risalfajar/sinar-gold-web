@@ -53,7 +53,7 @@
             title: `${data ? 'Edit' : 'Tambah'} Item`,
             component: {
                 ref: editDialog,
-                props: {data}
+                props: {data, repository}
             }
         }
         modalStore.trigger(dialog)

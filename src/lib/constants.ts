@@ -14,6 +14,7 @@ export const NODE_WAREHOUSE = 'warehouse'
 export const NODE_ITEM_TYPE = 'itemType'
 export const NODE_CHAMFER = 'chamfer'
 export const NODE_TAG = 'tag'
+export const NODE_SALESMAN = 'salesman'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

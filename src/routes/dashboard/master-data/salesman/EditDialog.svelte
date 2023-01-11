@@ -36,6 +36,6 @@
 </script>
 
 <FormDialog {isFormValid} {isSaving} on:save={save}>
-    <TextInput label="Kode Salesman" bind:value={data.code}/>
+    <TextInput label="Kode Salesman" disabled={isEditMode} bind:value={data.code}/>
     <TextInput label="Nama Salesman" bind:value={data.name}/>
 </FormDialog>

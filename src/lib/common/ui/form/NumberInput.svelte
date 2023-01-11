@@ -10,6 +10,7 @@
 <InputWrapper let:classes {label} {dark}>
     <input type="number"
            step="1"
+           min="0"
            placeholder={hint}
            bind:value
            on:input

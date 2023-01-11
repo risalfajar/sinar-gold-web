@@ -16,6 +16,7 @@ export const NODE_CHAMFER = 'chamfer'
 export const NODE_TAG = 'tag'
 export const NODE_SALESMAN = 'salesman'
 export const NODE_GIFT = 'gift'
+export const NODE_MARKETPLACE = 'marketplace'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

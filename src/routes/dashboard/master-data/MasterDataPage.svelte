@@ -6,20 +6,20 @@
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import {Group} from "$lib/master-data/group/group"
     import Icon from "$lib/common/ui/icon/Icon.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
     import {createMasterDataTable} from "./createTable"
     import {Schema} from "read-excel-file"
     import ImportDialog from "./ImportDialog.svelte"
-    import {SvelteComponent} from "svelte"
 
-    export let repository: MapDatabaseRepository<any>
+    type T = $$Generic
+
+    export let repository: MapDatabaseRepository<T>
     export let schema: Schema
-    export let initialSortKey: string
-    export let editDialog: SvelteComponent
+    export let initialSortKey: keyof T
+    export let editDialog: any
 
-    const data: Readable<any[]> = readable([], function start(set: Subscriber<any[]>) {
+    const data: Readable<T[]> = readable([], function start(set: Subscriber<T[]>) {
         return repository.listenChildren(items => set(items ?? []))
     })
     const tableViewModel = createMasterDataTable(data, schema, initialSortKey, showEditDialog, showDeleteConfirmationDialog)
@@ -47,7 +47,7 @@
         modalStore.trigger(dialog)
     }
 
-    function showEditDialog(data?: Group) {
+    function showEditDialog(data?: T) {
         const dialog: ModalSettings = {
             type: 'component',
             title: `${data ? 'Edit' : 'Tambah'} Item`,
@@ -59,7 +59,7 @@
         modalStore.trigger(dialog)
     }
 
-    function showDeleteConfirmationDialog(item: Group) {
+    function showDeleteConfirmationDialog(item: T) {
         modalStore.trigger({
             ...deleteConfirmationModal,
             body: `Apakah kamu yakin ingin menghapus item ${item.name}?`,

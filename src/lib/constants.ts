@@ -18,6 +18,7 @@ export const NODE_SALESMAN = 'salesman'
 export const NODE_GIFT = 'gift'
 export const NODE_MARKETPLACE = 'marketplace'
 export const NODE_STOREFRONT = 'storefront'
+export const NODE_TRANSACTION_CODE = 'transactionCode'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

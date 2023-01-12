@@ -20,5 +20,5 @@ export const groups = readable<string[]>([], (set) => {
     const groupRepository = new GroupRepository()
     groupRepository
         .getChildren()
-        .then(groups => set(groups.map(it => it.name)))
+        .then(groups => set(groups.map(it => it.code)))
 })

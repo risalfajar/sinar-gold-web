@@ -8,6 +8,7 @@ export const COLLECTION_USERS = 'users'
 
 // Database
 export const NODE_MASTER_DATA = 'masterData'
+export const NODE_BANK = 'bank'
 export const NODE_GROUP = 'group'
 export const NODE_KIND = 'kind'
 export const NODE_WAREHOUSE = 'warehouse'

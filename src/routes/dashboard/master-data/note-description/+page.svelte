@@ -7,4 +7,4 @@
     const repository = new NoteDescriptionRepository()
 </script>
 
-<MasterDataPage {repository} {schema} initialSortKey="name" editDialog={EditDialog}/>
+<MasterDataPage {repository} {schema} initialSortKey="groupCode" editDialog={EditDialog}/>

@@ -5,9 +5,7 @@ import {NODE_ITEM_TYPE, NODE_MASTER_DATA} from "$lib/constants"
 import {ItemType} from "$lib/master-data/item-type/itemType"
 
 export default class ItemTypeRepository extends MapDatabaseRepository<ItemType> {
-    protected getId(item: ItemType): string {
-        return item.id
-    }
+    protected primaryKey: keyof ItemType = "id"
 
     getDocumentReference(): DatabaseReference {
         return ref(Database, `${NODE_MASTER_DATA}/${NODE_ITEM_TYPE}`)

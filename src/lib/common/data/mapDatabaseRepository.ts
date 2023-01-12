@@ -2,7 +2,7 @@ import DatabaseRepository from "$lib/common/data/databaseRepository"
 import {child, push, remove, set, Unsubscribe} from "firebase/database"
 
 export default abstract class MapDatabaseRepository<T> extends DatabaseRepository<Record<string, T>> {
-    protected abstract getId(item: T): string
+    protected abstract primaryKey: keyof T
 
     async getChildren(): Promise<T[]> {
         const data = await this.get()
@@ -15,7 +15,7 @@ export default abstract class MapDatabaseRepository<T> extends DatabaseRepositor
 
     set(item: T) {
         const ref = this.getChildRef(item)
-        return set(ref, item)
+        return set(ref, {...item, [this.primaryKey]: ref.key})
     }
 
     remove(itemId: string) {
@@ -23,9 +23,9 @@ export default abstract class MapDatabaseRepository<T> extends DatabaseRepositor
     }
 
     protected getChildRef(item: T) {
-        const itemId = this.getId(item)
+        const itemId = item[this.primaryKey] as string
 
-        if (itemId.length > 0)
+        if (itemId && itemId.length > 0)
             return child(this.getDocumentReference(), itemId)
         else
             return push(this.getDocumentReference())

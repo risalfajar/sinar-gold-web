@@ -5,9 +5,7 @@ import {NODE_MASTER_DATA, NODE_STORE} from "$lib/constants"
 import {Store} from "$lib/master-data/store/store"
 
 export default class StoreRepository extends MapDatabaseRepository<Store> {
-    protected getId(item: Store): string {
-        return item.code
-    }
+    protected primaryKey: keyof Store = "code"
 
     getDocumentReference(): DatabaseReference {
         return ref(Database, `${NODE_MASTER_DATA}/${NODE_STORE}`)

@@ -5,9 +5,7 @@ import {NODE_CHAMFER, NODE_MASTER_DATA} from "$lib/constants"
 import {Chamfer} from "$lib/master-data/chamfer/chamfer"
 
 export default class ChamferRepository extends MapDatabaseRepository<Chamfer> {
-    protected getId(item: Chamfer): string {
-        return item.code
-    }
+    protected primaryKey: keyof Chamfer = "code"
 
     getDocumentReference(): DatabaseReference {
         return ref(Database, `${NODE_MASTER_DATA}/${NODE_CHAMFER}`)

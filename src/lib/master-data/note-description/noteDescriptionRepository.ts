@@ -5,9 +5,7 @@ import {NODE_MASTER_DATA, NODE_NOTE_DESCRIPTION} from "$lib/constants"
 import {NoteDescription} from "$lib/master-data/note-description/noteDescription"
 
 export default class NoteDescriptionRepository extends MapDatabaseRepository<NoteDescription> {
-    protected getId(item: NoteDescription): string {
-        return item.id
-    }
+    protected primaryKey: keyof NoteDescription = "id"
 
     getDocumentReference(): DatabaseReference {
         return ref(Database, `${NODE_MASTER_DATA}/${NODE_NOTE_DESCRIPTION}`)

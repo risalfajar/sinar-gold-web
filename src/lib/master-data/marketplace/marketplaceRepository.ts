@@ -5,9 +5,7 @@ import {NODE_MARKETPLACE, NODE_MASTER_DATA} from "$lib/constants"
 import {Marketplace} from "$lib/master-data/marketplace/marketplace"
 
 export default class MarketplaceRepository extends MapDatabaseRepository<Marketplace> {
-    protected getId(item: Marketplace): string {
-        return item.code
-    }
+    protected primaryKey: keyof Marketplace = "code"
 
     getDocumentReference(): DatabaseReference {
         return ref(Database, `${NODE_MASTER_DATA}/${NODE_MARKETPLACE}`)

@@ -5,9 +5,7 @@ import {NODE_COST, NODE_MASTER_DATA} from "$lib/constants"
 import {Cost} from "$lib/master-data/cost/cost"
 
 export default class CostRepository extends MapDatabaseRepository<Cost> {
-    protected getId(item: Cost): string {
-        return item.code
-    }
+    protected primaryKey: keyof Cost = "code"
 
     getDocumentReference(): DatabaseReference {
         return ref(Database, `${NODE_MASTER_DATA}/${NODE_COST}`)

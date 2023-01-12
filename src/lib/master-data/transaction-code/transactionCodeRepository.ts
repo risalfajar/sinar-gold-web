@@ -5,9 +5,7 @@ import {NODE_MASTER_DATA, NODE_TRANSACTION_CODE} from "$lib/constants"
 import {TransactionCode} from "$lib/master-data/transaction-code/transactionCode"
 
 export default class TransactionCodeRepository extends MapDatabaseRepository<TransactionCode> {
-    protected getId(item: TransactionCode): string {
-        return item.code
-    }
+    protected primaryKey: keyof TransactionCode = "code"
 
     getDocumentReference(): DatabaseReference {
         return ref(Database, `${NODE_MASTER_DATA}/${NODE_TRANSACTION_CODE}`)

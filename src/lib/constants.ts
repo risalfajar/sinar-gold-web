@@ -25,6 +25,8 @@ export const NODE_COST = 'cost'
 export const NODE_PURCHASE_CONDITION = 'purchaseCondition'
 export const NODE_STORE = 'store'
 export const NODE_NOTE_DESCRIPTION = 'noteDescription'
+export const NODE_BANK_ACCOUNT_NUMBER = 'bankAccountNumber'
+export const NODE_SUPPLIER = 'supplier'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

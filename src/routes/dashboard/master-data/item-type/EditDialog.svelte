@@ -4,7 +4,7 @@
     import {ItemType} from "$lib/master-data/item-type/itemType"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
     import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
-    import {groups} from "$lib/stores.js"
+    import {groupCodes} from "$lib/stores.js"
 
     type T = ItemType
 
@@ -25,6 +25,6 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <Select label="Kode Group" options={$groups} bind:value={data.groupCode}/>
+    <Select label="Kode Group" options={$groupCodes} bind:value={data.groupCode}/>
     <TextInput label="Tipe Barang" bind:value={data.name}/>
 </MasterDataEditDialog>

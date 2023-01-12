@@ -4,7 +4,7 @@
     import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
     import {Point} from "$lib/master-data/point/point"
     import Select from "$lib/common/ui/form/Select.svelte"
-    import {groups} from "$lib/stores.js"
+    import {groupCodes} from "$lib/stores.js"
     import NumberInput from "$lib/common/ui/form/NumberInput.svelte"
 
     type T = Point
@@ -27,7 +27,7 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <Select label="Kode Group" options={$groups} bind:value={data.groupCode}/>
+    <Select label="Kode Group" options={$groupCodes} bind:value={data.groupCode}/>
     <WeightInput label="Gram" bind:value={data.weight}/>
     <NumberInput label="Poin" bind:value={data.point}/>
 </MasterDataEditDialog>

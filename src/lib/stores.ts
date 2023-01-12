@@ -16,7 +16,7 @@ export const currentUser: Readable<User | null> = readable(null, function start(
     }
 })
 
-export const groups = readable<string[]>([], (set) => {
+export const groupCodes = readable<string[]>([], (set) => {
     const groupRepository = new GroupRepository()
     groupRepository
         .getChildren()

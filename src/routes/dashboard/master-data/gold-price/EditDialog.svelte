@@ -4,7 +4,7 @@
     import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
     import {GoldPrice} from "$lib/master-data/gold-price/goldPrice"
     import Select from "$lib/common/ui/form/Select.svelte"
-    import {groups} from "$lib/stores"
+    import {groupCodes} from "$lib/stores"
     import PriceInput from "$lib/common/ui/form/PriceInput.svelte"
 
     type T = GoldPrice
@@ -27,7 +27,7 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <Select label="Kode Group" options={$groups} bind:value={data.groupCode}/>
+    <Select label="Kode Group" options={$groupCodes} bind:value={data.groupCode}/>
     <TextInput label="Nama Group" bind:value={data.groupName}/>
     <PriceInput label="Harga" bind:value={data.price}/>
     <PriceInput label="Harga Modal" bind:value={data.capital}/>

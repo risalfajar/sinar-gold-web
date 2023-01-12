@@ -3,7 +3,7 @@
     import Select from "$lib/common/ui/form/Select.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
     import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
-    import {groups} from "$lib/stores.js"
+    import {groupCodes} from "$lib/stores.js"
     import {NoteDescription} from "$lib/master-data/note-description/noteDescription"
 
     type T = NoteDescription
@@ -25,6 +25,6 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <Select label="Kode Group" options={$groups} bind:value={data.groupCode}/>
+    <Select label="Kode Group" options={$groupCodes} bind:value={data.groupCode}/>
     <TextInput label="Keterangan" bind:value={data.description}/>
 </MasterDataEditDialog>

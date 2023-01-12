@@ -4,7 +4,7 @@
     import {Kind} from "$lib/master-data/kind/kind"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
     import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
-    import {groups} from "$lib/stores.js"
+    import {groupCodes} from "$lib/stores.js"
 
     type T = Kind
 
@@ -29,5 +29,5 @@
 <MasterDataEditDialog {isFormValid} {data} {repository}>
     <TextInput label="Kode Jenis" disabled={isEditMode} bind:value={data.code}/>
     <TextInput label="Nama Jenis" bind:value={data.name}/>
-    <Select label="Kode Grup" options={$groups} bind:value={data.groupCode}/>
+    <Select label="Kode Grup" options={$groupCodes} bind:value={data.groupCode}/>
 </MasterDataEditDialog>

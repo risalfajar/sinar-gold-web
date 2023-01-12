@@ -237,6 +237,10 @@ export const menus: Menu[] = [
                 title: 'Master Kategori',
                 link: '/dashboard/master-data/category'
             },
+            {
+                title: 'Master Tukang',
+                link: '/dashboard/master-data/craftsman'
+            },
         ]
     },
     {

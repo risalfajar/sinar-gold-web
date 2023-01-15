@@ -15,7 +15,7 @@
     async function save() {
         isSaving = true
         try {
-            await repository.set(data)
+            await repository.save(data)
             successToast('Berhasil menyimpan data')
             modalStore.close()
         } catch (err) {

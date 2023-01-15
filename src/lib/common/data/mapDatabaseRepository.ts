@@ -13,7 +13,7 @@ export default abstract class MapDatabaseRepository<T> extends DatabaseRepositor
         return this.listen(document => onChange(Object.values(document ?? {})))
     }
 
-    set(item: T) {
+    save(item: T) {
         const ref = this.getChildRef(item)
         return set(ref, {...item, [this.primaryKey]: ref.key})
     }

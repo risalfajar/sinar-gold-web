@@ -45,7 +45,7 @@
             return Promise.allSettled(
                 $data.map(async item => {
                     try {
-                        await repository.set(item)
+                        await repository.save(item)
                     } catch (err) {
                         console.error(err)
                         failedItems.push(item)

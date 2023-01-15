@@ -82,7 +82,7 @@
     <SearchInput slot="search" bind:value={$filterValue}/>
     <svelte:fragment slot="buttons">
         <button class="btn btn-filled-success" on:click={() => fileInput.click()}>
-            <Icon name="Excel" class="mr-2"/>
+            <Icon name="Excel" class="mr-2 fill-white"/>
             Import Excel
         </button>
         <button class="btn btn-filled-primary" on:click={() => showEditDialog()}>Tambah Data</button>

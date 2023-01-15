@@ -2,7 +2,7 @@
     import GroupRepository from "$lib/master-data/group/groupRepository"
     import EditDialog from './EditDialog.svelte'
     import {schema} from "./schema"
-    import MasterDataPage from "../MasterDataPage.svelte"
+    import MasterDataPage from "$lib/master-data/MasterDataPage.svelte"
 
     const repository = new GroupRepository()
 </script>

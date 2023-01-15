@@ -8,9 +8,9 @@
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import Icon from "$lib/common/ui/icon/Icon.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import {createMasterDataTable} from "./createTable"
+    import {createMasterDataTable} from "../../routes/dashboard/master-data/createTable"
     import {Schema} from "read-excel-file"
-    import ImportDialog from "./ImportDialog.svelte"
+    import ImportDialog from "../../routes/dashboard/master-data/ImportDialog.svelte"
 
     type T = $$Generic
 

@@ -3,7 +3,7 @@
     import readXlsxFile, {Schema} from "read-excel-file"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import {Writable, writable} from "svelte/store"
-    import {createSimpleTable} from "$lib/common/utils/tableUtils"
+    import {createDataTable} from "$lib/common/utils/tableUtils"
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
     import {modalStore} from "@skeletonlabs/skeleton"
@@ -14,7 +14,7 @@
     export let repository: MapDatabaseRepository<any>
 
     const data: Writable<any[]> = writable([])
-    const table = createSimpleTable(schema, data)
+    const table = createDataTable(data, schema)
 
     let isSaving: boolean = false
 

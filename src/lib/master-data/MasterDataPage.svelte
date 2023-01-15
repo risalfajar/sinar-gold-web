@@ -8,9 +8,9 @@
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import Icon from "$lib/common/ui/icon/Icon.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import {createMasterDataTable} from "../../routes/dashboard/master-data/createTable"
     import {Schema} from "read-excel-file"
     import ImportDialog from "../../routes/dashboard/master-data/ImportDialog.svelte"
+    import {createDataTable} from "$lib/common/utils/tableUtils"
 
     type T = $$Generic
 
@@ -23,7 +23,7 @@
     const data: Readable<T[]> = readable([], function start(set: Subscriber<T[]>) {
         return repository.listenChildren(items => set(items ?? []))
     })
-    const tableViewModel = createMasterDataTable(data, schema, initialSortKey, showEditDialog, showDeleteConfirmationDialog)
+    const tableViewModel = createDataTable(data, schema, initialSortKey, showEditDialog, showDeleteConfirmationDialog)
     const {filterValue} = tableViewModel.pluginStates.tableFilter
 
     let fileInput: HTMLInputElement

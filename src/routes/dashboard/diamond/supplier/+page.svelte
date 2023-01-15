@@ -7,4 +7,4 @@
     const repository = new DiamondSupplierRepository()
 </script>
 
-<MasterDataPage {repository} {schema} initialSortKey="code" editDialog={EditDialog}/>
+<MasterDataPage {repository} {schema} initialSortKey="code" editDialog={EditDialog} enableImport={false}/>

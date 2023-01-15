@@ -18,6 +18,7 @@
     export let schema: Schema
     export let initialSortKey: keyof T
     export let editDialog: any
+    export let enableImport: boolean = true
 
     const data: Readable<T[]> = readable([], function start(set: Subscriber<T[]>) {
         return repository.listenChildren(items => set(items ?? []))
@@ -81,10 +82,12 @@
 <TableContainer>
     <SearchInput slot="search" bind:value={$filterValue}/>
     <svelte:fragment slot="buttons">
-        <button class="btn btn-filled-success" on:click={() => fileInput.click()}>
-            <Icon name="Excel" class="mr-2 fill-white"/>
-            Import Excel
-        </button>
+        {#if enableImport}
+            <button class="btn btn-filled-success" on:click={() => fileInput.click()}>
+                <Icon name="Excel" class="mr-2 fill-white"/>
+                Import Excel
+            </button>
+        {/if}
         <button class="btn btn-filled-primary" on:click={() => showEditDialog()}>Tambah Data</button>
         <input class="hidden" type="file" accept=".xls, .xlsx" bind:this={fileInput} on:change={showImportDialog}/>
     </svelte:fragment>

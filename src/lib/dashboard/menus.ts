@@ -234,8 +234,8 @@ export const menus: Menu[] = [
                 link: '/dashboard/master-data/supplier'
             },
             {
-                title: 'Master Kategori',
-                link: '/dashboard/master-data/category'
+                title: 'Kategori Uang Kas',
+                link: '/dashboard/master-data/cash-category'
             },
             {
                 title: 'Master Tukang',

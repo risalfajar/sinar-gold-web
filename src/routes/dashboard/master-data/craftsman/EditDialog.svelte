@@ -1,6 +1,6 @@
 <script lang="ts">
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
     import {Craftsman} from "$lib/master-data/craftsman/craftsman"
 

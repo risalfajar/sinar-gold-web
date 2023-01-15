@@ -22,7 +22,7 @@
     import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
     import {Salesman} from "$lib/master-data/salesman/salesman"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
 
     type T = Chamfer
 

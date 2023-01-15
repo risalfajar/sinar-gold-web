@@ -1,7 +1,7 @@
 <script lang="ts">
     import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
     import {Point} from "$lib/master-data/point/point"
     import Select from "$lib/common/ui/form/Select.svelte"
     import {groupCodes} from "$lib/stores.js"

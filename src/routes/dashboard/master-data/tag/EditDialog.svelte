@@ -3,7 +3,7 @@
     import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
     import {Tag} from "$lib/master-data/tag/tag"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
 
     type T = Tag
 

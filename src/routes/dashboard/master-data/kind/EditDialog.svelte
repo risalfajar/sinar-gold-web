@@ -3,7 +3,7 @@
     import Select from "$lib/common/ui/form/Select.svelte"
     import {Kind} from "$lib/master-data/kind/kind"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
     import {groupCodes} from "$lib/stores.js"
 
     type T = Kind

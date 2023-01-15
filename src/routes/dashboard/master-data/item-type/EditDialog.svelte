@@ -3,7 +3,7 @@
     import Select from "$lib/common/ui/form/Select.svelte"
     import {ItemType} from "$lib/master-data/item-type/itemType"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
     import {groupCodes} from "$lib/stores.js"
 
     type T = ItemType

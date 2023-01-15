@@ -1,7 +1,7 @@
 <script lang="ts">
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import {Salesman} from "$lib/master-data/salesman/salesman"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
 
     type T = Salesman

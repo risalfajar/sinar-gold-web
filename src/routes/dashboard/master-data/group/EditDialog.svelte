@@ -4,7 +4,7 @@
     import {Group} from "$lib/master-data/group/group"
     import PriceInput from "$lib/common/ui/form/PriceInput.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
 
     type T = Group
 

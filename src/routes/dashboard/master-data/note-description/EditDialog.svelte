@@ -2,7 +2,7 @@
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import Select from "$lib/common/ui/form/Select.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
     import {groupCodes} from "$lib/stores.js"
     import {NoteDescription} from "$lib/master-data/note-description/noteDescription"
 

@@ -2,7 +2,7 @@
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import {Warehouse} from "$lib/master-data/warehouse/warehouse"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "../MasterDataEditDialog.svelte"
+    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
 
     type T = Warehouse
 

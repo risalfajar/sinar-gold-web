@@ -32,6 +32,7 @@ export const NODE_CASH_CATEGORY = 'cashCategory'
 export const NODE_NOTE_DESCRIPTION = 'noteDescription'
 export const NODE_BANK_ACCOUNT_NUMBER = 'bankAccountNumber'
 export const NODE_SUPPLIER = 'supplier'
+export const NODE_DIAMOND = 'diamond'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

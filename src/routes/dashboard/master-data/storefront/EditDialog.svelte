@@ -22,6 +22,6 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <TextInput label="Kode Etalase" bind:value={data.code}/>
+    <TextInput label="Kode Etalase" disabled={isEditMode} bind:value={data.code}/>
     <TextInput label="Nama Etalase" bind:value={data.name}/>
 </MasterDataEditDialog>

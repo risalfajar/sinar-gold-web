@@ -21,5 +21,5 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <TextInput label="Kode Jenis Group" bind:value={data.type}/>
+    <TextInput label="Kode Jenis Group" disabled={isEditMode} bind:value={data.type}/>
 </MasterDataEditDialog>

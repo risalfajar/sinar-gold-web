@@ -27,7 +27,7 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <TextInput label="Kode Intern" bind:value={data.code}/>
+    <TextInput label="Kode Intern" disabled={isEditMode} bind:value={data.code}/>
     <PriceInput label="Nominal" bind:value={data.amount}/>
     <NumberInput label="Persentase" max="100" bind:value={data.percentage}/>
     <Select label="Tipe Ongkos" options={["Nominal", "Gram"]} bind:value={data.type}/>

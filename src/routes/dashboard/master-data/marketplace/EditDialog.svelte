@@ -22,6 +22,6 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <TextInput label="Kode Marketplace" bind:value={data.code}/>
+    <TextInput label="Kode Marketplace" disabled={isEditMode} bind:value={data.code}/>
     <TextInput label="Nama Marketplace" bind:value={data.name}/>
 </MasterDataEditDialog>

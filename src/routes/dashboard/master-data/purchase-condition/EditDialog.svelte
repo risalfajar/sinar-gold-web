@@ -25,7 +25,7 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <TextInput label="Kode Kondisi Pembelian" bind:value={data.code}/>
+    <TextInput label="Kode Kondisi Pembelian" disabled={isEditMode} bind:value={data.code}/>
     <PriceInput label="Potongan Harga" bind:value={data.discount}/>
     <NumberInput label="Persentase" max="100" bind:value={data.percentage}/>
 </MasterDataEditDialog>

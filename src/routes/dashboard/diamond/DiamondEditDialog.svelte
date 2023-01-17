@@ -5,15 +5,26 @@
     import {modalStore} from "@skeletonlabs/skeleton"
     import {ItemAlreadyExistError} from "$lib/errors"
     import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
+    import {DiamondShape} from "$lib/diamond/shape/shape"
+    import TextInput from "$lib/common/ui/form/TextInput.svelte"
+    import {ObjectSchema} from "$lib/common/types/objectSchema"
 
-    type T = $$Generic
+    const defaultData: DiamondShape = {
+        code: generateNumberId(),
+        name: ""
+    }
 
-    export let data: T
-    export let repository: MapDatabaseRepository<T>
-    export let isEditMode: boolean
-    export let isFormValid: boolean
+    export {dataArgs as data}
+    export let repository: MapDatabaseRepository<DiamondShape>
+    export let schema: ObjectSchema<DiamondShape>
 
+    let dataArgs: DiamondShape | null = null
+    let data = dataArgs ? {...dataArgs} as DiamondShape : defaultData
     let isSaving = false
+
+    $: labels = Object.keys(schema ?? {})
+    $: isEditMode = dataArgs != null
+    $: isFormValid = data.code.length > 0 && data.name.length > 0
 
     async function save() {
         isSaving = true
@@ -39,5 +50,6 @@
 </script>
 
 <FormDialog {isFormValid} {isSaving} on:save={save}>
-    <slot/>
+    <TextInput disabled label={labels[0]} bind:value={data.code}/>
+    <TextInput label={labels[1]} bind:value={data.name}/>
 </FormDialog>

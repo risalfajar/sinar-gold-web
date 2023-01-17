@@ -34,6 +34,7 @@ export const NODE_BANK_ACCOUNT_NUMBER = 'bankAccountNumber'
 export const NODE_DIAMOND = 'diamond'
 export const NODE_SUPPLIER = 'supplier'
 export const NODE_SHAPE = 'shape'
+export const NODE_COLOR = 'color'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

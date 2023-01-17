@@ -1,3 +1,16 @@
+<script lang="ts" context="module">
+    import {readable} from "svelte/store"
+    import DiamondStoneTypeRepository from "$lib/diamond/stone-type/repository"
+
+    const stoneRepository = new DiamondStoneTypeRepository()
+    const stoneTypes = readable([], (set) => {
+        stoneRepository.getChildren().then(items => {
+            const names = items.map(it => it.name)
+            set(names)
+        })
+    })
+</script>
+
 <script lang="ts">
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import Select from "$lib/common/ui/form/Select.svelte"
@@ -36,6 +49,5 @@
     <TextInput label="Jenis Group" bind:value={data.type}/>
     <PriceInput label="Harga" bind:value={data.price}/>
     <PriceInput label="Harga Modal" bind:value={data.capital}/>
-    <!--  TODO clarify  -->
-    <Select label="Berlian" options={[data.diamond]} bind:value={data.diamond}/>
+    <Select label="Berlian" options={$stoneTypes} hint="-Pilih Jenis Batu-" bind:value={data.diamond}/>
 </MasterDataEditDialog>

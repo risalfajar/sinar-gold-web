@@ -38,6 +38,7 @@ export const NODE_COLOR = 'color'
 export const NODE_CLARITY = 'clarity'
 export const NODE_FLUORESCENCE = 'fluorescence'
 export const NODE_SYMMETRY = 'symmetry'
+export const NODE_POLISH = 'polish'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

@@ -1,7 +1,7 @@
 import {ObjectSchema} from "$lib/common/types/objectSchema"
-import {DiamondSupplier} from "$lib/diamond/supplier/supplier"
+import {Diamond} from "$lib/diamond/diamond"
 
-export const schema: ObjectSchema<DiamondSupplier> = {
+export const schema: ObjectSchema<Diamond> = {
     'Kode Master Supplier': {
         prop: 'code',
         type: String,

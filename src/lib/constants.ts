@@ -36,6 +36,7 @@ export const NODE_SUPPLIER = 'supplier'
 export const NODE_SHAPE = 'shape'
 export const NODE_COLOR = 'color'
 export const NODE_CLARITY = 'clarity'
+export const NODE_FLUORESCENCE = 'fluorescence'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'

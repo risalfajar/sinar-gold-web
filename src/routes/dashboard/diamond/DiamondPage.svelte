@@ -9,10 +9,10 @@
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
     import {Schema} from "read-excel-file"
     import {createDataTable} from "$lib/common/utils/tableUtils"
-    import {DiamondShape} from "$lib/diamond/shape/shape"
     import DiamondEditDialog from "./DiamondEditDialog.svelte"
+    import {Diamond} from "$lib/diamond/diamond"
 
-    type T = DiamondShape
+    type T = Diamond
 
     export let repository: MapDatabaseRepository<T>
     export let schema: Schema

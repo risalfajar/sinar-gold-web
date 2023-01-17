@@ -5,21 +5,21 @@
     import {modalStore} from "@skeletonlabs/skeleton"
     import {ItemAlreadyExistError} from "$lib/errors"
     import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
-    import {DiamondShape} from "$lib/diamond/shape/shape"
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import {ObjectSchema} from "$lib/common/types/objectSchema"
+    import {Diamond} from "$lib/diamond/diamond"
 
-    const defaultData: DiamondShape = {
+    const defaultData: Diamond = {
         code: generateNumberId(),
         name: ""
     }
 
     export {dataArgs as data}
-    export let repository: MapDatabaseRepository<DiamondShape>
-    export let schema: ObjectSchema<DiamondShape>
+    export let repository: MapDatabaseRepository<Diamond>
+    export let schema: ObjectSchema<Diamond>
 
-    let dataArgs: DiamondShape | null = null
-    let data = dataArgs ? {...dataArgs} as DiamondShape : defaultData
+    let dataArgs: Diamond | null = null
+    let data = dataArgs ? {...dataArgs} as Diamond : defaultData
     let isSaving = false
 
     $: labels = Object.keys(schema ?? {})

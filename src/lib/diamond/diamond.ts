@@ -1,4 +1,4 @@
-export type DiamondShape = {
+export type Diamond = {
     code: string
     name: string
 }

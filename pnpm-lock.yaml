@@ -16,6 +16,7 @@ specifiers:
   postcss: ^8.4.14
   postcss-load-config: ^4.0.1
   read-excel-file: ^5.5.3
+  short-unique-id: ^4.4.4
   svelte: ^3.54.0
   svelte-check: ^2.9.2
   svelte-headless-table: ^0.16.1
@@ -32,6 +33,7 @@ dependencies:
   lodash-es: 4.17.21
   luxon: 3.2.0
   read-excel-file: 5.5.3
+  short-unique-id: 4.4.4
 
 devDependencies:
   '@skeletonlabs/skeleton': 0.86.9
@@ -1934,6 +1936,11 @@ packages:
 
   /setimmediate/1.0.5:
     resolution: { integrity: sha512-MATJdZp8sLqDl/68LfQmbP8zKPLQNV6BIZoIgrscFDQ+RsvK/BxeDQOgyxKKoh0y/8h3BqVFnCqQ/gd+reiIXA== }
+    dev: false
+
+  /short-unique-id/4.4.4:
+    resolution: { integrity: sha512-oLF1NCmtbiTWl2SqdXZQbo5KM1b7axdp0RgQLq8qCBBLoq+o3A5wmLrNM6bZIh54/a8BJ3l69kTXuxwZ+XCYuw== }
+    hasBin: true
     dev: false
 
   /sirv/2.0.2:

@@ -1,13 +1,14 @@
 <script lang="ts">
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
     import {DiamondSupplier} from "$lib/diamond/supplier/supplier"
+    import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
+    import DiamondEditDialog from "../DiamondEditDialog.svelte"
 
     type T = DiamondSupplier
 
     const defaultData: T = {
-        code: "",
+        code: generateNumberId(),
         name: ""
     }
 
@@ -21,7 +22,7 @@
     $: isFormValid = data.code.length > 0 && data.name.length > 0
 </script>
 
-<MasterDataEditDialog {isFormValid} {data} {repository}>
-    <TextInput label="Kode Master Supplier" bind:value={data.code}/>
+<DiamondEditDialog {isFormValid} {data} {repository} {isEditMode}>
+    <TextInput disabled label="Kode Master Supplier" bind:value={data.code}/>
     <TextInput label="Nama Master Supplier" bind:value={data.name}/>
-</MasterDataEditDialog>
+</DiamondEditDialog>

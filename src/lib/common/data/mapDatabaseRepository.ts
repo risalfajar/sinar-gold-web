@@ -1,8 +1,9 @@
 import DatabaseRepository from "$lib/common/data/databaseRepository"
-import {child, push, remove, set, Unsubscribe} from "firebase/database"
+import {child, push, remove, runTransaction, set, Unsubscribe} from "firebase/database"
+import {ItemAlreadyExistError} from "$lib/errors"
 
 export default abstract class MapDatabaseRepository<T> extends DatabaseRepository<Record<string, T>> {
-    protected abstract primaryKey: keyof T
+    abstract primaryKey: keyof T
 
     async getChildren(): Promise<T[]> {
         const data = await this.get()
@@ -11,6 +12,18 @@ export default abstract class MapDatabaseRepository<T> extends DatabaseRepositor
 
     listenChildren(onChange: (document: T[]) => unknown): Unsubscribe {
         return this.listen(document => onChange(Object.values(document ?? {})))
+    }
+
+    create(item: T) {
+        const ref = this.getChildRef(item)
+        const data = {...item, [this.primaryKey]: ref.key}
+
+        return runTransaction(ref, (item) => {
+            if (item)
+                throw new ItemAlreadyExistError()
+            else
+                return data
+        })
     }
 
     save(item: T) {

@@ -1,11 +1,11 @@
-import {createRender, createTable, DisplayBodyCell, TableState} from "svelte-headless-table"
+import {createRender, createTable, DataBodyCell, DisplayBodyCell, TableState} from "svelte-headless-table"
 import {get} from "svelte/store"
 import {Schema} from "read-excel-file"
 import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
 import {ReadOrWritable} from "svelte-headless-table/lib/utils/store"
 import TableActions from "$lib/common/ui/table/TableActions.svelte"
 
-export function getRowData<T>(state: TableState<T>, cell: DisplayBodyCell<T>): T {
+export function getRowData<T>(state: TableState<T>, cell: DisplayBodyCell<T> | DataBodyCell<T>): T {
     const list = get(state.data)
     const id = cell.row.id
     // @ts-ignore

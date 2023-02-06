@@ -1,5 +1,9 @@
 import {Menu} from "./menu"
 
+export function findSubMenus(title: string) {
+    return menus.find(it => it.title === title)?.subMenus ?? []
+}
+
 export const menus: Menu[] = [
     {
         title: 'Beranda',

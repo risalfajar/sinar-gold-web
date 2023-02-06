@@ -1,14 +1,15 @@
 <script lang="ts">
     import Container from "$lib/common/ui/container/Container.svelte"
     import ContainerTitle from "$lib/common/ui/container/ContainerTitle.svelte"
-    import {menus} from "$lib/dashboard/menus"
+    import {findSubMenus} from "$lib/dashboard/menus"
     import TabbedContainer from "$lib/common/ui/container/tab/TabbedContainer.svelte"
 
-    const tabs = menus.find(it => it.title === 'Data Master').subMenus
+    const title = 'Data Master'
+    const tabs = findSubMenus(title)
 </script>
 
 <Container>
-    <ContainerTitle slot="title" title="Data Master"/>
+    <ContainerTitle slot="title" {title}/>
     <TabbedContainer {tabs}>
         <slot/>
     </TabbedContainer>

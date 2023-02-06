@@ -98,7 +98,7 @@
         if (!$modalStore.length)
             return
         if (event.code === 'Escape')
-            onClose()
+            $modalStore[0].type === 'component' || onClose()
     }
 
     // Reactive

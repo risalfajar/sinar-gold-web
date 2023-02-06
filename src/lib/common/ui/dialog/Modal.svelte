@@ -134,68 +134,66 @@
 
 <svelte:window on:keydown={onKeyDown}/>
 
-{#if $modalStore.length > 0}
-    {#key $modalStore}
-        <!-- Backdrop -->
+{#each $modalStore as store, index}
+    <!-- Backdrop -->
+    <div
+            class="modal-backdrop {classesBackdrop}"
+            on:mousedown={onBackdropInteraction}
+            on:touchstart={onBackdropInteraction}
+            transition:fade={{ duration }}
+            data-testid="modal-backdrop"
+    >
+        <!-- Modal -->
         <div
-                class="modal-backdrop {classesBackdrop}"
-                on:mousedown={onBackdropInteraction}
-                on:touchstart={onBackdropInteraction}
-                transition:fade={{ duration }}
-                data-testid="modal-backdrop"
+                class="modal {classesModal} {store.classes}"
+                transition:fly={{ duration, opacity: 0, y: 100 }}
+                use:focusTrap={true}
+                data-testid="modal"
+                role="dialog"
+                aria-modal="true"
+                aria-label={store.title}
         >
-            <!-- Modal -->
-            <div
-                    class="modal {classesModal} {$modalStore[0].classes}"
-                    transition:fly={{ duration, opacity: 0, y: 100 }}
-                    use:focusTrap={true}
-                    data-testid="modal"
-                    role="dialog"
-                    aria-modal="true"
-                    aria-label={$modalStore[0].title}
-            >
-                <!-- Header -->
-                {#if $modalStore[0]?.title}
-                    <header class="modal-header {regionHeader}">{@html $modalStore[0].title}</header>
-                {/if}
-                <!-- Body -->
-                {#if $modalStore[0]?.body}
-                    <article class="modal-body {regionBody}">{@html $modalStore[0].body}</article>
-                {/if}
-                <!-- Image -->
-                {#if $modalStore[0]?.image && typeof $modalStore[0]?.image === 'string'}
-                    <img class="modal-image {cModalImage}" src={$modalStore[0]?.image} alt="Modal"/>
-                {/if}
-                <!-- Type -->
-                {#if $modalStore[0].type === 'alert'}
-                    <!-- Template: Alert -->
-                    <footer class="modal-footer {regionFooter}">
-                        <!-- prettier-ignore -->
-                        <button class="btn {buttonNeutral}" on:click={onClose}>{buttonTextCancel}</button>
-                    </footer>
-                {:else if $modalStore[0].type === 'confirm'}
-                    <!-- Template: Confirm -->
+            <!-- Header -->
+            {#if store?.title}
+                <header class="modal-header {regionHeader}">{@html store.title}</header>
+            {/if}
+            <!-- Body -->
+            {#if store?.body}
+                <article class="modal-body {regionBody}">{@html store.body}</article>
+            {/if}
+            <!-- Image -->
+            {#if store?.image && typeof store?.image === 'string'}
+                <img class="modal-image {cModalImage}" src={store?.image} alt="Modal"/>
+            {/if}
+            <!-- Type -->
+            {#if store.type === 'alert'}
+                <!-- Template: Alert -->
+                <footer class="modal-footer {regionFooter}">
                     <!-- prettier-ignore -->
-                    <footer class="modal-footer {regionFooter}">
-                        <button class="btn {buttonNeutral}" on:click={onClose}>{buttonTextCancel}</button>
-                        <button class="btn {buttonPositive}" on:click={onConfirm}>{buttonTextConfirm}</button>
-                    </footer>
-                {:else if $modalStore[0].type === 'prompt'}
-                    <!-- Template: Prompt -->
-                    <input class="modal-prompt-input" type="text" bind:value={promptValue}/>
-                    <!-- prettier-ignore -->
-                    <footer class="modal-footer {regionFooter}">
-                        <button class="btn {buttonNeutral}" on:click={onClose}>{buttonTextCancel}</button>
-                        <button class="btn {buttonPositive}" on:click={onPromptSubmit} disabled={!promptValue}>{buttonTextSubmit}</button>
-                    </footer>
-                {:else if $modalStore[0].type === 'component'}
-                    <!-- Template: Component -->
-                    <!-- NOTE: users are repsonsible for handling all UI, including cancel/submit buttons -->
-                    <svelte:component this={$modalStore[0].component?.ref} {...$modalStore[0].component?.props} {parent}>
-                        {@html $modalStore[0].component?.slot}
-                    </svelte:component>
-                {/if}
-            </div>
+                    <button class="btn {buttonNeutral}" on:click={onClose}>{buttonTextCancel}</button>
+                </footer>
+            {:else if store.type === 'confirm'}
+                <!-- Template: Confirm -->
+                <!-- prettier-ignore -->
+                <footer class="modal-footer {regionFooter}">
+                    <button class="btn {buttonNeutral}" on:click={onClose}>{buttonTextCancel}</button>
+                    <button class="btn {buttonPositive}" on:click={onConfirm}>{buttonTextConfirm}</button>
+                </footer>
+            {:else if store.type === 'prompt'}
+                <!-- Template: Prompt -->
+                <input class="modal-prompt-input" type="text" bind:value={promptValue}/>
+                <!-- prettier-ignore -->
+                <footer class="modal-footer {regionFooter}">
+                    <button class="btn {buttonNeutral}" on:click={onClose}>{buttonTextCancel}</button>
+                    <button class="btn {buttonPositive}" on:click={onPromptSubmit} disabled={!promptValue}>{buttonTextSubmit}</button>
+                </footer>
+            {:else if store.type === 'component'}
+                <!-- Template: Component -->
+                <!-- NOTE: users are repsonsible for handling all UI, including cancel/submit buttons -->
+                <svelte:component this={store.component?.ref} {...store.component?.props} {parent}>
+                    {@html store.component?.slot}
+                </svelte:component>
+            {/if}
         </div>
-    {/key}
-{/if}
+    </div>
+{/each}

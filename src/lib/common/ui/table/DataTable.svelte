@@ -7,15 +7,16 @@
     let {headerRows, rows, tableAttrs, tableBodyAttrs} = model
 </script>
 
-<table {...$tableAttrs}>
-    <thead>
-    {#each $headerRows as headerRow (headerRow.id)}
-        <Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs rowProps={headerRow.props()} let:rowProps>
-            <tr {...rowAttrs}>
-                {#each headerRow.cells as cell (cell.id)}
-                    <Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
-                        <th {...attrs} on:click={props.sort?.toggle} class:sortable={!props.sort?.disabled}>
-                            {#key props.sort?.order}
+<div class="border rounded-lg overflow-hidden">
+    <table {...$tableAttrs}>
+        <thead>
+        {#each $headerRows as headerRow (headerRow.id)}
+            <Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs rowProps={headerRow.props()} let:rowProps>
+                <tr {...rowAttrs}>
+                    {#each headerRow.cells as cell (cell.id)}
+                        <Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
+                            <th {...attrs} on:click={props.sort?.toggle} class:sortable={!props.sort?.disabled}>
+                                {#key props.sort?.order}
                                 <span class="flex flex-row items-center gap-2" in:fade>
                                     <Render of={cell.render()}/>
                                     {#if props.sort?.order === 'asc'}
@@ -24,35 +25,36 @@
                                         <i class="material-icons text-gray-500 text-base">arrow_upward</i>
                                     {/if}
                                 </span>
-                            {/key}
-                        </th>
-                    </Subscribe>
-                {/each}
-            </tr>
-        </Subscribe>
-    {/each}
-    </thead>
+                                {/key}
+                            </th>
+                        </Subscribe>
+                    {/each}
+                </tr>
+            </Subscribe>
+        {/each}
+        </thead>
 
-    <tbody {...$tableBodyAttrs}>
-    {#each $rows as row (row.id)}
-        <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-            <tr {...rowAttrs}>
-                {#each row.cells as cell (cell.id)}
-                    <Subscribe attrs={cell.attrs()} let:attrs>
-                        <td {...attrs}>
-                            <Render of={cell.render()}/>
-                        </td>
-                    </Subscribe>
-                {/each}
+        <tbody {...$tableBodyAttrs}>
+        {#each $rows as row (row.id)}
+            <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
+                <tr {...rowAttrs}>
+                    {#each row.cells as cell (cell.id)}
+                        <Subscribe attrs={cell.attrs()} let:attrs>
+                            <td {...attrs}>
+                                <Render of={cell.render()}/>
+                            </td>
+                        </Subscribe>
+                    {/each}
+                </tr>
+            </Subscribe>
+        {:else}
+            <tr>
+                <td colspan={$headerRows?.[0]?.cells?.length ?? 1} class="text-center">Tidak ada data</td>
             </tr>
-        </Subscribe>
-    {:else}
-        <tr>
-            <td colspan={$headerRows?.[0]?.cells?.length ?? 1} class="text-center">Tidak ada data</td>
-        </tr>
-    {/each}
-    </tbody>
-</table>
+        {/each}
+        </tbody>
+    </table>
+</div>
 
 <style>
     .sortable {

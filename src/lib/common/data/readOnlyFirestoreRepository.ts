@@ -1,7 +1,6 @@
 import {
     CollectionReference,
     doc,
-    documentId,
     DocumentSnapshot,
     FieldPath,
     getDoc,
@@ -57,6 +56,16 @@ export abstract class ReadOnlyFirestoreRepository<T> {
 
     listenAll(onChange: (data: T[]) => any): Unsubscribe {
         return onSnapshot(this.getQuery(), (snapshot) => {
+            const data: T[] = this.convertObjects(snapshot)
+            onChange(data)
+        })
+    }
+
+    listenByDate(start: Date, end: Date, onChange: (data: T[]) => any) {
+        const startDate = DateTime.fromJSDate(start).startOf('day').toJSDate()
+        const endDate = DateTime.fromJSDate(end).endOf('day').toJSDate()
+        const q = query(this.getQuery('created'), where('created', '>=', startDate), where('created', '<=', endDate))
+        return onSnapshot(q, (snapshot) => {
             const data: T[] = this.convertObjects(snapshot)
             onChange(data)
         })

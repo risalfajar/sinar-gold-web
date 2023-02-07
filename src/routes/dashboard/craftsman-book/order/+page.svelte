@@ -5,9 +5,8 @@
     import Button from "$lib/common/ui/button/Button.svelte"
     import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
     import CreateDialog from "./create/CreateDialog.svelte"
-    import {craftsmans} from "$lib/stores.js"
-    import {readable} from "svelte/store"
-    import {CraftsmanOrder} from "./data/order"
+    import {craftsmans, salesmans} from "$lib/stores.js"
+    import {derived, writable} from "svelte/store"
     import CraftsmanOrderRepository from "./data/repository"
     import {createRender, createTable} from "svelte-headless-table"
     import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
@@ -15,10 +14,18 @@
     import TableActions from "$lib/common/ui/table/TableActions.svelte"
     import {sumBy} from "lodash-es"
 
-    const repository = new CraftsmanOrderRepository()
-    const data = readable<CraftsmanOrder[]>([], (set) => {
-        return repository.listenAll(set)
-    })
+    const craftsman = writable('')
+    const salesman = writable('')
+    const startDate = writable(new Date())
+    const endDate = writable(new Date())
+    const data = derived([craftsman, salesman, startDate, endDate], (values, set) => {
+        const craftsman = values[0].length > 0 ? values[0] : undefined
+        const salesman = values[1].length > 0 ? values[1] : undefined
+        const start = values[2]
+        const end = values[3]
+        const repository = new CraftsmanOrderRepository(salesman, craftsman)
+        return repository.listenByDate(start, end, items => set(items))
+    }, [])
 
     const table = createTable(data, {
         sort: addSortBy({initialSortKeys: [{id: 'created', order: 'desc'}]}),
@@ -51,7 +58,7 @@
         table.column({
             id: 'rate',
             header: 'Kadar Bahan',
-            accessor: (item) => item.materials.map(it => it.rate).reduce((previousValue, currentValue) => currentValue + previousValue)
+            accessor: (item) => item.materials.map(it => it.rate).reduce((previousValue, currentValue) => currentValue + previousValue) // TODO clarify
         }),
         table.column({
             id: 'goldWeight',
@@ -79,11 +86,6 @@
         })
     ])
 
-    let craftsman = ''
-    let salesman = ''
-    let startDate = new Date()
-    let endDate = new Date()
-
     function openCreateDialog() {
         const dialog: ModalSettings = {
             type: 'component',
@@ -97,9 +99,9 @@
 
 <TableContainer>
     <svelte:fragment slot="search">
-        <Select label="Tukang" options={$craftsmans} bind:value={craftsman}/>
-        <Select label="Sales" options={[]} bind:value={salesman}/>
-        <DateRangePicker label="Tanggal" bind:start={startDate} bind:end={endDate}/>
+        <Select label="Tukang" options={$craftsmans} bind:value={$craftsman}/>
+        <Select label="Sales" options={$salesmans.map(it => it.name)} values={$salesmans.map(it => it.code)} bind:value={$salesman}/>
+        <DateRangePicker label="Tanggal" bind:start={$startDate} bind:end={$endDate}/>
     </svelte:fragment>
     <Button class="btn-filled-primary" slot="buttons" on:click={openCreateDialog}>Buat Pesanan</Button>
 

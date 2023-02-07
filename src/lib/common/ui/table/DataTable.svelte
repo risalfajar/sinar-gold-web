@@ -17,7 +17,7 @@
                         <Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
                             <th {...attrs} on:click={props.sort?.toggle} class:sortable={!props.sort?.disabled}>
                                 {#key props.sort?.order}
-                                <span class="flex flex-row items-center gap-2" in:fade>
+                                <span class="flex flex-row justify-center items-center gap-2" in:fade>
                                     <Render of={cell.render()}/>
                                     {#if props.sort?.order === 'asc'}
                                         <i class="material-icons text-gray-500 text-base">arrow_downward</i>

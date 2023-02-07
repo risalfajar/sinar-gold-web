@@ -10,13 +10,14 @@
 <InputWrapper let:classes {label} {dark}>
     <input type="number"
            step=".01"
+           min="0"
            placeholder={hint}
            bind:value
            on:input
            on:keydown
            {...$$restProps}
-           class="{classes} invalid:!border-error-500">
+           class="{classes} pr-12 invalid:!border-error-500">
     <slot slot="end" name="end">
-        <span>gram</span>
+        <span class="select-none">gram</span>
     </slot>
 </InputWrapper>

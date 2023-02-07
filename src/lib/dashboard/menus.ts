@@ -87,7 +87,21 @@ export const menus: Menu[] = [
     },
     {
         title: 'Buku Tukang',
-        link: '/dashboard/craftsman'
+        link: '/dashboard/craftsman-book',
+        subMenus: [
+            {
+                title: 'Buat Pesanan ke Tukang',
+                link: '/dashboard/craftsman-book/order'
+            },
+            {
+                title: 'Tukang Setor Pesanan',
+                link: '/dashboard/craftsman-book/deposit'
+            },
+            {
+                title: 'Riwayat Pesanan Tukang',
+                link: '/dashboard/craftsman-book/history'
+            }
+        ]
     },
     {
         title: 'Service',

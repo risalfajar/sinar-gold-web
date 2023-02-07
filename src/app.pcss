@@ -34,7 +34,11 @@ input, select {
 }
 
 .hoverable {
-    @apply hover:bg-gray-300;
+    @apply hover:bg-gray-300 transition;
+}
+
+.clickable {
+    @apply hoverable active:bg-gray-400;
 }
 
 .text-caption {

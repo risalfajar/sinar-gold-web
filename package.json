@@ -33,10 +33,12 @@
   "type": "module",
   "dependencies": {
     "@egjs/svelte-conveyer": "^1.4.7",
+    "compressorjs": "^1.1.1",
     "firebase": "^9.15.0",
     "lodash-es": "^4.17.21",
     "luxon": "^3.2.0",
     "read-excel-file": "^5.5.3",
-    "short-unique-id": "^4.4.4"
+    "short-unique-id": "^4.4.4",
+    "svelty-picker": "^3.4.2"
   }
 }

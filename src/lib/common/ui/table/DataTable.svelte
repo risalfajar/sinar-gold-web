@@ -3,6 +3,7 @@
     import {fade} from "svelte/transition"
 
     export let model: TableViewModel<unknown>
+    export let emptyText = "Tidak ada data"
 
     let {headerRows, rows, tableAttrs, tableBodyAttrs} = model
 </script>
@@ -49,9 +50,12 @@
             </Subscribe>
         {:else}
             <tr>
-                <td colspan={$headerRows?.[0]?.cells?.length ?? 1} class="text-center">Tidak ada data</td>
+                <td colspan={$headerRows?.[0]?.cells?.length ?? 1} class="text-center">{emptyText}</td>
             </tr>
         {/each}
+        {#if $rows.length > 0}
+            <slot></slot>
+        {/if}
         </tbody>
     </table>
 </div>

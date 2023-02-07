@@ -1,0 +1,16 @@
+<script lang="ts">
+    import Container from "$lib/common/ui/container/Container.svelte"
+    import ContainerTitle from "$lib/common/ui/container/ContainerTitle.svelte"
+    import {findSubMenus} from "$lib/dashboard/menus"
+    import TabbedContainer from "$lib/common/ui/container/tab/TabbedContainer.svelte"
+
+    const title = 'Buku Tukang'
+    const tabs = findSubMenus(title)
+</script>
+
+<Container>
+    <ContainerTitle slot="title" {title}/>
+    <TabbedContainer {tabs}>
+        <slot/>
+    </TabbedContainer>
+</Container>

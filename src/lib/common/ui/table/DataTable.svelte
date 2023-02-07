@@ -8,7 +8,7 @@
     let {headerRows, rows, tableAttrs, tableBodyAttrs} = model
 </script>
 
-<div class="border rounded-lg overflow-hidden">
+<div class="border rounded-lg overflow-x-auto scrollbar-default">
     <table {...$tableAttrs}>
         <thead>
         {#each $headerRows as headerRow (headerRow.id)}

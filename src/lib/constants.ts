@@ -45,3 +45,6 @@ export const NODE_STONE_TYPE = 'stoneType'
 
 // Cloud Functions
 export const CLOUD_FUNCTIONS_DEFAULT_REGION = 'asia-southeast2'
+
+// Date
+export const LOCALE_INDONESIA = 'id'

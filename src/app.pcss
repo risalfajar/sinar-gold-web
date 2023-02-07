@@ -17,12 +17,16 @@ html, body {
     @apply bg-surface-400;
 }
 
+.scrollbar-default {
+    @apply scrollbar-thin scrollbar-thumb-surface-600 scrollbar-track-surface-400 hover:scrollbar-thumb-surface-700 transition-colors;
+}
+
 table {
     @apply w-full bg-transparent;
 }
 
 th {
-    @apply p-2 border-b text-center;
+    @apply p-2 border-b text-center whitespace-nowrap;
 }
 
 td {

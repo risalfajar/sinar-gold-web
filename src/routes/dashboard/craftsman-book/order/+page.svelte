@@ -6,6 +6,78 @@
     import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
     import CreateDialog from "./create/CreateDialog.svelte"
     import {craftsmans} from "$lib/stores.js"
+    import {readable} from "svelte/store"
+    import {CraftsmanOrder} from "./data/order"
+    import CraftsmanOrderRepository from "./data/repository"
+    import {createRender, createTable} from "svelte-headless-table"
+    import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
+    import DataTable from "$lib/common/ui/table/DataTable.svelte"
+    import TableActions from "$lib/common/ui/table/TableActions.svelte"
+    import {sumBy} from "lodash-es"
+
+    const repository = new CraftsmanOrderRepository()
+    const data = readable<CraftsmanOrder[]>([], (set) => {
+        return repository.listenAll(set)
+    })
+
+    const table = createTable(data, {
+        sort: addSortBy({initialSortKeys: [{id: 'created', order: 'desc'}]}),
+        tableFilter: addTableFilter()
+    })
+    const columns = table.createColumns([
+        table.column({
+            id: 'created',
+            header: 'Tanggal Pesan',
+            accessor: (item) => item.created?.toLocaleDateString()
+        }),
+        table.column({
+            header: 'Nomor Pesanan',
+            accessor: 'id'
+        }),
+        table.column({
+            id: 'salesman',
+            header: 'Nama Sales',
+            accessor: (item) => item.salesman.name
+        }),
+        table.column({
+            header: 'Nama Tukang',
+            accessor: 'craftsman'
+        }),
+        table.column({
+            id: 'quantity',
+            header: 'Jumlah Item',
+            accessor: (item) => item.models.length
+        }),
+        table.column({
+            id: 'rate',
+            header: 'Kadar Bahan',
+            accessor: (item) => item.materials.map(it => it.rate).reduce((previousValue, currentValue) => currentValue + previousValue)
+        }),
+        table.column({
+            id: 'goldWeight',
+            header: 'Berat Emas',
+            accessor: (item) => sumBy(item.materials, (it) => it.goldWeight)
+        }),
+        table.column({
+            id: 'jewelWeight',
+            header: 'Berat Permata',
+            accessor: (item) => sumBy(item.materials, (it) => it.jewelWeight)
+        }),
+        table.column({
+            id: 'sampleWeight',
+            header: 'Berat Contoh',
+            accessor: (item) => sumBy(item.materials, (it) => it.sampleWeight)
+        }),
+        table.display({
+            id: 'actions',
+            header: 'Actions',
+            cell: (cell, state) => createRender(TableActions)
+                .on('edit', () => {
+                })
+                .on('delete', () => {
+                })
+        })
+    ])
 
     let craftsman = ''
     let salesman = ''
@@ -30,4 +102,14 @@
         <DateRangePicker label="Tanggal" bind:start={startDate} bind:end={endDate}/>
     </svelte:fragment>
     <Button class="btn-filled-primary" slot="buttons" on:click={openCreateDialog}>Buat Pesanan</Button>
+
+    <DataTable model={table.createViewModel(columns)}>
+        <tr class="border-t border-t-primary-500">
+            <td colspan="5"></td>
+            <th class="">Grand Total</th>
+            <th class="">{sumBy($data, (item) => sumBy(item.materials, (item) => item.goldWeight))}</th>
+            <th class="">{sumBy($data, (item) => sumBy(item.materials, (item) => item.jewelWeight))}</th>
+            <th class="">{sumBy($data, (item) => sumBy(item.materials, (item) => item.sampleWeight))}</th>
+        </tr>
+    </DataTable>
 </TableContainer>

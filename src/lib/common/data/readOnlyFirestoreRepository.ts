@@ -22,8 +22,11 @@ export abstract class ReadOnlyFirestoreRepository<T> {
 
     abstract getCollectionRef(): CollectionReference<T>
 
-    getQuery(order: string | FieldPath = documentId(), direction?: OrderByDirection): Query<T> {
-        return query(this.getCollectionRef(), orderBy(order, direction))
+    getQuery(order?: string | FieldPath, direction?: OrderByDirection): Query<T> {
+        if (order)
+            return query(this.getCollectionRef(), orderBy(order, direction))
+        else
+            return query(this.getCollectionRef())
     }
 
     async get(itemId: string): Promise<T | undefined> {
@@ -40,7 +43,7 @@ export abstract class ReadOnlyFirestoreRepository<T> {
     async getByDate(start: Date, end: Date) {
         const startDate = DateTime.fromJSDate(start).startOf('day').toJSDate()
         const endDate = DateTime.fromJSDate(end).endOf('day').toJSDate()
-        const q = query(this.getCollectionRef(), orderBy('created'), where('created', '>=', startDate), where('created', '<=', endDate))
+        const q = query(this.getQuery('created'), where('created', '>=', startDate), where('created', '<=', endDate))
         const snapshot = await getDocs(q)
         return this.convertObjects(snapshot)
     }

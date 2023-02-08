@@ -16,14 +16,11 @@ export const deleteConfirmationModal: ModalSettings = {
     buttonTextConfirm: 'Ya, hapus'
 }
 
-// Change default Queue based modal to Stack based modal
 export function triggerModal(modal: ModalSettings) {
-    modalStore.update(modals => {
-        modals.unshift(modal)
-        return modals
-    })
+    modalStore.trigger(modal)
 }
 
+// Change default Queue based modal to Stack based modal
 export function closeModal(response?: any) {
     const store = get(modalStore)
     const lastStore = store[store?.length - 1]

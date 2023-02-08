@@ -13,6 +13,10 @@
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import TableActions from "$lib/common/ui/table/TableActions.svelte"
     import {sumBy} from "lodash-es"
+    import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
+    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+    import {getRowData} from "$lib/common/utils/tableUtils"
+    import {CraftsmanOrder} from "./data/order"
 
     const craftsman = writable('')
     const salesman = writable('')
@@ -79,11 +83,12 @@
             id: 'actions',
             header: 'Actions',
             cell: (cell, state) => createRender(TableActions, {showEditButton: false})
-                .on('delete', () => {
-                    // TODO
-                })
+                .on('delete', () => openDeleteConfirmationDialog(getRowData(state, cell)))
         })
     ])
+    const viewModel = table.createViewModel(columns)
+
+    let isLoading = false
 
     function openCreateDialog() {
         const dialog: ModalSettings = {
@@ -93,6 +98,27 @@
             }
         }
         modalStore.trigger(dialog)
+    }
+
+    function openDeleteConfirmationDialog(item: CraftsmanOrder) {
+        modalStore.trigger({
+            ...deleteConfirmationModal,
+            body: `Apakah kamu yakin ingin menghapus pesanan ${item.id}?`,
+            response: (r) => r && deleteItem(item.id),
+        })
+    }
+
+    async function deleteItem(id: string) {
+        isLoading = true
+        const repository = new CraftsmanOrderRepository()
+        try {
+            await repository.delete(id)
+            successToast('Berhasil menghapus pesanan')
+        } catch (err) {
+            console.error(err)
+            errorToast('Gagal menghapus pesanan')
+        }
+        isLoading = false
     }
 </script>
 
@@ -104,7 +130,7 @@
     </svelte:fragment>
     <Button class="btn-filled-primary" slot="buttons" on:click={openCreateDialog}>Buat Pesanan</Button>
 
-    <DataTable model={table.createViewModel(columns)} clickable>
+    <DataTable model={viewModel} clickable {isLoading}>
         <tr class="border-t border-t-primary-500">
             <td colspan="5"></td>
             <th class="">Grand Total</th>

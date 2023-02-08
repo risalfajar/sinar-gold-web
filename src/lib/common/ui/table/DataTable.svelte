@@ -1,9 +1,12 @@
 <script lang="ts">
     import {Render, Subscribe, TableViewModel} from "svelte-headless-table"
     import {fade} from "svelte/transition"
+    import {ProgressRadial} from "@skeletonlabs/skeleton"
 
     export let model: TableViewModel<unknown>
     export let emptyText = "Tidak ada data"
+    export let clickable = false
+    export let isLoading = false
 
     let {headerRows, rows, tableAttrs, tableBodyAttrs} = model
 </script>
@@ -36,25 +39,35 @@
         </thead>
 
         <tbody {...$tableBodyAttrs}>
-        {#each $rows as row (row.id)}
-            <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-                <tr {...rowAttrs}>
-                    {#each row.cells as cell (cell.id)}
-                        <Subscribe attrs={cell.attrs()} let:attrs>
-                            <td {...attrs}>
-                                <Render of={cell.render()}/>
-                            </td>
-                        </Subscribe>
-                    {/each}
-                </tr>
-            </Subscribe>
-        {:else}
+        {#if isLoading}
             <tr>
-                <td colspan={$headerRows?.[0]?.cells?.length ?? 1} class="text-center">{emptyText}</td>
+                <td colspan={$headerRows?.[0]?.cells?.length ?? 1}>
+                    <div class="w-full flex items-center justify-center py-4">
+                        <ProgressRadial class="w-8"/>
+                    </div>
+                </td>
             </tr>
-        {/each}
-        {#if $rows.length > 0}
-            <slot></slot>
+        {:else}
+            {#each $rows as row (row.id)}
+                <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
+                    <tr {...rowAttrs} class:clickable>
+                        {#each row.cells as cell (cell.id)}
+                            <Subscribe attrs={cell.attrs()} let:attrs>
+                                <td {...attrs}>
+                                    <Render of={cell.render()}/>
+                                </td>
+                            </Subscribe>
+                        {/each}
+                    </tr>
+                </Subscribe>
+            {:else}
+                <tr>
+                    <td colspan={$headerRows?.[0]?.cells?.length ?? 1} class="text-center">{emptyText}</td>
+                </tr>
+            {/each}
+            {#if $rows.length > 0}
+                <slot></slot>
+            {/if}
         {/if}
         </tbody>
     </table>

@@ -13,10 +13,10 @@
     import {UserRepository} from "$lib/users/data/userRepository"
     import EditDialog from "./EditDialog.svelte"
     import {User} from "$lib/users/types/user"
-    import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
     import {getRowData} from "$lib/common/utils/tableUtils"
+    import {deleteConfirmationModal} from "$lib/common/utils/modalUtils"
 
     const repository = new UserRepository()
     const data: Readable<User[]> = readable([], function start(set: Subscriber<User[]>) {

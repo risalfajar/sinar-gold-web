@@ -2,7 +2,7 @@
     import ModalTitle from "$lib/common/ui/dialog/ModalTitle.svelte"
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import Button from "$lib/common/ui/button/Button.svelte"
-    import {closeTopModal} from "$lib/common/ui/dialog/modalUtils"
+    import {closeModal} from "$lib/common/utils/modalUtils"
     import {OrderMaterial} from "../data/material"
     import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
 
@@ -18,12 +18,12 @@
     $: isFormValid = data.rate.length > 0
 
     function finish() {
-        closeTopModal(data)
+        closeModal(data)
     }
 </script>
 
 <div>
-    <ModalTitle title="Form Tambah Bahan" showCloseButton on:close={() => closeTopModal()}/>
+    <ModalTitle title="Form Tambah Bahan" showCloseButton on:close={() => closeModal()}/>
     <div class="py-2 space-y-2">
         <div class="grid grid-cols-2 gap-2">
             <TextInput label="Kadar" bind:value={data.rate}/>

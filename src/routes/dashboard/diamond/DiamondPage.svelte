@@ -4,13 +4,13 @@
     import {readable, Readable, Subscriber} from "svelte/store"
     import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
-    import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
     import {Schema} from "read-excel-file"
     import {createDataTable} from "$lib/common/utils/tableUtils"
     import DiamondEditDialog from "./DiamondEditDialog.svelte"
     import {Diamond} from "$lib/diamond/diamond"
+    import {deleteConfirmationModal} from "$lib/common/utils/modalUtils"
 
     type T = Diamond
 

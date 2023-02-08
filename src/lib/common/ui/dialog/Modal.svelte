@@ -1,8 +1,8 @@
-<!-- Modifier from @skeletonlabs/skeleton to make custom modal can't be closed by clicking on the backdrop (line 73) -->
 <script>
     import {createEventDispatcher} from 'svelte'
     import {fade, fly} from 'svelte/transition'
     import {focusTrap, modalStore} from "@skeletonlabs/skeleton"
+    import {closeModal} from "$lib/common/utils/modalUtils"
     // Event Handler
     const dispatch = createEventDispatcher()
     // Props
@@ -57,12 +57,13 @@
     modalStore.subscribe((dArr) => {
         if (!dArr.length)
             return
+        const lastIndex = dArr.length - 1
         // Set Prompt input value and type
-        promptValue = dArr[0].value
+        promptValue = dArr[lastIndex].value
         // Override button text per instance, if available
-        buttonTextCancel = dArr[0].buttonTextCancel || buttonTextDefaults.buttonTextCancel
-        buttonTextConfirm = dArr[0].buttonTextConfirm || buttonTextDefaults.buttonTextConfirm
-        buttonTextSubmit = dArr[0].buttonTextSubmit || buttonTextDefaults.buttonTextSubmit
+        buttonTextCancel = dArr[lastIndex].buttonTextCancel || buttonTextDefaults.buttonTextCancel
+        buttonTextConfirm = dArr[lastIndex].buttonTextConfirm || buttonTextDefaults.buttonTextConfirm
+        buttonTextSubmit = dArr[lastIndex].buttonTextSubmit || buttonTextDefaults.buttonTextSubmit
     })
 
     // Event Handlers ---
@@ -70,27 +71,21 @@
         if (!(event.target instanceof Element))
             return
         if (event.target.classList.contains('modal-backdrop'))
-            $modalStore[0].meta?.mandatory || onClose()
+            getLastModal().meta?.mandatory || onClose()
         /** @event {{ event }} backdrop - Fires on backdrop interaction.  */
         dispatch('backdrop', event)
     }
 
     function onClose() {
-        if ($modalStore[0].response)
-            $modalStore[0].response(false)
-        modalStore.close()
+        closeModal(false)
     }
 
     function onConfirm() {
-        if ($modalStore[0].response)
-            $modalStore[0].response(true)
-        modalStore.close()
+        closeModal(true)
     }
 
     function onPromptSubmit() {
-        if ($modalStore[0].response)
-            $modalStore[0].response(promptValue)
-        modalStore.close()
+        closeModal(promptValue)
     }
 
     // A11y ---
@@ -98,7 +93,11 @@
         if (!$modalStore.length)
             return
         if (event.code === 'Escape')
-            $modalStore[0].meta?.mandatory || onClose()
+            getLastModal().meta?.mandatory || onClose()
+    }
+
+    function getLastModal() {
+        return $modalStore[$modalStore.length - 1]
     }
 
     // Reactive

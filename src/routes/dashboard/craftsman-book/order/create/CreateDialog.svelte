@@ -8,7 +8,7 @@
     import {CraftsmanOrder} from "../data/order"
     import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
     import AddModelDialog from "./AddModelDialog.svelte"
-    import {triggerModal} from "$lib/common/ui/dialog/modalUtils"
+    import {triggerModal} from "$lib/common/utils/modalUtils"
     import {craftsmans, salesmans} from "$lib/stores.js"
     import {createRender, createTable} from "svelte-headless-table"
     import {writable} from "svelte/store"

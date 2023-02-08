@@ -3,7 +3,7 @@
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import ImageInput from "$lib/common/ui/form/ImageInput.svelte"
     import Button from "$lib/common/ui/button/Button.svelte"
-    import {closeTopModal} from "$lib/common/ui/dialog/modalUtils"
+    import {closeModal} from "$lib/common/utils/modalUtils"
     import {OrderModel} from "../data/model"
     import NumberInput from "$lib/common/ui/form/NumberInput.svelte"
 
@@ -19,12 +19,12 @@
     $: isFormValid = data.size.length > 0 && data.details.length > 0 && data.quantity > 0 && data.photoFile
 
     function finish() {
-        closeTopModal(data)
+        closeModal(data)
     }
 </script>
 
 <div>
-    <ModalTitle title="Form Tambah Model" showCloseButton on:close={() => closeTopModal()}/>
+    <ModalTitle title="Form Tambah Model" showCloseButton on:close={() => closeModal()}/>
     <div class="py-2 space-y-2">
         <div class="grid grid-cols-2 gap-2">
             <TextInput label="Ukuran" bind:value={data.size}/>

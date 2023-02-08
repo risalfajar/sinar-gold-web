@@ -13,10 +13,11 @@
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import TableActions from "$lib/common/ui/table/TableActions.svelte"
     import {sumBy} from "lodash-es"
-    import {deleteConfirmationModal} from "$lib/common/utils/dialogUtils"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import {getRowData} from "$lib/common/utils/tableUtils"
     import {CraftsmanOrder} from "./data/order"
+    import {deleteConfirmationModal, triggerModal} from "$lib/common/utils/modalUtils"
+    import DetailsDialog from "./details/DetailsDialog.svelte"
 
     const craftsman = writable('')
     const salesman = writable('')
@@ -102,7 +103,7 @@
     }
 
     function openDeleteConfirmationDialog(item: CraftsmanOrder) {
-        modalStore.trigger({
+        triggerModal({
             ...deleteConfirmationModal,
             body: `Apakah kamu yakin ingin menghapus pesanan ${item.id}?`,
             response: (r) => r && deleteItem(item.id),

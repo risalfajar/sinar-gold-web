@@ -8,7 +8,7 @@
 
 <div class="w-full {$$props.class}">
     {#if label.length > 0}
-        <label class="font-bold text-base mb-2 {dark && 'text-white'}">{label}</label>
+        <label class="mb-1 {dark && 'text-white'}">{label}</label>
     {/if}
     <div class="relative w-full">
         {#if $$slots.start}

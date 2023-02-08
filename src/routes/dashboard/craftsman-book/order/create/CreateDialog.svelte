@@ -8,7 +8,7 @@
     import {CraftsmanOrder} from "../data/order"
     import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
     import AddModelDialog from "./AddModelDialog.svelte"
-    import {triggerModal} from "$lib/common/utils/modalUtils"
+    import {closeModal, triggerModal} from "$lib/common/utils/modalUtils"
     import {craftsmans, salesmans} from "$lib/stores.js"
     import {createRender, createTable} from "svelte-headless-table"
     import {writable} from "svelte/store"
@@ -22,6 +22,7 @@
     import CraftsmanOrderRepository from "../data/repository"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
+    import CraftsmanOrderModelRepository from "../data/modelRepository"
 
     const title = 'Buat Pesanan Tukang'
     const repository = new CraftsmanOrderRepository()
@@ -32,7 +33,7 @@
             code: '',
             name: ''
         },
-        models: [],
+        modelCount: 0,
         material: {
             rate: '',
             goldWeight: 0,
@@ -69,7 +70,7 @@
             header: 'Actions',
             cell: (cell, state) => createRender(TableActions)
                 .on('edit', () => openAddModelDialog(getRowData(state, cell)))
-                .on('delete', () => data.models = removeIndex(data.models, cell.row.id))
+                .on('delete', () => $models = removeIndex($models, cell.row.id))
         })
     ])
 
@@ -78,14 +79,13 @@
     let editedIndex: number | undefined
     let isLoading = false
 
-    $: models.set(data.models)
     $: isFormValid = data.salesman.code.length > 0
         && data.craftsman.length > 0
-        && data.models.length > 0
         && data.material.rate.length > 0
+        && $models.length > 0
 
     function openAddModelDialog(arg?: OrderModel) {
-        editedIndex = arg && data.models.findIndex(it => it === arg)
+        editedIndex = arg && $models.findIndex(it => it === arg)
         triggerModal({
             type: 'component',
             component: {
@@ -95,10 +95,10 @@
             response: (r: OrderModel) => {
                 if (!r) return
                 if (editedIndex != null)
-                    data.models[editedIndex] = r
+                    $models[editedIndex] = r
                 else
-                    data.models.push(r)
-                data.models = data.models
+                    $models.push(r)
+                $models = $models
             }
         })
     }
@@ -111,9 +111,11 @@
     async function save() {
         isLoading = true
         try {
-            await repository.save(data)
+            const orderId = await repository.save(data)
+            const modelRepository = new CraftsmanOrderModelRepository(orderId)
+            await Promise.all($models.map(model => modelRepository.save(model)))
             successToast('Berhasil membuat pesanan')
-            modalStore.close()
+            closeModal()
         } catch (err) {
             console.error(err)
             errorToast('Gagal membuat pesanan')
@@ -140,7 +142,7 @@
                 <tr class=" border-t border-t-primary-500">
                     <td colspan="2"></td>
                     <td class="text-center">Total Item</td>
-                    <td class="text-center">{sumBy(data.models, (it => it.quantity))}</td>
+                    <td class="text-center">{sumBy($models, (it => it.quantity))}</td>
                 </tr>
             </DataTable>
             <Button class="btn-filled-primary btn-sm w-full" on:click={() => openAddModelDialog()}>

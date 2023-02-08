@@ -6,6 +6,7 @@ export const CUSTOM_CLAIMS_ROLE = 'role'
 // Firestore
 export const COLLECTION_USERS = 'users'
 export const COLLECTION_CRAFTSMAN_ORDER = 'craftsmanOrder'
+export const COLLECTION_CRAFTSMAN_ORDER_MODEL = 'models'
 
 // Database
 export const NODE_MASTER_DATA = 'masterData'

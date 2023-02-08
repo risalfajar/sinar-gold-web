@@ -6,7 +6,7 @@
     import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
     import CreateDialog from "./create/CreateDialog.svelte"
     import {craftsmans, salesmans} from "$lib/stores.js"
-    import {derived, writable} from "svelte/store"
+    import {derived, Readable, writable} from "svelte/store"
     import CraftsmanOrderRepository from "./data/repository"
     import {createRender, createTable} from "svelte-headless-table"
     import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
@@ -17,13 +17,12 @@
     import {getRowData} from "$lib/common/utils/tableUtils"
     import {CraftsmanOrder} from "./data/order"
     import {deleteConfirmationModal, triggerModal} from "$lib/common/utils/modalUtils"
-    import DetailsDialog from "./details/DetailsDialog.svelte"
 
     const craftsman = writable('')
     const salesman = writable('')
     const startDate = writable(new Date())
     const endDate = writable(new Date())
-    const data = derived([craftsman, salesman, startDate, endDate], (values, set) => {
+    const data: Readable<CraftsmanOrder[]> = derived([craftsman, salesman, startDate, endDate], (values, set) => {
         const craftsman = values[0].length > 0 ? values[0] : undefined
         const salesman = values[1].length > 0 ? values[1] : undefined
         const start = values[2]
@@ -56,9 +55,8 @@
             accessor: 'craftsman'
         }),
         table.column({
-            id: 'quantity',
             header: 'Jumlah Item',
-            accessor: (item) => item.models.length
+            accessor: 'modelCount'
         }),
         table.column({
             id: 'rate',

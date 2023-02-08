@@ -78,10 +78,9 @@
         table.display({
             id: 'actions',
             header: 'Actions',
-            cell: (cell, state) => createRender(TableActions)
-                .on('edit', () => {
-                })
+            cell: (cell, state) => createRender(TableActions, {showEditButton: false})
                 .on('delete', () => {
+                    // TODO
                 })
         })
     ])
@@ -105,7 +104,7 @@
     </svelte:fragment>
     <Button class="btn-filled-primary" slot="buttons" on:click={openCreateDialog}>Buat Pesanan</Button>
 
-    <DataTable model={table.createViewModel(columns)}>
+    <DataTable model={table.createViewModel(columns)} clickable>
         <tr class="border-t border-t-primary-500">
             <td colspan="5"></td>
             <th class="">Grand Total</th>

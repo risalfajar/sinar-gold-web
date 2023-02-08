@@ -108,9 +108,9 @@
         <tr class="border-t border-t-primary-500">
             <td colspan="5"></td>
             <th class="">Grand Total</th>
-            <th class="">{sumBy($data, (item) => item.material.goldWeight)}</th>
-            <th class="">{sumBy($data, (item) => item.material.jewelWeight)}</th>
-            <th class="">{sumBy($data, (item) => item.material.sampleWeight)}</th>
+            <th class="">{sumBy($data, (item) => item.material.goldWeight).toFixed(2)}</th>
+            <th class="">{sumBy($data, (item) => item.material.jewelWeight).toFixed(2)}</th>
+            <th class="">{sumBy($data, (item) => item.material.sampleWeight).toFixed(2)}</th>
         </tr>
     </DataTable>
 </TableContainer>

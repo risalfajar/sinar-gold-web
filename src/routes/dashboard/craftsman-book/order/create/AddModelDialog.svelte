@@ -5,6 +5,7 @@
     import Button from "$lib/common/ui/button/Button.svelte"
     import {closeTopModal} from "$lib/common/ui/dialog/modalUtils"
     import {OrderModel} from "../data/model"
+    import NumberInput from "$lib/common/ui/form/NumberInput.svelte"
 
     export let data: OrderModel = {
         size: "",
@@ -15,7 +16,7 @@
 
     let isFormValid
 
-    $: isFormValid = data.size.length > 0 && data.details.length > 0 && data.photoFile
+    $: isFormValid = data.size.length > 0 && data.details.length > 0 && data.quantity > 0 && data.photoFile
 
     function finish() {
         closeTopModal(data)
@@ -29,6 +30,7 @@
             <TextInput label="Ukuran" bind:value={data.size}/>
             <TextInput label="Nama Model" hint="Masukkan Deskripsi Pesanan" bind:value={data.details}/>
         </div>
+        <NumberInput label="Jumlah" bind:value={data.quantity}/>
         <ImageInput bind:value={data.photoFile} label="Foto Contoh Model"/>
         <Button class="btn-filled-secondary w-full" disabled={!isFormValid} on:click={finish}>Simpan</Button>
     </div>

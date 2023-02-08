@@ -55,7 +55,8 @@
             component: {
                 ref: editDialog,
                 props: {data, repository}
-            }
+            },
+            meta: {mandatory: true}
         }
         modalStore.trigger(dialog)
     }

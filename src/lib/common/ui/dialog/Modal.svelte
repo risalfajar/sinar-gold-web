@@ -70,7 +70,7 @@
         if (!(event.target instanceof Element))
             return
         if (event.target.classList.contains('modal-backdrop'))
-            $modalStore[0].type === 'component' || onClose()
+            $modalStore[0].meta?.mandatory || onClose()
         /** @event {{ event }} backdrop - Fires on backdrop interaction.  */
         dispatch('backdrop', event)
     }
@@ -98,7 +98,7 @@
         if (!$modalStore.length)
             return
         if (event.code === 'Escape')
-            $modalStore[0].type === 'component' || onClose()
+            $modalStore[0].meta?.mandatory || onClose()
     }
 
     // Reactive

@@ -95,7 +95,8 @@
             type: 'component',
             component: {
                 ref: CreateDialog
-            }
+            },
+            meta: {mandatory: true}
         }
         modalStore.trigger(dialog)
     }

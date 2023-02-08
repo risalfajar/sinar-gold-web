@@ -60,7 +60,8 @@
             type: 'component',
             component,
             classes: '!max-w-[480px]',
-            title: `${data ? 'Edit' : 'Tambah'} Data Pengguna`
+            title: `${data ? 'Edit' : 'Tambah'} Data Pengguna`,
+            meta: {mandatory: true}
         }
         modalStore.trigger(dialog)
     }

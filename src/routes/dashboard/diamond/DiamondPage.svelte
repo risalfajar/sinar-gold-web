@@ -30,7 +30,8 @@
             component: {
                 ref: DiamondEditDialog,
                 props: {data, repository, schema}
-            }
+            },
+            meta: {mandatory: true}
         }
         modalStore.trigger(dialog)
     }

@@ -58,22 +58,22 @@
         table.column({
             id: 'rate',
             header: 'Kadar Bahan',
-            accessor: (item) => item.materials.map(it => it.rate).reduce((previousValue, currentValue) => currentValue + previousValue) // TODO clarify
+            accessor: (item) => item.material.rate
         }),
         table.column({
             id: 'goldWeight',
             header: 'Berat Emas',
-            accessor: (item) => sumBy(item.materials, (it) => it.goldWeight)
+            accessor: (item) => item.material.goldWeight
         }),
         table.column({
             id: 'jewelWeight',
             header: 'Berat Permata',
-            accessor: (item) => sumBy(item.materials, (it) => it.jewelWeight)
+            accessor: (item) => item.material.jewelWeight
         }),
         table.column({
             id: 'sampleWeight',
             header: 'Berat Contoh',
-            accessor: (item) => sumBy(item.materials, (it) => it.sampleWeight)
+            accessor: (item) => item.material.sampleWeight
         }),
         table.display({
             id: 'actions',
@@ -108,9 +108,9 @@
         <tr class="border-t border-t-primary-500">
             <td colspan="5"></td>
             <th class="">Grand Total</th>
-            <th class="">{sumBy($data, (item) => sumBy(item.materials, (item) => item.goldWeight))}</th>
-            <th class="">{sumBy($data, (item) => sumBy(item.materials, (item) => item.jewelWeight))}</th>
-            <th class="">{sumBy($data, (item) => sumBy(item.materials, (item) => item.sampleWeight))}</th>
+            <th class="">{sumBy($data, (item) => item.material.goldWeight)}</th>
+            <th class="">{sumBy($data, (item) => item.material.jewelWeight)}</th>
+            <th class="">{sumBy($data, (item) => item.material.sampleWeight)}</th>
         </tr>
     </DataTable>
 </TableContainer>

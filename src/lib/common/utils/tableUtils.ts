@@ -7,9 +7,8 @@ import TableActions from "$lib/common/ui/table/TableActions.svelte"
 
 export function getRowData<T>(state: TableState<T>, cell: DisplayBodyCell<T> | DataBodyCell<T>): T {
     const list = get(state.data)
-    const id = cell.row.id
-    // @ts-ignore
-    return list[id]
+    const id = cell.row.isData() && cell.row.dataId || cell.row.id
+    return list[Number(id)]
 }
 
 export function createDataTable<T extends any>(

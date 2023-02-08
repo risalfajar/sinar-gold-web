@@ -16,13 +16,12 @@
     import PhotoIcon from "./PhotoIcon.svelte"
     import TableActions from "$lib/common/ui/table/TableActions.svelte"
     import {getRowData} from "$lib/common/utils/tableUtils"
-    import {OrderMaterial} from "../data/material"
-    import AddMaterialDialog from "./AddMaterialDialog.svelte"
     import {sumBy} from "lodash-es"
     import {removeIndex} from "$lib/common/utils/arrayUtils"
     import {OrderModel} from "../data/model"
     import CraftsmanOrderRepository from "../data/repository"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+    import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
 
     const title = 'Buat Pesanan Tukang'
     const repository = new CraftsmanOrderRepository()
@@ -34,7 +33,12 @@
             name: ''
         },
         models: [],
-        materials: []
+        material: {
+            rate: '',
+            goldWeight: 0,
+            jewelWeight: 0,
+            sampleWeight: 0
+        }
     }
 
     const models = writable<OrderModel[]>([])
@@ -69,45 +73,16 @@
         })
     ])
 
-    const materials = writable<OrderMaterial[]>()
-    const materialsTable = createTable(materials)
-    const materialsColumns = materialsTable.createColumns([
-        materialsTable.column({
-            accessor: 'rate',
-            header: 'Kadar'
-        }),
-        materialsTable.column({
-            accessor: 'goldWeight',
-            header: 'Berat Emas'
-        }),
-        materialsTable.column({
-            accessor: 'sampleWeight',
-            header: 'Berat Contoh',
-        }),
-        materialsTable.column({
-            accessor: 'jewelWeight',
-            header: 'Berat Permata'
-        }),
-        materialsTable.display({
-            id: 'actions',
-            header: 'Actions',
-            cell: (cell, state) => createRender(TableActions)
-                .on('edit', () => openAddMaterialDialog(getRowData(state, cell)))
-                .on('delete', () => data.materials = removeIndex(data.materials, cell.row.id))
-        })
-    ])
-
     let salesmanNames = $salesmans.map(it => it.name)
     let isFormValid: boolean
     let editedIndex: number | undefined
     let isLoading = false
 
     $: models.set(data.models)
-    $: materials.set(data.materials)
     $: isFormValid = data.salesman.code.length > 0
         && data.craftsman.length > 0
         && data.models.length > 0
-        && data.materials.length > 0
+        && data.material.rate.length > 0
 
     function openAddModelDialog(arg?: OrderModel) {
         editedIndex = arg && data.models.findIndex(it => it === arg)
@@ -124,25 +99,6 @@
                 else
                     data.models.push(r)
                 data.models = data.models
-            }
-        })
-    }
-
-    function openAddMaterialDialog(arg?: OrderMaterial) {
-        editedIndex = arg && data.materials.findIndex(it => it === arg)
-        triggerModal({
-            type: 'component',
-            component: {
-                ref: AddMaterialDialog,
-                props: arg && {data: arg}
-            },
-            response: (r: OrderMaterial) => {
-                if (!r) return
-                if (editedIndex != null)
-                    data.materials[editedIndex] = r
-                else
-                    data.materials.push(r)
-                data.materials = data.materials
             }
         })
     }
@@ -165,10 +121,9 @@
         isLoading = false
     }
 </script>
-
 <div>
     <ModalTitle showCloseButton={!isLoading} {title} on:close={close}/>
-    <div class="py-2 space-y-4 max-h-[75vh] overflow-y-auto">
+    <div class="px-1 py-2 space-y-4 max-h-[75vh] overflow-y-auto">
         <div class="grid grid-cols-2 gap-2">
             <DatePicker label="Tanggal" disabled value={new Date()}/>
             <TextInput label="Nomor Pesanan" disabled value={data.id}/>
@@ -180,10 +135,7 @@
         <!--    Models    -->
         <hr/>
         <div class="space-y-2">
-            <Button class="btn-filled-primary w-full" on:click={() => openAddModelDialog()}>
-                <i class="material-icons">add</i>
-                Tambah Model
-            </Button>
+            <h5>Tambah Model</h5>
             <DataTable model={modelsTable.createViewModel(modelsColumns)} emptyText="Silahkan menambahkan model">
                 <tr class=" border-t border-t-primary-500">
                     <td colspan="2"></td>
@@ -191,23 +143,22 @@
                     <td class="text-center">{sumBy(data.models, (it => it.quantity))}</td>
                 </tr>
             </DataTable>
+            <Button class="btn-filled-primary btn-sm w-full" on:click={() => openAddModelDialog()}>
+                <i class="material-icons">add</i>
+                Tambah Model
+            </Button>
         </div>
 
         <!--    Materials    -->
         <hr/>
         <div class="space-y-2">
-            <Button class="btn-filled-primary w-full" on:click={() => openAddMaterialDialog()}>
-                <i class="material-icons">add</i>
-                Tambah Bahan
-            </Button>
-            <DataTable model={materialsTable.createViewModel(materialsColumns)} emptyText="Silahkan menambahkan bahan">
-                <tr class="font-bold border-t border-t-primary-500">
-                    <td class="text-center">Total Bahan</td>
-                    <td class="text-center">{sumBy(data.materials, (it => it.goldWeight))}</td>
-                    <td class="text-center">{sumBy(data.materials, (it => it.sampleWeight))}</td>
-                    <td class="text-center">{sumBy(data.materials, (it => it.jewelWeight))}</td>
-                </tr>
-            </DataTable>
+            <h5>Bahan</h5>
+            <div class="grid grid-cols-2 gap-2">
+                <TextInput label="Kadar" bind:value={data.material.rate}/>
+                <WeightInput label="Berat Emas" bind:value={data.material.goldWeight}/>
+                <WeightInput label="Berat Contoh" bind:value={data.material.sampleWeight}/>
+                <WeightInput label="Berat Permata" bind:value={data.material.jewelWeight}/>
+            </div>
         </div>
 
         <hr/>

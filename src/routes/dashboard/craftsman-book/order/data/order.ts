@@ -11,7 +11,7 @@ export type CraftsmanOrder = {
     craftsman: string,
     salesman: Salesman,
     models: OrderModel[],
-    materials: OrderMaterial[]
+    material: OrderMaterial
 }
 
 export const craftsmanOrderConverter: FirestoreDataConverter<CraftsmanOrder> = {

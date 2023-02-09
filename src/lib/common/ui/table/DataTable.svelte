@@ -12,10 +12,6 @@
     export let isLoading = false
 
     let {headerRows, rows, tableAttrs, tableBodyAttrs} = model
-
-    export function test(value: boolean) {
-
-    }
 </script>
 
 <div class="border rounded-lg overflow-x-auto scrollbar-default {$$props.class}">

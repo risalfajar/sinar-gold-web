@@ -16,6 +16,8 @@
     import IconButton from "$lib/common/ui/button/IconButton.svelte"
     import {deleteConfirmationModal} from "$lib/common/utils/modalUtils.js"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+    import Button from "$lib/common/ui/button/Button.svelte"
+    import CreateAdvanceDialog from "../advance/CreateAdvanceDialog.svelte"
 
     export let data: Readable<CraftsmanOrder>
 
@@ -96,6 +98,18 @@
         }
         isDeletingModel = false
     }
+
+    function openCreateAdvanceDialog() {
+        triggerModal({
+            type: 'component',
+            component: {
+                ref: CreateAdvanceDialog,
+                props: {orderId: $data.id}
+            },
+            title: 'Buat Kasbon',
+            classes: '!max-w-[480px]'
+        })
+    }
 </script>
 
 <div>
@@ -136,6 +150,11 @@
         </div>
 
         <h5>Riwayat Kasbon</h5>
+        <!--    TODO    -->
 
+        <h5>Riwayat Setor</h5>
+        <!--    TODO    -->
+
+        <Button class="w-fit self-end btn-filled-secondary" on:click={openCreateAdvanceDialog}>Buat Kasbon</Button>
     </div>
 </div>

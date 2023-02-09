@@ -7,6 +7,7 @@ export const CUSTOM_CLAIMS_ROLE = 'role'
 export const COLLECTION_USERS = 'users'
 export const COLLECTION_CRAFTSMAN_ORDER = 'craftsmanOrder'
 export const COLLECTION_CRAFTSMAN_ORDER_MODEL = 'models'
+export const COLLECTION_CRAFTSMAN_ORDER_ADVANCE = 'cashAdvances'
 
 // Database
 export const NODE_MASTER_DATA = 'masterData'

@@ -18,12 +18,16 @@
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import Button from "$lib/common/ui/button/Button.svelte"
     import CreateAdvanceDialog from "../advance/CreateAdvanceDialog.svelte"
+    import CashAdvanceRepository from "../data/source/advanceRepository"
+    import {CashAdvance} from "../data/advance"
+    import {sumBy} from "lodash-es"
 
     export let data: Readable<CraftsmanOrder>
 
-    const repository = new CraftsmanOrderModelRepository($data.id)
     const modelRepository = new CraftsmanOrderModelRepository($data.id)
-    const models = readable<OrderModel[]>([], set => repository.listenAll(set))
+    const cashAdvanceRepository = new CashAdvanceRepository($data.id)
+
+    const models = readable<OrderModel[]>([], set => modelRepository.listenAll(set))
     const modelsTable = createTable(models)
     const modelsColumns = modelsTable.createColumns([
         modelsTable.column({
@@ -57,6 +61,21 @@
                 .on('click', () => {
                     // TODO
                 })
+        })
+    ])
+
+    const advances = readable<CashAdvance[]>([], set => cashAdvanceRepository.listenAll(set))
+    const advancesTable = createTable(advances)
+    const advancesColumns = advancesTable.createColumns([
+        advancesTable.column({
+            id: 'created',
+            header: 'Tanggal',
+            accessor: (item) => item.created?.toLocaleDateString(LOCALE_INDONESIA, {dateStyle: 'long'})
+        }),
+        advancesTable.column({
+            id: 'amount',
+            header: 'Jumlah Kasbon',
+            accessor: (item) => item.amount.toLocaleString(LOCALE_INDONESIA)
         })
     ])
 
@@ -113,7 +132,7 @@
 </script>
 
 <div>
-    <p class="unstyled w-full bg-primary-500 text-white text-center py-2">TOKO SINAR MAS</p>
+    <p class="unstyled w-full bg-primary-500 text-white font-semibold text-center py-2">TOKO SINAR MAS</p>
     <div class="overflow-y-auto max-h-[75vh] p-4 flex flex-col gap-4">
         <div class="grid grid-cols-2 gap-4">
             <DataText title="Tanggal Pesan" content={$data.created?.toLocaleDateString(LOCALE_INDONESIA, {dateStyle: 'long'})}/>
@@ -150,7 +169,12 @@
         </div>
 
         <h5>Riwayat Kasbon</h5>
-        <!--    TODO    -->
+        <DataTable model={advancesTable.createViewModel(advancesColumns)} class="!overflow-x-visible">
+            <tr>
+                <th>Grand Total</th>
+                <th>{sumBy($advances, (item) => item.amount).toLocaleString(LOCALE_INDONESIA)}</th>
+            </tr>
+        </DataTable>
 
         <h5>Riwayat Setor</h5>
         <!--    TODO    -->

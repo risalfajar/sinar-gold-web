@@ -3,9 +3,8 @@
     import TextInput from "$lib/common/ui/form/TextInput.svelte"
     import Button from "$lib/common/ui/button/Button.svelte"
     import {closeModal} from "$lib/common/utils/modalUtils"
-    import {OrderMaterial} from "../data/material"
     import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
-    import {CraftsmanOrder} from "../data/order"
+    import {CraftsmanOrder, OrderMaterial} from "../data/order"
     import CraftsmanOrderRepository from "../data/source/orderRepository"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 

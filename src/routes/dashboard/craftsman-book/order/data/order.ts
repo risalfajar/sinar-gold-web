@@ -1,7 +1,5 @@
 import {Salesman} from "$lib/master-data/salesman/salesman"
-import {OrderMaterial} from "./material"
 import {DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, serverTimestamp} from "firebase/firestore"
-import firebase from "firebase/compat"
 
 export type CraftsmanOrder = {
     id: string,
@@ -10,6 +8,13 @@ export type CraftsmanOrder = {
     salesman: Salesman,
     modelCount: number,
     material: OrderMaterial
+}
+
+export type OrderMaterial = {
+    rate: string
+    goldWeight: number
+    sampleWeight: number
+    jewelWeight: number
 }
 
 export const craftsmanOrderConverter: FirestoreDataConverter<CraftsmanOrder> = {

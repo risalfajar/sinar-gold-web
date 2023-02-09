@@ -25,7 +25,7 @@
     export let shadow = 'shadow-xl'
     // Props (buttons)
     /** Provide classes for neutral buttons, such as Cancel. */
-    export let buttonNeutral = 'btn-ghost-surface'
+    export let buttonNeutral = 'variant-ghost-surface'
     /** Provide classes for positive actions, such as Confirm or Submit. */
     export let buttonPositive = 'variant-filled-primary'
     /** Override the text for the Cancel button. */

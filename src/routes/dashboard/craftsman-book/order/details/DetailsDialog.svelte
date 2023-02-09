@@ -126,7 +126,7 @@
                 props: {orderId: $data.id}
             },
             title: 'Buat Kasbon',
-            classes: '!max-w-[480px]'
+            modalClasses: '!max-w-[480px]'
         })
     }
 </script>

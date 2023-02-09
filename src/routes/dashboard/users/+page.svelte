@@ -59,7 +59,7 @@
         const dialog: ModalSettings = {
             type: 'component',
             component,
-            classes: '!max-w-[480px]',
+            modalClasses: '!max-w-[480px]',
             title: `${data ? 'Edit' : 'Tambah'} Data Pengguna`,
             meta: {mandatory: true}
         }

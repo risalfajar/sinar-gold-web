@@ -7,7 +7,7 @@
     export let disabled: boolean = false
     export let isLoading: boolean = false
 
-    $: defaultClass = $$props?.class?.includes('btn-') ? '' : 'hoverable'
+    $: defaultClass = $$props?.class?.includes('variant-') ? '' : 'clickable'
 </script>
 
 <button {...$$restProps} class="btn-icon p-1 {defaultClass} {$$props.class}" {disabled} on:click={() => isLoading || dispatch('click')}>

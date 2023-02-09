@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Label from "$lib/common/ui/form/Label.svelte"
+
     export let value: File | null
     export let placeholderUrl: string = ""
     export let label: string = ""
@@ -23,7 +25,7 @@
 </script>
 
 <div>
-    <label class="font-bold text-base mb-2">{label}</label>
+    <Label>{label}</Label>
     <div class="flex justify-center items-center min-h-[12em] w-full border rounded-lg clickable" on:click={() => fileInput.click()}>
         {#if value}
             <img alt="Foto" class="max-h-[18em]" bind:this={img}/>

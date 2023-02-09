@@ -1,5 +1,6 @@
 <script lang="ts">
     export let value: File | null
+    export let placeholderUrl: string = ""
     export let label: string = ""
 
     let fileInput: HTMLInputElement
@@ -26,6 +27,8 @@
     <div class="flex justify-center items-center min-h-[12em] w-full border rounded-lg clickable" on:click={() => fileInput.click()}>
         {#if value}
             <img alt="Foto" class="max-h-[18em]" bind:this={img}/>
+        {:else if placeholderUrl.length > 0}
+            <img alt="Foto" class="max-h-[18em]" src={placeholderUrl}/>
         {:else}
             <div class="flex flex-col gap-2 justify-center items-center">
                 <i class="material-icons-outlined text-gray-500">camera_alt</i>

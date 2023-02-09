@@ -8,15 +8,17 @@
     import NumberInput from "$lib/common/ui/form/NumberInput.svelte"
 
     export let data: OrderModel = {
+        id: "",
         size: "",
         details: "",
         photoUrl: "",
+        photoFile: undefined,
         quantity: 1
     }
 
     let isFormValid
 
-    $: isFormValid = data.size.length > 0 && data.details.length > 0 && data.quantity > 0 && data.photoFile
+    $: isFormValid = data.size.length > 0 && data.details.length > 0 && data.quantity > 0 && (data.photoFile || data.photoUrl.length > 0)
 
     function finish() {
         closeModal(data)
@@ -31,7 +33,7 @@
             <TextInput label="Nama Model" hint="Masukkan Deskripsi Pesanan" bind:value={data.details}/>
         </div>
         <NumberInput label="Jumlah" bind:value={data.quantity}/>
-        <ImageInput bind:value={data.photoFile} label="Foto Contoh Model"/>
+        <ImageInput bind:value={data.photoFile} placeholderUrl={data.photoUrl} label="Foto Contoh Model"/>
         <Button class="btn-filled-secondary w-full" disabled={!isFormValid} on:click={finish}>Simpan</Button>
     </div>
 </div>

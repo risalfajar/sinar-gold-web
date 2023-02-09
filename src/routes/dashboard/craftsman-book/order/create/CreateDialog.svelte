@@ -7,7 +7,6 @@
     import Button from "$lib/common/ui/button/Button.svelte"
     import {CraftsmanOrder} from "../data/order"
     import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
-    import AddModelDialog from "./AddModelDialog.svelte"
     import {closeModal, triggerModal} from "$lib/common/utils/modalUtils"
     import {craftsmans, salesmans} from "$lib/stores.js"
     import {createRender, createTable} from "svelte-headless-table"
@@ -19,10 +18,11 @@
     import {sumBy} from "lodash-es"
     import {removeIndex} from "$lib/common/utils/arrayUtils"
     import {OrderModel} from "../data/model"
-    import CraftsmanOrderRepository from "../data/repository"
+    import CraftsmanOrderRepository from "../data/source/orderRepository"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
-    import CraftsmanOrderModelRepository from "../data/modelRepository"
+    import CraftsmanOrderModelRepository from "../data/source/modelRepository"
+    import EditModelDialog from "./EditModelDialog.svelte"
 
     const title = 'Buat Pesanan Tukang'
     const repository = new CraftsmanOrderRepository()
@@ -89,7 +89,7 @@
         triggerModal({
             type: 'component',
             component: {
-                ref: AddModelDialog,
+                ref: EditModelDialog,
                 props: arg && {data: arg}
             },
             response: (r: OrderModel) => {

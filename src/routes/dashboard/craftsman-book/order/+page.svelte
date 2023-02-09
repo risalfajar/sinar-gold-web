@@ -121,6 +121,17 @@
         }
         isLoading = false
     }
+
+    function openDetailsDialog(item: CraftsmanOrder) {
+        triggerModal({
+            type: 'component',
+            component: {
+                ref: DetailsDialog,
+                props: {data: derived(data, (data) => data.find(it => it.id === item.id))}
+            },
+            classes: 'overflow-hidden !p-0'
+        })
+    }
 </script>
 
 <TableContainer>
@@ -131,7 +142,7 @@
     </svelte:fragment>
     <Button class="btn-filled-primary" slot="buttons" on:click={openCreateDialog}>Buat Pesanan</Button>
 
-    <DataTable model={viewModel} clickable {isLoading}>
+    <DataTable model={viewModel} clickable {isLoading} on:click={(e) => openDetailsDialog(e.detail)}>
         <tr class="border-t border-t-primary-500">
             <td colspan="5"></td>
             <th class="">Grand Total</th>

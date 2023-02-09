@@ -160,7 +160,7 @@
                     <td>{$data.material.sampleWeight}</td>
                     <td>{$data.material.jewelWeight}</td>
                     <td>
-                        <IconButton class="btn-ringed-surface clickable">
+                        <IconButton class="variant-ringed-surface clickable">
                             <i class="material-icons text-primary-500">add</i>
                         </IconButton>
                     </td>
@@ -179,6 +179,6 @@
         <h5>Riwayat Setor</h5>
         <!--    TODO    -->
 
-        <Button class="w-fit self-end btn-filled-secondary" on:click={openCreateAdvanceDialog}>Buat Kasbon</Button>
+        <Button class="w-fit self-end variant-filled-secondary" on:click={openCreateAdvanceDialog}>Buat Kasbon</Button>
     </div>
 </div>

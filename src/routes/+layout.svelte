@@ -36,13 +36,13 @@
     }
 </script>
 
-<Toast buttonDismiss="btn-ringed-surface"/>
+<Toast buttonDismiss="variant-ringed-surface"/>
 <Modal background="bg-white"
        rounded="rounded-xl"
        regionHeader="text-xl font-bold"
        regionBody="font-semibold text-center text-lg py-4"
        buttonNeutral="border-2 border-secondary-500 font-bold"
-       buttonPositive="btn-filled-primary font-bold"/>
+       buttonPositive="variant-filled-primary font-bold"/>
 
 {#if isLoading}
     <div class="w-screen h-screen flex justify-center items-center">

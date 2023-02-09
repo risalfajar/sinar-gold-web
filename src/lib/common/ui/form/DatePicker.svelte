@@ -34,6 +34,6 @@
 
 <InputWrapper let:classes {label}>
     <!--    <input type="date" {...$$restProps} min={formatDate(min)} max={formatDate(max)} class:classes bind:value={valueString}>-->
-    <SveltyPicker {...$$restProps} {format} inputClasses="{classes} min-w-[10em]" bind:value={valueString} bind:this={picker}/>
+    <SveltyPicker {...$$restProps} {format} inputClasses="input {classes} min-w-[10em]" bind:value={valueString} bind:this={picker}/>
     <i slot="end" class="material-icons">calendar_month</i>
 </InputWrapper>

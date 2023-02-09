@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
 /*noinspection CssUnknownTarget*/
 @import url('https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined&display=swap');
-@import "./theme.css";
+@import "./theme.pcss";
 @import '@skeletonlabs/skeleton/styles/all.css';
 
 html, body {
@@ -39,7 +39,7 @@ td {
 }
 
 input, select {
-    @apply bg-white shadow-none border border-gray-300 placeholder:text-gray-400 !important;
+    @apply border-gray-300 focus:border-primary-500 !important;
 }
 
 .hoverable {

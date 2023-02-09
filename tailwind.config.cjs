@@ -9,9 +9,9 @@ module.exports = {
     ],
 
     plugins: [
-        require('@skeletonlabs/skeleton/tailwind/theme.cjs'),
         require('@tailwindcss/forms'),
         require('tailwind-scrollbar'),
+        ...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')(),
     ],
 
     theme: {

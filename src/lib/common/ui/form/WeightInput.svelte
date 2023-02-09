@@ -16,7 +16,7 @@
            on:input
            on:keydown
            {...$$restProps}
-           class="{classes} pr-12 invalid:!border-error-500">
+           class="input {classes} pr-12 invalid:!border-error-500">
     <slot slot="end" name="end">
         <span class="select-none">gram</span>
     </slot>

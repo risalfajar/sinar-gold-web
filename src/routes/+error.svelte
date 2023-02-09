@@ -7,5 +7,5 @@
     <h2>Maaf, Terjadi Kesalahan</h2>
     <p>Pesan kesalahan:</p>
     <pre class="my-4">{$page.status} {$page.error.message}</pre>
-    <button class="mt-8 btn btn-filled-primary" on:click={() => goto('/')}>Kembali</button>
+    <button class="mt-8 btn variant-filled-primary" on:click={() => goto('/')}>Kembali</button>
 </div>

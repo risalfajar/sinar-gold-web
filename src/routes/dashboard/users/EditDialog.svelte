@@ -90,10 +90,11 @@
             {#if (menu.subMenus?.length ?? 0) === 0}
                 <CheckboxGroup label={menu.title} bind:group={data.pages}/>
             {:else}
-                <AccordionItem regionSummary="pr-4 hover:bg-surface-100 rounded-md transition">
+                <AccordionItem regionPanel="pr-4 hover:bg-surface-100 rounded-md transition">
                     <Checkbox slot="summary"
                               label={menu.title}
                               checked={menuGroups[menu.title].every(it => data.pages.includes(it))}
+                              on:click={(e) => e.stopPropagation()}
                               on:change={(e) => toggleGroup(e.target.checked, menu.title)}/>
                     <div class="flex flex-col gap-2 py-1 pl-8" slot="content">
                         {#each menu.subMenus as subMenu (subMenu.title)}

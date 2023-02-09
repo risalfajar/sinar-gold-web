@@ -31,6 +31,6 @@
         <AppLogo logoText class="mb-12"/>
         <TextInput dark label="Username" bind:value={username}/>
         <PasswordInput dark bind:value={password}/>
-        <Button action="submit" class="mt-4 btn-filled-primary" disabled={!isFormValid} {isLoading}>Masuk</Button>
+        <Button action="submit" class="mt-4 variant-filled-primary" disabled={!isFormValid} {isLoading}>Masuk</Button>
     </form>
 </div>

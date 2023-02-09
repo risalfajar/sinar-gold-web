@@ -18,7 +18,7 @@
         </div>
         <div class="flex flex-row px-1 justify-end gap-2 mt-4">
             <Button type="button" on:click={() => isSaving || closeModal()}>Kembali</Button>
-            <Button type="submit" isLoading={isSaving} disabled={!isFormValid} class="btn-filled-secondary">
+            <Button type="submit" isLoading={isSaving} disabled={!isFormValid} class="variant-filled-secondary">
                 Simpan
             </Button>
         </div>

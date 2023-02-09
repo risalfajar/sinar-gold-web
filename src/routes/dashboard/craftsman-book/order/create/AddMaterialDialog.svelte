@@ -31,6 +31,6 @@
             <WeightInput label="Berat Contoh" bind:value={data.sampleWeight}/>
             <WeightInput label="Berat Permata" bind:value={data.jewelWeight}/>
         </div>
-        <Button class="btn-filled-secondary w-full" disabled={!isFormValid} on:click={finish}>Simpan</Button>
+        <Button class="variant-filled-secondary w-full" disabled={!isFormValid} on:click={finish}>Simpan</Button>
     </div>
 </div>

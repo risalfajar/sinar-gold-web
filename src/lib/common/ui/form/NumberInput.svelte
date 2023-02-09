@@ -16,5 +16,5 @@
            on:input
            on:keydown
            {...$$restProps}
-           class="{classes} invalid:!border-error-500">
+           class="input {classes} invalid:!border-error-500">
 </InputWrapper>

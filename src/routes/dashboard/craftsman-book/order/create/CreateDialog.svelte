@@ -145,7 +145,7 @@
                     <td class="text-center">{sumBy($models, (it => it.quantity))}</td>
                 </tr>
             </DataTable>
-            <Button class="btn-filled-primary btn-sm w-full" on:click={() => openAddModelDialog()}>
+            <Button class="variant-filled-primary btn-sm w-full" on:click={() => openAddModelDialog()}>
                 <i class="material-icons">add</i>
                 Tambah Model
             </Button>
@@ -164,6 +164,6 @@
         </div>
 
         <hr/>
-        <Button class="btn-filled-secondary w-full" disabled={!isFormValid} {isLoading} on:click={save}>Buat Pesanan</Button>
+        <Button class="variant-filled-secondary w-full" disabled={!isFormValid} {isLoading} on:click={save}>Buat Pesanan</Button>
     </div>
 </div>

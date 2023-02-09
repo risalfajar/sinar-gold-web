@@ -17,7 +17,7 @@
             on:keydown
             {...$$restProps}
             name={label}
-            class={classes}
+            class="input {classes}"
             class:text-gray-500={value.length === 0}>
         <option value="" disabled selected>{hint}</option>
         {#each options as option, index (option)}

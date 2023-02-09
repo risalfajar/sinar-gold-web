@@ -1,14 +1,15 @@
 <script lang="ts">
+    import Label from "$lib/common/ui/form/Label.svelte"
+
     export let label: string = ''
     export let helper: string = ''
-    export let dark: boolean = false
 
     let classes = `${$$slots.start && 'pl-10'} ${$$slots.end && 'pr-10'}`
 </script>
 
 <div class="w-full {$$props.class}">
     {#if label.length > 0}
-        <label class="mb-1 {dark && 'text-white'}">{label}</label>
+        <Label>{label}</Label>
     {/if}
     <div class="relative w-full">
         {#if $$slots.start}
@@ -24,6 +25,6 @@
         {/if}
     </div>
     {#if helper.length > 0}
-        <p class="pt-2 !text-xs {dark ? '!text-gray-300' : '!text-gray-700'}">{helper}</p>
+        <p class="pt-2 !text-xs !text-gray-700">{helper}</p>
     {/if}
 </div>

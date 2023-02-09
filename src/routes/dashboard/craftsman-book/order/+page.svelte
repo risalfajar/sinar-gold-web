@@ -140,7 +140,7 @@
         <Select label="Sales" options={$salesmans.map(it => it.name)} values={$salesmans.map(it => it.code)} bind:value={$salesman}/>
         <DateRangePicker label="Tanggal" bind:start={$startDate} bind:end={$endDate}/>
     </svelte:fragment>
-    <Button class="btn-filled-primary" slot="buttons" on:click={openCreateDialog}>Buat Pesanan</Button>
+    <Button class="variant-filled-primary" slot="buttons" on:click={openCreateDialog}>Buat Pesanan</Button>
 
     <DataTable model={viewModel} clickable {isLoading} on:click={(e) => openDetailsDialog(e.detail)}>
         <tr class="border-t border-t-primary-500">

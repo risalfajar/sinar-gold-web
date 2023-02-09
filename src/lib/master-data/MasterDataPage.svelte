@@ -84,12 +84,12 @@
     <SearchInput slot="search" bind:value={$filterValue}/>
     <svelte:fragment slot="buttons">
         {#if enableImport}
-            <button class="btn btn-filled-success" on:click={() => fileInput.click()}>
+            <button class="btn variant-filled-success" on:click={() => fileInput.click()}>
                 <Icon name="Excel" class="mr-2 fill-white"/>
                 Import Excel
             </button>
         {/if}
-        <button class="btn btn-filled-primary" on:click={() => showEditDialog()}>Tambah Data</button>
+        <button class="btn variant-filled-primary" on:click={() => showEditDialog()}>Tambah Data</button>
         <input class="hidden" type="file" accept=".xls, .xlsx" bind:this={fileInput} on:change={showImportDialog}/>
     </svelte:fragment>
     <DataTable model={tableViewModel}/>

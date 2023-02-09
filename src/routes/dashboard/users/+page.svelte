@@ -90,7 +90,7 @@
     <ContainerCard title="Data Pengguna">
         <TableContainer>
             <SearchInput slot="search" bind:value={$filterValue}/>
-            <Button slot="buttons" class="btn-filled-primary" on:click={() => openEditDialog()}>Tambah Data</Button>
+            <Button slot="buttons" class="variant-filled-primary" on:click={() => openEditDialog()}>Tambah Data</Button>
             <DataTable model={tableViewModel}/>
         </TableContainer>
     </ContainerCard>

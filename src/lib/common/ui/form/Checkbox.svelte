@@ -5,6 +5,6 @@
 </script>
 
 <div class="flex flex-row gap-4 items-center">
-    <input {...$$restProps} type="checkbox" class="transition duration-200 {$$props.class}" {value} bind:checked on:change/>
+    <input {...$$restProps} type="checkbox" class="checkbox transition duration-200 {$$props.class}" {value} bind:checked on:change on:click/>
     <label>{label}</label>
 </div>

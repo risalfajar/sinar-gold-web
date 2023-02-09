@@ -19,7 +19,7 @@
             placeholder={hint}
             on:input={(e) => value = e.target.value}
             {...$$restProps}
-            class={classes}>
+            class="input {classes}">
     <button tabindex="-1" slot="end" type="button" class="btn-icon" on:click={() => showPassword = !showPassword}>
         <i class="material-icons">{showPassword ? "visibility" : "visibility_off"}</i>
     </button>

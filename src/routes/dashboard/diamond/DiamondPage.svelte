@@ -58,7 +58,7 @@
 <TableContainer>
     <SearchInput slot="search" bind:value={$filterValue}/>
     <svelte:fragment slot="buttons">
-        <button class="btn btn-filled-primary" on:click={() => showEditDialog()}>Tambah Data</button>
+        <button class="btn variant-filled-primary" on:click={() => showEditDialog()}>Tambah Data</button>
     </svelte:fragment>
     <DataTable model={tableViewModel}/>
 </TableContainer>

@@ -27,8 +27,8 @@
             {#each menus as menu (menu.title)}
                 {#if isExpanded}
                     {#if menu.subMenus?.length > 0}
-                        <AccordionItem regionSummary="py-2 px-5 [&>div>svg]:!fill-white [&>div>svg]:!opacity-100"
-                                       regionContent="pl-9 py-1"
+                        <AccordionItem regionControl="py-2 px-5 [&>div>svg]:!fill-white [&>div>svg]:!opacity-100"
+                                       regionPanel="pl-9 py-1"
                                        rounded="rounded-lg"
                                        hover="transition-colors duration-150 hover:bg-primary-400 ">
                             <Icon slot="lead" name={menu.title}/>
@@ -56,7 +56,7 @@
         </div>
     {/key}
 
-    <button class="btn-icon btn-filled-primary" on:click={() => isExpanded = !isExpanded}>
+    <button class="btn-icon variant-filled-primary" on:click={() => isExpanded = !isExpanded}>
         <i class="material-icons text-secondary-500 transition-all duration-300" class:rotate-180={isExpanded}>chevron_right</i>
     </button>
 </div>

@@ -34,6 +34,6 @@
         </div>
         <NumberInput label="Jumlah" bind:value={data.quantity}/>
         <ImageInput bind:value={data.photoFile} placeholderUrl={data.photoUrl} label="Foto Contoh Model"/>
-        <Button class="btn-filled-secondary w-full" disabled={!isFormValid} on:click={finish}>Simpan</Button>
+        <Button class="variant-filled-secondary w-full" disabled={!isFormValid} on:click={finish}>Simpan</Button>
     </div>
 </div>

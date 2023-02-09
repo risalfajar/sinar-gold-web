@@ -38,5 +38,5 @@
            bind:this={input}
            on:input={handleInput}
            {...$$restProps}
-           class={classes}>
+           class="input {classes}">
 </InputWrapper>

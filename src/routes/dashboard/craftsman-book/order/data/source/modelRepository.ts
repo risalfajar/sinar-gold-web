@@ -1,5 +1,5 @@
 import {FirestoreRepository} from "$lib/common/data/firestoreRepository"
-import {modelConverter, OrderModel} from "./model"
+import {modelConverter, OrderModel} from "../model"
 import {collection, CollectionReference, SetOptions} from "firebase/firestore"
 import {Firestore, Storage} from "$lib/firebase"
 import {COLLECTION_CRAFTSMAN_ORDER, COLLECTION_CRAFTSMAN_ORDER_MODEL} from "$lib/constants"

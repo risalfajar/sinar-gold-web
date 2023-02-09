@@ -7,7 +7,7 @@
     import CreateDialog from "./create/CreateDialog.svelte"
     import {craftsmans, salesmans} from "$lib/stores.js"
     import {derived, Readable, writable} from "svelte/store"
-    import CraftsmanOrderRepository from "./data/repository"
+    import CraftsmanOrderRepository from "./data/source/orderRepository"
     import {createRender, createTable} from "svelte-headless-table"
     import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
@@ -17,6 +17,7 @@
     import {getRowData} from "$lib/common/utils/tableUtils"
     import {CraftsmanOrder} from "./data/order"
     import {deleteConfirmationModal, triggerModal} from "$lib/common/utils/modalUtils"
+    import DetailsDialog from "./details/DetailsDialog.svelte"
 
     const craftsman = writable('')
     const salesman = writable('')

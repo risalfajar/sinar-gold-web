@@ -17,7 +17,7 @@
     import {deleteConfirmationModal} from "$lib/common/utils/modalUtils.js"
     import {errorToast, successToast} from "$lib/common/utils/toastUtils"
     import Button from "$lib/common/ui/button/Button.svelte"
-    import CreateAdvanceDialog from "../advance/CreateAdvanceDialog.svelte"
+    import CreateAdvanceDialog from "./CreateAdvanceDialog.svelte"
     import CashAdvanceRepository from "../data/source/advanceRepository"
     import {CashAdvance} from "../data/advance"
     import {sumBy} from "lodash-es"

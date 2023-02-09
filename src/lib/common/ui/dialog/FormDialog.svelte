@@ -1,7 +1,7 @@
 <script lang="ts">
     import Button from "$lib/common/ui/button/Button.svelte"
-    import {modalStore} from "@skeletonlabs/skeleton"
     import {createEventDispatcher} from "svelte"
+    import {closeModal} from "$lib/common/utils/modalUtils"
 
     export let isFormValid: boolean = true
     export let isSaving: boolean = false
@@ -17,7 +17,7 @@
             <slot></slot>
         </div>
         <div class="flex flex-row px-1 justify-end gap-2 mt-4">
-            <Button type="button" on:click={() => isSaving || modalStore.close()}>Kembali</Button>
+            <Button type="button" on:click={() => isSaving || closeModal()}>Kembali</Button>
             <Button type="submit" isLoading={isSaving} disabled={!isFormValid} class="btn-filled-secondary">
                 Simpan
             </Button>

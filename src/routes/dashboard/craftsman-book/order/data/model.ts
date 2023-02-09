@@ -5,7 +5,7 @@ export type OrderModel = {
     size: string,
     details: string,
     photoUrl: string,
-    photoFile?: File,
+    photoFile?: File, // can be undefined when user is updating model and doesn't pass a new photo
     quantity: number
 }
 

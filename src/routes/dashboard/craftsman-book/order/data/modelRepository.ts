@@ -24,9 +24,10 @@ export default class CraftsmanOrderModelRepository extends FirestoreRepository<O
     }
 
     async save(item: OrderModel, options: SetOptions = {merge: true}): Promise<string> {
-        const modelId = this.getDocRefForItem(item).id
-        item.id = modelId
-        item.photoUrl = await this.saveImage(item.photoFile!, item.id, modelId)
+        if (item.photoFile) {
+            item.id = this.getDocRefForItem(item).id
+            item.photoUrl = await this.saveImage(item.photoFile, this.orderId, item.id)
+        }
         return super.save(item, options)
     }
 

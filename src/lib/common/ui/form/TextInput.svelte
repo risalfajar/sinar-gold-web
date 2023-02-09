@@ -3,11 +3,12 @@
 
     export let value
     export let label: string = ''
+    export let helper: string = ''
     export let hint: string = 'Masukkan ' + label
     export let dark: boolean = false
 </script>
 
-<InputWrapper let:classes {label} {dark}>
+<InputWrapper let:classes {label} {dark} {helper}>
     <input type="text"
            placeholder={hint}
            bind:value

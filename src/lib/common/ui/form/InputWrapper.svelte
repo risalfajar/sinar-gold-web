@@ -25,6 +25,6 @@
         {/if}
     </div>
     {#if helper.length > 0}
-        <p class="pt-2 !text-xs !text-gray-700">{helper}</p>
+        <p class="pt-1 !text-xs !text-gray-700">{helper}</p>
     {/if}
 </div>

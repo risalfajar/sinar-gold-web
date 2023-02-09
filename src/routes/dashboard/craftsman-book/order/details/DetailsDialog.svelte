@@ -21,6 +21,7 @@
     import CashAdvanceRepository from "../data/source/advanceRepository"
     import {CashAdvance} from "../data/advance"
     import {sumBy} from "lodash-es"
+    import AddMaterialDialog from "./AddMaterialDialog.svelte"
 
     export let data: Readable<CraftsmanOrder>
 
@@ -129,6 +130,16 @@
             modalClasses: '!max-w-[480px]'
         })
     }
+
+    function openAddMaterialDialog() {
+        triggerModal({
+            type: 'component',
+            component: {
+                ref: AddMaterialDialog,
+                props: {arg: $data}
+            }
+        })
+    }
 </script>
 
 <div class="-m-4">
@@ -160,7 +171,7 @@
                     <td>{$data.material.sampleWeight}</td>
                     <td>{$data.material.jewelWeight}</td>
                     <td>
-                        <IconButton class="variant-ringed-surface clickable">
+                        <IconButton class="variant-ringed-surface" on:click={openAddMaterialDialog}>
                             <i class="material-icons text-primary-500">add</i>
                         </IconButton>
                     </td>

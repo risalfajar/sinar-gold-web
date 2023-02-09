@@ -14,7 +14,7 @@
     let {headerRows, rows, tableAttrs, tableBodyAttrs} = model
 </script>
 
-<div class="border rounded-lg overflow-x-auto scrollbar-default {$$props.class}">
+<div class="border rounded-lg !overflow-x-auto scrollbar-default {$$props.class}">
     <table {...$tableAttrs}>
         <thead>
         {#each $headerRows as headerRow (headerRow.id)}

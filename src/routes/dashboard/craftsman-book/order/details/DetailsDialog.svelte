@@ -123,7 +123,7 @@
         </div>
 
         <h5>Rincian Model</h5>
-        <DataTable model={modelsTable.createViewModel(modelsColumns)} class="overflow-x-visible" isLoading={isDeletingModel}/>
+        <DataTable model={modelsTable.createViewModel(modelsColumns)} class="!overflow-x-visible" isLoading={isDeletingModel}/>
 
         <h5>Rincian Bahan</h5>
         <div class="border rounded-lg">

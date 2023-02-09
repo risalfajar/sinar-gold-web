@@ -23,6 +23,7 @@ h5 {
 
 .scrollbar-default {
     @apply scrollbar-thin scrollbar-thumb-surface-600 scrollbar-track-surface-400 hover:scrollbar-thumb-surface-700 transition-colors;
+    overflow: initial; /* overwrite overflow:overlay from scrollbar-thin which causes problem for tables inside dialog */
 }
 
 table {

@@ -19,15 +19,20 @@
   // from the referenced tsconfig.json - TypeScript does not merge them in
   "include": [
     "src/**/*",
+    "src/**/*.js",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.svelte",
-    "src/main.ts"
+    "src/main.ts",
+    ".svelte-kit/ambient.d.ts",
+    ".svelte-kit/types/**/$types.d.ts",
+    "/vite.config.ts"
   ],
   "exclude": [
     ".routify/*",
-    "node_modules/*",
-    "dist/*"
+    "node_modules/**",
+    "dist/*",
+    ".svelte-kit/[!ambient.d.ts]**"
   ]
 }

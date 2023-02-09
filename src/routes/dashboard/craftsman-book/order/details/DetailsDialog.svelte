@@ -131,8 +131,8 @@
     }
 </script>
 
-<div>
-    <p class="unstyled w-full bg-primary-500 text-white font-semibold text-center py-2">TOKO SINAR MAS</p>
+<div class="-m-4">
+    <p class="unstyled w-full bg-primary-500 rounded-t-lg text-white font-semibold text-center py-2">TOKO SINAR MAS</p>
     <div class="overflow-y-auto max-h-[75vh] p-4 flex flex-col gap-4">
         <div class="grid grid-cols-2 gap-4">
             <DataText title="Tanggal Pesan" content={$data.created?.toLocaleDateString(LOCALE_INDONESIA, {dateStyle: 'long'})}/>

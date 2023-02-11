@@ -53,7 +53,7 @@
         {:else}
             {#each $rows as row (row.id)}
                 <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-                    <tr {...rowAttrs} class:clickable on:click={() => dispatch('click', $rows[row.dataId].original)}>
+                    <tr {...rowAttrs} class:clickable on:click={() => dispatch('click', row.original)}>
                         {#each row.cells as cell (cell.id)}
                             <Subscribe attrs={cell.attrs()} let:attrs>
                                 <td {...attrs}>

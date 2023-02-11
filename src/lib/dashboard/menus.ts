@@ -90,15 +90,15 @@ export const menus: Menu[] = [
         link: '/dashboard/craftsman-book',
         subMenus: [
             {
-                title: 'Buat Pesanan ke Tukang',
+                title: 'Buat Pesanan',
                 link: '/dashboard/craftsman-book/order'
             },
             {
-                title: 'Tukang Setor Pesanan',
+                title: 'Riwayat Setoran',
                 link: '/dashboard/craftsman-book/deposit'
             },
             {
-                title: 'Riwayat Pesanan Tukang',
+                title: 'Riwayat Pesanan',
                 link: '/dashboard/craftsman-book/history'
             }
         ]

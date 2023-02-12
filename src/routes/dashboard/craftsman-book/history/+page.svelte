@@ -61,12 +61,12 @@
         }),
         table.column({
             id: 'goldWeight',
-            header: 'Total Berat Bahan',
+            header: 'Berat Bahan',
             accessor: (item) => item.material.goldWeight + ' gram'
         }),
         table.column({
             id: 'finishedWeight',
-            header: 'Total Berat Jadi',
+            header: 'Berat Jadi',
             accessor: (item) => item.finishedWeight + ' gram'
         }),
         table.column({

@@ -5,7 +5,7 @@ import {DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, serverTimes
 export type OrderDeposit = {
     id: string
     created: Date | null
-    order: Omit<CraftsmanOrder, "modelCount">
+    order: Omit<CraftsmanOrder, "modelCount" | "finished" | "totalCost" | "advancesTotal" | "laborCost" | "finishedWeight">
     model: Omit<OrderModel, "photoFile" | "isFinished">
     finishedMaterial: OrderMaterial
     goldWeightGap: number

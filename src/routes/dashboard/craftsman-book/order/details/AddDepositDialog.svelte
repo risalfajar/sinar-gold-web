@@ -24,8 +24,20 @@
     const data: OrderDeposit = {
         id: model.id,
         created: null,
-        order: order,
-        model: model,
+        order: {
+            id: order.id,
+            craftsman: order.craftsman,
+            material: order.material,
+            created: order.created,
+            salesman: order.salesman
+        },
+        model: {
+            id: model.id,
+            details: model.details,
+            photoUrl: model.photoUrl,
+            quantity: model.quantity,
+            size: model.size
+        },
         photoUrl: "",
         photoFile: null,
         pricePerGram: 0,

@@ -1,15 +1,12 @@
-import {Salesman} from "$lib/master-data/salesman/salesman"
 import {OrderModel} from "./model"
-import {OrderMaterial} from "./order"
+import {CraftsmanOrder, OrderMaterial} from "./order"
 import {DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, serverTimestamp, SnapshotOptions, WithFieldValue} from "firebase/firestore"
 
 export type OrderDeposit = {
     id: string
     created: Date | null
-    craftsman: string
-    salesman: Salesman
+    order: Omit<CraftsmanOrder, "modelCount">
     model: Omit<OrderModel, "photoFile">
-    sourceMaterial: OrderMaterial
     finishedMaterial: OrderMaterial
     goldWeightGap: number
     laborCost: number
@@ -29,6 +26,11 @@ export const depositConverter: FirestoreDataConverter<OrderDeposit> = {
     },
     fromFirestore: function (snapshot: QueryDocumentSnapshot, options?: SnapshotOptions | undefined): OrderDeposit {
         const data = snapshot.data()
-        return {...data, id: snapshot.id, created: data.created?.toDate()} as OrderDeposit
+        return {
+            ...data,
+            id: snapshot.id,
+            created: data.created?.toDate(),
+            order: {...data.order, created: data.order.created.toDate()}
+        } as OrderDeposit
     }
 }

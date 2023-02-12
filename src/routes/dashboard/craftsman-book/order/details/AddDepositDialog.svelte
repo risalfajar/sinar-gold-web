@@ -24,15 +24,13 @@
     const data: OrderDeposit = {
         id: model.id,
         created: null,
-        craftsman: order.craftsman,
-        salesman: order.salesman,
+        order: order,
         model: model,
         photoUrl: "",
         photoFile: null,
         pricePerGram: 0,
         laborCost: 0,
         totalCost: 0,
-        sourceMaterial: order.material,
         finishedMaterial: {
             rate: order.material.rate,
             goldWeight: 0,
@@ -45,7 +43,7 @@
     let isFormValid: boolean
     let isSaving = false
 
-    $: data.goldWeightGap = +(data.sourceMaterial.goldWeight - data.finishedMaterial.goldWeight).toFixed(2)
+    $: data.goldWeightGap = +(data.order.material.goldWeight - data.finishedMaterial.goldWeight).toFixed(2)
     $: data.totalCost = +(data.pricePerGram * data.laborCost).toFixed(0)
     $: isFormValid = data.photoFile != null
 
@@ -71,18 +69,18 @@
         <div class="grid grid-cols-2 gap-4">
             <DatePicker disabled label="Tanggal Setor" value={new Date()}/>
             <TextInput disabled label="Nomor Pesanan" value={order.id}/>
-            <TextInput disabled label="Nama Tukang" value={data.craftsman}/>
-            <TextInput disabled label="Nama Sales" value={data.salesman.name}/>
+            <TextInput disabled label="Nama Tukang" value={data.order.craftsman}/>
+            <TextInput disabled label="Nama Sales" value={data.order.salesman.name}/>
             <TextInput disabled label="Nama Model" value={data.model.details}/>
             <TextInput disabled label="Ukuran" value={data.model.size}/>
         </div>
         <ImageInput required label="Foto Pesanan Jadi" bind:value={data.photoFile}/>
         <div class="grid grid-cols-2 gap-4">
-            <TextInput disabled label="Kadar" value={data.sourceMaterial.rate}/>
+            <TextInput disabled label="Kadar" value={data.order.material.rate}/>
             <WeightInput required label="Berat Permata" bind:value={data.finishedMaterial.jewelWeight}/>
             <WeightInput required label="Berat Contoh" bind:value={data.finishedMaterial.sampleWeight}/>
             <WeightInput required label="Berat Emas Jadi" bind:value={data.finishedMaterial.goldWeight}/>
-            <WeightInput disabled label="Berat Bahan Emas" value={data.sourceMaterial.goldWeight}/>
+            <WeightInput disabled label="Berat Bahan Emas" value={data.order.material.goldWeight}/>
             <WeightInput disabled label="Selisih Bahan Emas" value={data.goldWeightGap}/>
             <PriceInput disabled label="Total Kasbon" value={sumBy($advances, (item) => item.amount)}/>
             <WeightInput required label="Ongkos Kerja" bind:value={data.laborCost}/>

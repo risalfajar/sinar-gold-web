@@ -6,7 +6,7 @@ export type OrderDeposit = {
     id: string
     created: Date | null
     order: Omit<CraftsmanOrder, "modelCount">
-    model: Omit<OrderModel, "photoFile">
+    model: Omit<OrderModel, "photoFile" | "isFinished">
     finishedMaterial: OrderMaterial
     goldWeightGap: number
     laborCost: number

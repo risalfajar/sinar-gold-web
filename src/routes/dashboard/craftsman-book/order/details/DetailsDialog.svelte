@@ -25,6 +25,7 @@
     import AddDepositDialog from "./AddDepositDialog.svelte"
     import DepositRepository from "../data/source/depositRepository"
     import {OrderDeposit} from "../data/deposit"
+    import BaseInfoDialog from "$lib/common/ui/dialog/BaseInfoDialog.svelte"
 
     export let data: Readable<CraftsmanOrder>
 
@@ -189,54 +190,51 @@
     }
 </script>
 
-<div class="-m-4">
-    <p class="unstyled w-full bg-primary-500 rounded-t-lg text-white font-semibold text-center py-2">TOKO SINAR MAS</p>
-    <div class="overflow-y-auto max-h-[75vh] p-4 flex flex-col gap-4">
-        <div class="grid grid-cols-2 gap-4">
-            <DataText title="Tanggal Pesan" content={$data.created?.toLocaleDateString(LOCALE_INDONESIA, {dateStyle: 'long'})}/>
-            <DataText title="Nomor Pesanan" content={$data.id}/>
-            <DataText title="Nama Tukang" content={$data.craftsman}/>
-            <DataText title="Nama Sales" content={$data.salesman.name}/>
-        </div>
-
-        <h5>Rincian Model</h5>
-        <DataTable model={modelsTable.createViewModel(modelsColumns)} class="!overflow-x-visible" isLoading={isDeletingModel}/>
-
-        <h5>Rincian Bahan</h5>
-        <div class="border rounded-lg">
-            <table>
-                <tr>
-                    <th>Kadar</th>
-                    <th>Berat Emas</th>
-                    <th>Berat Contoh</th>
-                    <th>Berat Permata</th>
-                    <th>Tambah Berat</th>
-                </tr>
-                <tr>
-                    <td>{$data.material.rate}</td>
-                    <td>{$data.material.goldWeight}</td>
-                    <td>{$data.material.sampleWeight}</td>
-                    <td>{$data.material.jewelWeight}</td>
-                    <td>
-                        <IconButton class="variant-ringed-surface" on:click={openAddMaterialDialog}>
-                            <i class="material-icons text-primary-500">add</i>
-                        </IconButton>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <h5>Riwayat Kasbon</h5>
-        <DataTable model={advancesTable.createViewModel(advancesColumns)} class="!overflow-x-visible">
-            <tr>
-                <th>Grand Total</th>
-                <th>{sumBy($advances, (item) => item.amount).toLocaleString(LOCALE_INDONESIA)}</th>
-            </tr>
-        </DataTable>
-
-        <h5>Riwayat Setor</h5>
-        <DataTable model={depositsTable.createViewModel(depositsColumns)} class="!overflow-x-visible"/>
-
-        <Button class="w-fit self-end variant-filled-secondary" on:click={openCreateAdvanceDialog}>Buat Kasbon</Button>
+<BaseInfoDialog>
+    <div class="grid grid-cols-2 gap-4">
+        <DataText title="Tanggal Pesan" content={$data.created?.toLocaleDateString(LOCALE_INDONESIA, {dateStyle: 'long'})}/>
+        <DataText title="Nomor Pesanan" content={$data.id}/>
+        <DataText title="Nama Tukang" content={$data.craftsman}/>
+        <DataText title="Nama Sales" content={$data.salesman.name}/>
     </div>
-</div>
+
+    <h5>Rincian Model</h5>
+    <DataTable model={modelsTable.createViewModel(modelsColumns)} class="!overflow-x-visible" isLoading={isDeletingModel}/>
+
+    <h5>Rincian Bahan</h5>
+    <div class="border rounded-lg">
+        <table>
+            <tr>
+                <th>Kadar</th>
+                <th>Berat Emas</th>
+                <th>Berat Contoh</th>
+                <th>Berat Permata</th>
+                <th>Tambah Berat</th>
+            </tr>
+            <tr>
+                <td>{$data.material.rate}</td>
+                <td>{$data.material.goldWeight}</td>
+                <td>{$data.material.sampleWeight}</td>
+                <td>{$data.material.jewelWeight}</td>
+                <td>
+                    <IconButton class="variant-ringed-surface" on:click={openAddMaterialDialog}>
+                        <i class="material-icons text-primary-500">add</i>
+                    </IconButton>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h5>Riwayat Kasbon</h5>
+    <DataTable model={advancesTable.createViewModel(advancesColumns)} class="!overflow-x-visible">
+        <tr>
+            <th>Grand Total</th>
+            <th>{sumBy($advances, (item) => item.amount).toLocaleString(LOCALE_INDONESIA)}</th>
+        </tr>
+    </DataTable>
+
+    <h5>Riwayat Setor</h5>
+    <DataTable model={depositsTable.createViewModel(depositsColumns)} class="!overflow-x-visible"/>
+
+    <Button class="w-fit self-end variant-filled-secondary" on:click={openCreateAdvanceDialog}>Buat Kasbon</Button>
+</BaseInfoDialog>

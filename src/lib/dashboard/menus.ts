@@ -11,7 +11,6 @@ export const menus: Menu[] = [
     },
     {
         title: 'Berlian',
-        link: '/dashboard/diamond',
         subMenus: [
             {
                 title: 'Master Supplier',
@@ -61,7 +60,6 @@ export const menus: Menu[] = [
     },
     {
         title: 'Pemesanan',
-        link: '/dashboard/order/index',
         subMenus: [
             {
                 title: 'Data Pesanan',
@@ -87,7 +85,6 @@ export const menus: Menu[] = [
     },
     {
         title: 'Buku Tukang',
-        link: '/dashboard/craftsman-book',
         subMenus: [
             {
                 title: 'Buat Pesanan',
@@ -143,7 +140,6 @@ export const menus: Menu[] = [
     },
     {
         title: 'Barang',
-        link: '/dashboard/items',
         subMenus: [
             {
                 title: 'Data Barang',
@@ -161,7 +157,6 @@ export const menus: Menu[] = [
     },
     {
         title: 'Data Master',
-        link: '/dashboard/master-data/group',
         subMenus: [
             {
                 title: 'Master Group',
@@ -267,7 +262,6 @@ export const menus: Menu[] = [
     },
     {
         title: 'Laporan',
-        link: '/dashboard/report',
         subMenus: [
             {
                 title: 'Laporan Barang',

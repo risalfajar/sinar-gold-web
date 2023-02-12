@@ -5,6 +5,33 @@
     import {fly} from "svelte/transition"
     import {menus} from "$lib/dashboard/menus.js"
     import {goto} from "$app/navigation"
+    import {derived} from "svelte/store"
+    import {currentUser} from "$lib/stores"
+    import {Menu} from "$lib/dashboard/menu"
+
+    const userPages = derived(currentUser, (user) => user?.pages ?? [])
+    const validMenus = derived(userPages, (pages) => {
+        const validMenus = []
+        menus.forEach(menu => {
+            if (menu.title === 'Beranda')
+                validMenus.push(menu)
+            else if (pages.includes(menu.link ?? ''))
+                validMenus.push(menu)
+            else if (menu.subMenus?.length > 0) {
+                const subMenus = menu.subMenus!.filter(it => pages.includes(it.link))
+                if (subMenus.length > 0) {
+                    const newMenu: Menu = {
+                        title: menu.title,
+                        isExpanded: false,
+                        link: subMenus[0].link,
+                        subMenus
+                    }
+                    validMenus.push(newMenu)
+                }
+            }
+        })
+        return validMenus
+    })
 
     let isExpanded = true
 </script>
@@ -24,7 +51,7 @@
 
     {#key isExpanded}
         <div id="sidebar-content" class="w-full flex flex-col flex-grow overflow-y-auto gap-2" in:fly={{x: 100}}>
-            {#each menus as menu (menu.title)}
+            {#each $validMenus as menu (menu.title)}
                 {#if isExpanded}
                     {#if menu.subMenus?.length > 0}
                         <AccordionItem regionControl="py-2 px-5 [&>div>svg]:!fill-white [&>div>svg]:!opacity-100"

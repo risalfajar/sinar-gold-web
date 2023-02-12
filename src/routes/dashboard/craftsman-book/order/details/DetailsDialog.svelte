@@ -23,11 +23,14 @@
     import {sumBy} from "lodash-es"
     import AddMaterialDialog from "./AddMaterialDialog.svelte"
     import AddDepositDialog from "./AddDepositDialog.svelte"
+    import DepositRepository from "../data/source/depositRepository"
+    import {OrderDeposit} from "../data/deposit"
 
     export let data: Readable<CraftsmanOrder>
 
     const modelRepository = new CraftsmanOrderModelRepository($data.id)
     const cashAdvanceRepository = new CashAdvanceRepository($data.id)
+    const depositRepository = new DepositRepository($data.id)
 
     const models = readable<OrderModel[]>([], set => modelRepository.listenAll(set))
     const modelsTable = createTable(models)
@@ -77,6 +80,36 @@
             header: 'Jumlah Kasbon',
             accessor: (item) => item.amount.toLocaleString(LOCALE_INDONESIA)
         })
+    ])
+
+    const deposits = readable<OrderDeposit[]>([], set => depositRepository.listenAll(set))
+    const depositsTable = createTable(deposits)
+    const depositsColumns = depositsTable.createColumns([
+        depositsTable.column({
+            header: 'Ukuran',
+            id: 'size',
+            accessor: (item) => item.model.size
+        }),
+        depositsTable.column({
+            header: 'Rincian Model',
+            id: 'details',
+            accessor: (item) => item.model.details
+        }),
+        depositsTable.column({
+            header: 'Gambar Jadi',
+            accessor: 'photoUrl',
+            cell: cell => createRender(PhotoIcon, {photo: cell.value})
+        }),
+        depositsTable.column({
+            header: 'Berat Jadi',
+            id: 'finishedWeight',
+            accessor: (item) => item.finishedMaterial.goldWeight + ' gram'
+        }),
+        depositsTable.column({
+            header: 'Total Ongkos Kerja',
+            id: 'totalCost',
+            accessor: (item) => item.totalCost.toLocaleString(LOCALE_INDONESIA)
+        }),
     ])
 
     let isDeletingModel = false
@@ -202,7 +235,7 @@
         </DataTable>
 
         <h5>Riwayat Setor</h5>
-        <!--    TODO    -->
+        <DataTable model={depositsTable.createViewModel(depositsColumns)} class="!overflow-x-visible"/>
 
         <Button class="w-fit self-end variant-filled-secondary" on:click={openCreateAdvanceDialog}>Buat Kasbon</Button>
     </div>

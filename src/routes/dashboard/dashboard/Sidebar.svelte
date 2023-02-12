@@ -46,9 +46,7 @@
                 </div>
             {/if}
         </div>
-    {/key}
 
-    {#key isExpanded}
         <div id="sidebar-content" class="w-full flex flex-col flex-grow overflow-y-auto gap-2" in:fly={{x: 100}}>
             {#each $validMenus as menu (menu.title)}
                 {#if isExpanded}

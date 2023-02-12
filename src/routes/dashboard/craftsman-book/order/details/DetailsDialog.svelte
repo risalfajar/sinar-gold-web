@@ -56,10 +56,10 @@
                 .on('edit', () => openEditModelDialog(getRowData(state, cell)))
                 .on('delete', () => confirmDeleteModel(getRowData(state, cell)))
         }),
-        modelsTable.display({
-            id: 'finish',
+        modelsTable.column({
             header: 'Setor',
-            cell: (cell, state) => createRender(FinishButton, {disabled: getRowData(state, cell).isFinished})
+            accessor: 'isFinished',
+            cell: (cell, state) => createRender(FinishButton, {disabled: cell.value})
                 .on('click', () => openAddDepositDialog(getRowData(state, cell)))
         })
     ])

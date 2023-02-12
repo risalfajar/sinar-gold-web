@@ -9,7 +9,9 @@ export type CraftsmanOrder = {
     salesman: Salesman
     modelCount: number
     material: OrderMaterial
+    advancesTotal: number
     finishedWeight: number
+    laborCost: number
     totalCost: number
 }
 

@@ -2,18 +2,15 @@
     import TableContainer from "$lib/common/ui/container/table/TableContainer.svelte"
     import Select from "$lib/common/ui/form/Select.svelte"
     import DateRangePicker from "$lib/common/ui/form/DateRangePicker.svelte"
-    import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
     import {craftsmans, salesmans} from "$lib/stores.js"
     import {derived, Readable, writable} from "svelte/store"
     import {createTable} from "svelte-headless-table"
     import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import {sumBy} from "lodash-es"
-    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import {deleteConfirmationModal, triggerModal} from "$lib/common/utils/modalUtils"
+    import {triggerModal} from "$lib/common/utils/modalUtils"
     import {CraftsmanOrder} from "../order/data/order"
     import CraftsmanOrderRepository from "../order/data/source/orderRepository"
-    import CreateDialog from "../order/create/CreateDialog.svelte"
     import DetailsDialog from "./DetailsDialog.svelte"
     import {LOCALE_INDONESIA} from "$lib/constants"
 
@@ -73,46 +70,19 @@
             accessor: (item) => item.finishedWeight + ' gram'
         }),
         table.column({
-            id: 'totalCost',
+            id: 'laborCost',
             header: 'Total Ongkos Kerja',
+            accessor: (item) => item.laborCost + ' gram'
+        }),
+        table.column({
+            id: 'totalCost',
+            header: 'Total Biaya',
             accessor: (item) => item.totalCost.toLocaleString(LOCALE_INDONESIA)
         }),
     ])
     const viewModel = table.createViewModel(columns)
 
     let isLoading = false
-
-    function openCreateDialog() {
-        const dialog: ModalSettings = {
-            type: 'component',
-            component: {
-                ref: CreateDialog
-            },
-            meta: {mandatory: true}
-        }
-        modalStore.trigger(dialog)
-    }
-
-    function openDeleteConfirmationDialog(item: CraftsmanOrder) {
-        triggerModal({
-            ...deleteConfirmationModal,
-            body: `Apakah kamu yakin ingin menghapus pesanan ${item.id}?`,
-            response: (r) => r && deleteItem(item.id),
-        })
-    }
-
-    async function deleteItem(id: string) {
-        isLoading = true
-        const repository = new CraftsmanOrderRepository()
-        try {
-            await repository.delete(id)
-            successToast('Berhasil menghapus pesanan')
-        } catch (err) {
-            console.error(err)
-            errorToast('Gagal menghapus pesanan')
-        }
-        isLoading = false
-    }
 
     function openDetailsDialog(item: CraftsmanOrder) {
         triggerModal({
@@ -138,6 +108,7 @@
             <th class="">Grand Total</th>
             <th class="">{sumBy($data, (item) => item.material.goldWeight).toFixed(2)}</th>
             <th class="">{sumBy($data, (item) => item.finishedWeight).toFixed(2)}</th>
+            <th class="">{sumBy($data, (item) => item.laborCost).toFixed(2)}</th>
             <th class="">{sumBy($data, (item) => item.totalCost).toLocaleString(LOCALE_INDONESIA)}</th>
         </tr>
     </DataTable>

@@ -34,7 +34,9 @@
             name: ''
         },
         modelCount: 0,
+        advancesTotal: 0,
         finishedWeight: 0,
+        laborCost: 0,
         totalCost: 0,
         material: {
             rate: '',

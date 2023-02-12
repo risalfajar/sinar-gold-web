@@ -11,8 +11,9 @@
     export let dark: boolean = false
 
     let input: HTMLInputElement
-    let formattedValue: string = formatValue(value)
+    let formattedValue: string
 
+    $: formattedValue = formatValue(value)
     $: if (formattedValue && input) input.value = formattedValue
 
     function handleInput() {

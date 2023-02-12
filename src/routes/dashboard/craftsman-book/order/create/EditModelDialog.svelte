@@ -13,7 +13,8 @@
         details: "",
         photoUrl: "",
         photoFile: undefined,
-        quantity: 1
+        quantity: 1,
+        isFinished: false
     }
 
     let isFormValid

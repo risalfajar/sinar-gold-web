@@ -59,7 +59,7 @@
         modelsTable.display({
             id: 'finish',
             header: 'Setor',
-            cell: (cell, state) => createRender(FinishButton)
+            cell: (cell, state) => createRender(FinishButton, {disabled: getRowData(state, cell).isFinished})
                 .on('click', () => openAddDepositDialog(getRowData(state, cell)))
         })
     ])

@@ -6,7 +6,8 @@ export type OrderModel = {
     details: string,
     photoUrl: string,
     photoFile?: File, // can be undefined when user is updating model and doesn't pass a new photo
-    quantity: number
+    quantity: number,
+    isFinished: boolean
 }
 
 export const modelConverter: FirestoreDataConverter<OrderModel> = {

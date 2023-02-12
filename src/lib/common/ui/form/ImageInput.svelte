@@ -4,6 +4,7 @@
     export let value: File | null
     export let placeholderUrl: string = ""
     export let label: string = ""
+    export let required: boolean = false
 
     let fileInput: HTMLInputElement
     let img: HTMLImageElement
@@ -38,5 +39,5 @@
             </div>
         {/if}
     </div>
-    <input type="file" class="hidden" accept="image/jpeg, image/png" bind:this={fileInput} on:change={selectImage}/>
+    <input {required} type="file" class="hidden" accept="image/jpeg, image/png" bind:this={fileInput} on:change={selectImage}/>
 </div>

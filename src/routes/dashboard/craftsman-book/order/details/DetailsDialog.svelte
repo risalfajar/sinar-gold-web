@@ -22,6 +22,7 @@
     import {CashAdvance} from "../data/advance"
     import {sumBy} from "lodash-es"
     import AddMaterialDialog from "./AddMaterialDialog.svelte"
+    import AddDepositDialog from "./AddDepositDialog.svelte"
 
     export let data: Readable<CraftsmanOrder>
 
@@ -59,9 +60,7 @@
             id: 'finish',
             header: 'Setor',
             cell: (cell, state) => createRender(FinishButton)
-                .on('click', () => {
-                    // TODO
-                })
+                .on('click', () => openAddDepositDialog(getRowData(state, cell)))
         })
     ])
 
@@ -138,6 +137,21 @@
                 ref: AddMaterialDialog,
                 props: {arg: $data}
             }
+        })
+    }
+
+    function openAddDepositDialog(model: OrderModel) {
+        triggerModal({
+            type: 'component',
+            component: {
+                ref: AddDepositDialog,
+                props: {
+                    order: $data,
+                    model,
+                    advances
+                }
+            },
+            meta: {mandatory: true}
         })
     }
 </script>

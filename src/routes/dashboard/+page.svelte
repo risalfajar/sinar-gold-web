@@ -21,7 +21,7 @@
 </script>
 
 <div class="w-full h-full grid grid-cols-6 grid-rows-1 gap-6">
-    <div class="flex flex-col col-span-4 gap-6">
+    <div class="flex flex-col col-span-full md:col-span-4 gap-6">
         <!--    Welcome Card    -->
         <div class="bg-primary-500 flex flex-row items-center justify-between [&_p]:text-white card">
             <div>
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="flex flex-col col-span-2 gap-6">
+    <div class="flex flex-col col-span-full md:col-span-2 gap-6">
         <div class="bg-white card">
             <p class="unstyled text-secondary-500 font-bold text-lg">Profil</p>
             <div class="mt-4 [&_p]:font-semibold flex flex-row justify-between items-center">

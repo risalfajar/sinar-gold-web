@@ -35,7 +35,7 @@
     let isExpanded = true
 </script>
 
-<div class="flex flex-col h-screen items-center gap-4 bg-secondary-500 p-6 rounded-r-3xl transition-width {isExpanded ? 'w-[20em]' : 'w-[6em]'}">
+<div class="flex flex-col h-screen items-center gap-4 bg-secondary-500 p-2 md:p-4 lg:p-6 rounded-r-3xl transition-width {isExpanded ? 'w-[20em]' : 'w-[4em] lg:w-[6em]'}">
     {#key isExpanded}
         <div class="w-full flex flex-row justify-center items-center gap-2" in:fly={{x: 100}}>
             <AppLogo class="flex-none"/>
@@ -47,7 +47,7 @@
             {/if}
         </div>
 
-        <div id="sidebar-content" class="w-full flex flex-col flex-grow overflow-y-auto gap-2" in:fly={{x: 100}}>
+        <div id="sidebar-content" class="w-full flex flex-col flex-grow overflow-y-auto gap-2 {isExpanded ? '' : 'items-center'}" in:fly={{x: 100}}>
             {#each $validMenus as menu (menu.title)}
                 {#if isExpanded}
                     {#if menu.subMenus?.length > 0}

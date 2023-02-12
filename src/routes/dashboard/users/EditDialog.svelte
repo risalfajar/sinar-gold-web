@@ -15,6 +15,7 @@
     import {UserRepository} from "$lib/users/data/userRepository"
     import {User} from "$lib/users/types/user"
     import {menus as menusSource} from "$lib/dashboard/menus"
+    import {slide} from "svelte/transition"
 
     const repository = new UserRepository()
     const menus = menusSource.filter(it => it.title !== 'Beranda')
@@ -83,26 +84,30 @@
     <PasswordInput bind:value={data.password}/>
     <PasswordInput label="Konfirmasi Password" hint="Konfirmasi Ulang Password" showHelperText={false} bind:value={passwordConfirmation}/>
     <Select label="Role" options={Object.values(Role)} bind:value={data.role}/>
-    <Label>Hak Akses</Label>
-    <div class="flex flex-col gap-2">
-        <Checkbox disabled checked label="Beranda"/>
-        {#each menus as menu (menu.title)}
-            {#if (menu.subMenus?.length ?? 0) === 0}
-                <CheckboxGroup label={menu.title} value={menu.link} bind:group={data.pages}/>
-            {:else}
-                <AccordionItem regionPanel="pr-4 hover:bg-surface-100 rounded-md transition">
-                    <Checkbox slot="summary"
-                              label={menu.title}
-                              checked={menuGroups[menu.title].every(it => data.pages.includes(it))}
-                              on:click={(e) => e.stopPropagation()}
-                              on:change={(e) => toggleGroup(e.target.checked, menu.title)}/>
-                    <div class="flex flex-col gap-2 py-1 pl-8" slot="content">
-                        {#each menu.subMenus as subMenu (subMenu.title)}
-                            <CheckboxGroup label={subMenu.title} value={subMenu.link} bind:group={data.pages}/>
-                        {/each}
-                    </div>
-                </AccordionItem>
-            {/if}
-        {/each}
-    </div>
+    {#if data.role !== Role.CRAFTSMAN}
+        <div transition:slide>
+            <Label>Hak Akses</Label>
+            <div class="flex flex-col gap-2">
+                <Checkbox disabled checked label="Beranda"/>
+                {#each menus as menu (menu.title)}
+                    {#if (menu.subMenus?.length ?? 0) === 0}
+                        <CheckboxGroup label={menu.title} value={menu.link} bind:group={data.pages}/>
+                    {:else}
+                        <AccordionItem regionPanel="pr-4 hover:bg-surface-100 rounded-md transition">
+                            <Checkbox slot="summary"
+                                      label={menu.title}
+                                      checked={menuGroups[menu.title].every(it => data.pages.includes(it))}
+                                      on:click={(e) => e.stopPropagation()}
+                                      on:change={(e) => toggleGroup(e.target.checked, menu.title)}/>
+                            <div class="flex flex-col gap-2 py-1 pl-8" slot="content">
+                                {#each menu.subMenus as subMenu (subMenu.title)}
+                                    <CheckboxGroup label={subMenu.title} value={subMenu.link} bind:group={data.pages}/>
+                                {/each}
+                            </div>
+                        </AccordionItem>
+                    {/if}
+                {/each}
+            </div>
+        </div>
+    {/if}
 </FormDialog>

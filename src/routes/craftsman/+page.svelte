@@ -14,6 +14,9 @@
     import DataTable from "$lib/common/ui/table/DataTable.svelte"
     import TableContainer from "$lib/common/ui/container/table/TableContainer.svelte"
     import DateRangePicker from "$lib/common/ui/form/DateRangePicker.svelte"
+    import Button from "$lib/common/ui/button/Button.svelte"
+    import {signOut} from "$lib/common/auth/authManager"
+    import {errorToast} from "$lib/common/utils/toastUtils"
 
     const craftsman = derived(currentUser, (user) => user?.name)
     const startDate = writable(new Date())
@@ -75,7 +78,7 @@
         }),
     ])
 
-    let isLoading = false
+    let isSigningOut = false
 
     function openDetailsDialog(item: CraftsmanOrder) {
         triggerModal({
@@ -86,12 +89,29 @@
             }
         })
     }
+
+    async function logout() {
+        isSigningOut = true
+        try {
+            await signOut()
+        } catch (e) {
+            console.error(e)
+            errorToast('Terjadi kesalahan')
+        }
+        isSigningOut = false
+    }
 </script>
 
 <AppShell>
     <div class="w-full h-full max-w-full max-h-full p-6">
         <Container>
-            <ContainerTitle slot="title" title="Buku Tukang"/>
+            <div slot="title" class="flex flex-row justify-between">
+                <ContainerTitle title="Buku Tukang"/>
+                <Button isLoading={isSigningOut} class="variant-soft-secondary btn-sm" on:click={logout}>
+                    <i class="material-icons pr-2">logout</i>
+                    Keluar
+                </Button>
+            </div>
             <ContainerCard title="Pesanan Toko">
                 <TableContainer>
                     <svelte:fragment slot="search">

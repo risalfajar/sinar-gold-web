@@ -71,12 +71,12 @@
         }),
         table.column({
             id: 'laborCost',
-            header: 'Total Ongkos Kerja',
+            header: 'Ongkos Kerja',
             accessor: (item) => item.laborCost + ' gram'
         }),
         table.column({
             id: 'totalCost',
-            header: 'Total Biaya',
+            header: 'Total Ongkos Kerja',
             accessor: (item) => item.totalCost.toLocaleString(LOCALE_INDONESIA)
         }),
     ])

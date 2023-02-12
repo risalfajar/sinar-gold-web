@@ -17,10 +17,12 @@
 
     $: debounceVerify(user, $page.url)
 
-    onMount(() => listenUser(value => user = value))
+    onMount(() => {
+        listenUser(value => user = value)
+        console.count('mount root')
+    })
 
     async function verifyAccess(user: User | null, url) {
-        isLoading = true
         const isLoggedIn = user != null
         const isCraftsman = await getRole() === Role.CRAFTSMAN
         const path = url.pathname

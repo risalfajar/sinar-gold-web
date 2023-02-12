@@ -49,7 +49,7 @@
         const record: Record<string, string[]> = {}
         menus
             .filter(it => it.subMenus && it.subMenus.length > 0)
-            .forEach(it => record[it.title] = it.subMenus!.map(sub => sub.title))
+            .forEach(it => record[it.title] = it.subMenus!.map(sub => sub.link))
         return record
     }
 
@@ -88,7 +88,7 @@
         <Checkbox disabled checked label="Beranda"/>
         {#each menus as menu (menu.title)}
             {#if (menu.subMenus?.length ?? 0) === 0}
-                <CheckboxGroup label={menu.title} bind:group={data.pages}/>
+                <CheckboxGroup label={menu.title} value={menu.link} bind:group={data.pages}/>
             {:else}
                 <AccordionItem regionPanel="pr-4 hover:bg-surface-100 rounded-md transition">
                     <Checkbox slot="summary"
@@ -98,7 +98,7 @@
                               on:change={(e) => toggleGroup(e.target.checked, menu.title)}/>
                     <div class="flex flex-col gap-2 py-1 pl-8" slot="content">
                         {#each menu.subMenus as subMenu (subMenu.title)}
-                            <CheckboxGroup label={subMenu.title} bind:group={data.pages}/>
+                            <CheckboxGroup label={subMenu.title} value={subMenu.link} bind:group={data.pages}/>
                         {/each}
                     </div>
                 </AccordionItem>

@@ -4,20 +4,16 @@
     import {page} from "$app/stores"
     import {derived} from "svelte/store"
     import {currentUser} from "$lib/stores"
-    import {menus} from "$lib/dashboard/menus"
-    import {SubMenu} from "$lib/dashboard/menu"
     import {goto} from "$app/navigation"
 
-    const allMenus: SubMenu[] = menus.flatMap(menu => menu.subMenus?.length > 0 ? menu.subMenus! : {title: menu.title, link: menu.link ?? ''})
     const userPages = derived(currentUser, (user) => user?.pages ?? [])
-    const validMenus = derived(userPages, (pages) => allMenus.filter(menu => pages.includes(menu.title)))
     const publicLinks = ['/dashboard']
 
     let currentRoute: string
     let isRouteValid: boolean
 
     $: currentRoute = $page.route.id ?? ''
-    $: isRouteValid = publicLinks.includes(currentRoute) || $validMenus.some(menu => currentRoute.includes(menu.link))
+    $: isRouteValid = publicLinks.includes(currentRoute) || $userPages.includes(currentRoute)
 </script>
 
 <AppShell>

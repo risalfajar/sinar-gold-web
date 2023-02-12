@@ -11,6 +11,8 @@
     import DepositRepository from "../order/data/source/depositRepository"
     import {CraftsmanOrder} from "../order/data/order"
     import {LOCALE_INDONESIA} from "$lib/constants"
+    import {triggerModal} from "$lib/common/utils/modalUtils"
+    import DetailsDialog from "./DetailsDialog.svelte"
 
     const craftsman = writable('')
     const salesman = writable('')
@@ -93,15 +95,13 @@
     ])
 
     function openDetailsDialog(item: CraftsmanOrder) {
-        // TODO
-        // triggerModal({
-        //     type: 'component',
-        //     component: {
-        //         ref: DetailsDialog,
-        //         props: {data: derived(data, (data) => data.find(it => it.id === item.id))}
-        //     },
-        //     modalClasses: 'overflow-hidden !p-0'
-        // })
+        triggerModal({
+            type: 'component',
+            component: {
+                ref: DetailsDialog,
+                props: {data: item}
+            }
+        })
     }
 </script>
 

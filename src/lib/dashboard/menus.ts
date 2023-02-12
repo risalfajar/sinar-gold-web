@@ -1,7 +1,13 @@
 import {Menu} from "./menu"
+import {currentUser} from "$lib/stores"
+import {derived} from "svelte/store"
 
 export function findSubMenus(title: string) {
-    return menus.find(it => it.title === title)?.subMenus ?? []
+    const all = menus.find(it => it.title === title)?.subMenus ?? []
+    return derived(currentUser, user => {
+        const pages = user?.pages ?? []
+        return all.filter(sub => pages.includes(sub.link))
+    })
 }
 
 export const menus: Menu[] = [

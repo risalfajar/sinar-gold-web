@@ -10,7 +10,7 @@
 
 <Container>
     <ContainerTitle slot="title" {title}/>
-    <TabbedContainer {tabs}>
+    <TabbedContainer tabs={$tabs}>
         <slot/>
     </TabbedContainer>
 </Container>

@@ -10,28 +10,27 @@
     import {Menu} from "$lib/dashboard/menu"
 
     const userPages = derived(currentUser, (user) => user?.pages ?? [])
-    const validMenus = derived(userPages, (pages) => {
-        const validMenus = []
-        menus.forEach(menu => {
+    const validMenus = derived(userPages, (pages) => menus.map(menu => {
             if (menu.title === 'Beranda')
-                validMenus.push(menu)
+                return menu
             else if (pages.includes(menu.link ?? ''))
-                validMenus.push(menu)
+                return menu
             else if (menu.subMenus?.length > 0) {
                 const subMenus = menu.subMenus!.filter(it => pages.includes(it.link))
-                if (subMenus.length > 0) {
-                    const newMenu: Menu = {
-                        title: menu.title,
-                        isExpanded: false,
-                        link: subMenus[0].link,
-                        subMenus
-                    }
-                    validMenus.push(newMenu)
+                if (subMenus.length === 0)
+                    return null
+
+                const newMenu: Menu = {
+                    title: menu.title,
+                    isExpanded: false,
+                    link: subMenus[0].link,
+                    subMenus
                 }
+                return newMenu
             }
         })
-        return validMenus
-    })
+            .filter(menu => menu)
+    )
 
     let isExpanded = true
 </script>

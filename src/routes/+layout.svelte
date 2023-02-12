@@ -5,9 +5,10 @@
     import {debounce} from "lodash-es"
     import {page} from '$app/stores'
     import {goto} from '$app/navigation'
-    import {listenUser} from "$lib/common/auth/authManager"
+    import {getRole, listenUser} from "$lib/common/auth/authManager"
     import type {User} from "firebase/auth"
     import Modal from "$lib/common/ui/dialog/Modal.svelte"
+    import {Role} from "$lib/users/types/role"
 
     const debounceVerify = debounce(verifyAccess, 300)
 
@@ -18,19 +19,18 @@
 
     onMount(() => listenUser(value => user = value))
 
-    function verifyAccess(user: User | null, url) {
+    async function verifyAccess(user: User | null, url) {
+        isLoading = true
         const isLoggedIn = user != null
+        const isCraftsman = await getRole() === Role.CRAFTSMAN
         const path = url.pathname
 
-        if (path.includes("/dashboard") && !isLoggedIn)
-            goto('/login')
-        else if (path.includes("/login") && isLoggedIn)
-            goto('/dashboard')
-        else if (path === "/")
-            if (isLoggedIn)
-                goto('/dashboard')
-            else
-                goto('/login')
+        if (!isLoggedIn && !path.includes('/login'))
+            await goto('/login')
+        else if (isCraftsman && !path.includes('/craftsman'))
+            await goto('/craftsman')
+        else if (isLoggedIn && !isCraftsman && !path.includes('/dashboard'))
+            await goto('/dashboard')
 
         isLoading = false
     }

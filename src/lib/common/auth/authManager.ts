@@ -1,7 +1,8 @@
 import {type NextOrObserver, onAuthStateChanged, type ParsedToken, signInWithEmailAndPassword, signOut as authSignOut, type User} from 'firebase/auth'
-import {USERNAME_SUFFIX} from "$lib/constants"
+import {CUSTOM_CLAIMS_ROLE, USERNAME_SUFFIX} from "$lib/constants"
 import {Auth} from '$lib/firebase'
 import type {Unsubscribe} from "firebase/firestore"
+import {Role} from "$lib/users/types/role"
 
 export function signIn(username: string, password: string) {
     return signInWithEmailAndPassword(Auth, username + USERNAME_SUFFIX, password)
@@ -11,11 +12,10 @@ export async function getUserId(): Promise<string | undefined> {
     return (await getUser())?.uid
 }
 
-// TODO move to user package
-// export async function getRole(): Promise<Role> {
-//     const claims = await getCustomClaims()
-//     return claims?.[CUSTOM_CLAIMS_ROLE]
-// }
+export async function getRole(): Promise<Role | null> {
+    const claims = await getCustomClaims()
+    return claims?.[CUSTOM_CLAIMS_ROLE]
+}
 
 async function getCustomClaims(): Promise<ParsedToken | undefined> {
     const user = await getUser()

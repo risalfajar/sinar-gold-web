@@ -34,6 +34,8 @@
             name: ''
         },
         modelCount: 0,
+        finishedWeight: 0,
+        totalCost: 0,
         material: {
             rate: '',
             goldWeight: 0,

@@ -128,8 +128,7 @@
             component: {
                 ref: DetailsDialog,
                 props: {data: derived(data, (data) => data.find(it => it.id === item.id))}
-            },
-            modalClasses: 'overflow-hidden !p-0'
+            }
         })
     }
 </script>

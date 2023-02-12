@@ -3,13 +3,14 @@
 
     export let label: string = ''
     export let helper: string = ''
+    export let dark: boolean = false
 
     let classes = `${$$slots.start && 'pl-10'} ${$$slots.end && 'pr-10'}`
 </script>
 
 <div class="w-full {$$props.class}">
     {#if label.length > 0}
-        <Label>{label}</Label>
+        <Label {dark}>{label}</Label>
     {/if}
     <div class="relative w-full">
         {#if $$slots.start}

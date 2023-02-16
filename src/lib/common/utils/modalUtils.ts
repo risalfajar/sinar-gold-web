@@ -7,7 +7,7 @@ export const defaultConfirmationModal: ModalSettings = {
     body: 'Apakah anda yakin ingin meneruskan?',
     buttonTextCancel: 'Batal',
     buttonTextConfirm: 'Yakin',
-    classes: '!max-w-[480px]'
+    modalClasses: '!max-w-[480px]'
 }
 
 export const deleteConfirmationModal: ModalSettings = {

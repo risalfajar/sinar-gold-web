@@ -2,11 +2,12 @@ import {Menu} from "./menu"
 import {currentUser} from "$lib/stores"
 import {derived} from "svelte/store"
 
-export function findSubMenus(title: string) {
-    const all = menus.find(it => it.title === title)?.subMenus ?? []
+export function findMenu(url: string) {
     return derived(currentUser, user => {
-        const pages = user?.pages ?? []
-        return all.filter(sub => pages.includes(sub.link))
+        const userPages = user?.pages ?? []
+        const menu = menus.find(menu => menu.link === url || menu.subMenus?.some(sub => sub.link.includes(url)))!
+        menu.subMenus = menu.subMenus?.filter(sub => userPages.includes(sub.link))
+        return menu
     })
 }
 
@@ -148,12 +149,24 @@ export const menus: Menu[] = [
         title: 'Barang',
         subMenus: [
             {
-                title: 'Data Barang',
-                link: '/dashboard/items/data'
+                title: 'Data Barang (Berlian)',
+                link: '/dashboard/goods/diamond'
+            },
+            {
+                title: 'Data Barang (Non Berlian)',
+                link: '/dashboard/goods/non-diamond'
             },
             {
                 title: 'Cetak Barcode',
-                link: '/dashboard/items/barcode-print'
+                link: '/dashboard/goods/barcode-print'
+            },
+            {
+                title: 'Pindah Barang',
+                link: '/dashboard/goods/move'
+            },
+            {
+                title: 'Riwayat Barang',
+                link: '/dashboard/goods/history'
             },
         ]
     },

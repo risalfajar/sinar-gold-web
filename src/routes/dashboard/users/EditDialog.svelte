@@ -85,7 +85,7 @@
     <PasswordInput label="Konfirmasi Password" hint="Konfirmasi Ulang Password" showHelperText={false} bind:value={passwordConfirmation}/>
     <Select label="Role" options={Object.values(Role)} bind:value={data.role}/>
     {#if data.role !== Role.CRAFTSMAN}
-        <div transition:slide>
+        <div transition:slide|local>
             <Label>Hak Akses</Label>
             <div class="flex flex-col gap-2">
                 <Checkbox disabled checked label="Beranda"/>

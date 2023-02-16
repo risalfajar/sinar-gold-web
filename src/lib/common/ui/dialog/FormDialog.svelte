@@ -13,7 +13,7 @@
 <div class="flex flex-col max-h-[75vh] w-full -mx-1">
     <hr/>
     <form class="min-w-fit flex flex-col overflow-y-hidden" on:submit|preventDefault={() => isFormValid && dispatch('save')}>
-        <div class="flex flex-col gap-4 px-1 py-4 overflow-y-auto">
+        <div class="flex flex-col gap-4 px-1 overflow-y-auto">
             <slot></slot>
         </div>
         <div class="flex flex-row px-1 justify-end gap-2 mt-4">

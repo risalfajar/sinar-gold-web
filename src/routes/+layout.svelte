@@ -17,10 +17,7 @@
 
     $: debounceVerify(user, $page.url)
 
-    onMount(() => {
-        listenUser(value => user = value)
-        console.count('mount root')
-    })
+    onMount(() => listenUser(value => user = value))
 
     async function verifyAccess(user: User | null, url) {
         const isLoggedIn = user != null

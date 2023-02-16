@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
     import {createEventDispatcher} from 'svelte'
     import {fade, fly} from 'svelte/transition'
-    import {focusTrap, modalStore} from "@skeletonlabs/skeleton"
+    import {focusTrap, ModalSettings, modalStore} from "@skeletonlabs/skeleton"
     import {closeModal} from "$lib/common/utils/modalUtils"
     // Event Handler
     const dispatch = createEventDispatcher()
@@ -71,7 +71,7 @@
         if (!(event.target instanceof Element))
             return
         if (event.target.classList.contains('modal-backdrop'))
-            getLastModal().meta?.mandatory || onClose()
+            getLastModal()?.meta?.mandatory || onClose()
         /** @event {{ event }} backdrop - Fires on backdrop interaction.  */
         dispatch('backdrop', event)
     }
@@ -93,10 +93,10 @@
         if (!$modalStore.length)
             return
         if (event.code === 'Escape')
-            getLastModal().meta?.mandatory || onClose()
+            getLastModal()?.meta?.mandatory || onClose()
     }
 
-    function getLastModal() {
+    function getLastModal(): ModalSettings | null {
         return $modalStore[$modalStore.length - 1]
     }
 

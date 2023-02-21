@@ -26,6 +26,11 @@ export default abstract class MapDatabaseRepository<T> extends DatabaseRepositor
         })
     }
 
+    update(oldItem: T, newItem: T) {
+        const ref = this.getChildRef(oldItem)
+        return set(ref, {...newItem, [this.primaryKey]: ref.key})
+    }
+
     save(item: T) {
         const ref = this.getChildRef(item)
         return set(ref, {...item, [this.primaryKey]: ref.key})

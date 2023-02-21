@@ -5,9 +5,14 @@ import {NODE_CRAFTSMAN, NODE_MASTER_DATA} from "$lib/constants"
 import {Craftsman} from "$lib/master-data/craftsman/craftsman"
 
 export default class CraftsmanRepository extends MapDatabaseRepository<Craftsman> {
-    protected primaryKey: keyof Craftsman = "name"
+    primaryKey: keyof Craftsman = "name"
 
     getDocumentReference(): DatabaseReference {
         return ref(Database, `${NODE_MASTER_DATA}/${NODE_CRAFTSMAN}`)
+    }
+
+    async update(oldItem: Craftsman, newItem: Craftsman): Promise<void> {
+        await this.remove(oldItem.name)
+        await this.save(newItem)
     }
 }

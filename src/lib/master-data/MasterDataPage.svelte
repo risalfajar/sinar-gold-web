@@ -1,18 +1,18 @@
 <script lang="ts">
-    import TableContainer from "$lib/common/ui/container/table/TableContainer.svelte"
-    import SearchInput from "$lib/common/ui/form/SearchInput.svelte"
-    import {readable, Readable, Subscriber} from "svelte/store"
-    import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
-    import DataTable from "$lib/common/ui/table/DataTable.svelte"
-    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import Icon from "$lib/common/ui/icon/Icon.svelte"
-    import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import {Schema} from "read-excel-file"
-    import ImportDialog from "../../routes/dashboard/master-data/ImportDialog.svelte"
-    import {createDataTable} from "$lib/common/utils/tableUtils"
-    import {deleteConfirmationModal} from "$lib/common/utils/modalUtils"
+	import TableContainer from "$lib/common/ui/container/table/TableContainer.svelte"
+	import SearchInput from "$lib/common/ui/form/SearchInput.svelte"
+	import {readable, Readable, Subscriber} from "svelte/store"
+	import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
+	import DataTable from "$lib/common/ui/table/DataTable.svelte"
+	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+	import Icon from "$lib/common/ui/icon/Icon.svelte"
+	import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
+	import {Schema} from "read-excel-file"
+	import ImportDialog from "../../routes/dashboard/master-data/ImportDialog.svelte"
+	import {createDataTable} from "$lib/common/utils/tableUtils"
+	import {deleteConfirmationModal} from "$lib/common/utils/modalUtils"
 
-    type T = $$Generic
+	type T = $$Generic
 
     export let repository: MapDatabaseRepository<T>
     export let schema: Schema
@@ -63,9 +63,9 @@
 
     function showDeleteConfirmationDialog(item: T) {
         modalStore.trigger({
-            ...deleteConfirmationModal,
-            body: `Apakah kamu yakin ingin menghapus item ${item.name}?`,
-            response: (r) => r && deleteItem(item.code),
+	        ...deleteConfirmationModal,
+	        body: `Apakah kamu yakin ingin menghapus item ${item.name}?`,
+	        response: (r) => r && deleteItem(item.code ?? item.name),
         })
     }
 

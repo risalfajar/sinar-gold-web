@@ -64,7 +64,7 @@
     function showDeleteConfirmationDialog(item: T) {
         modalStore.trigger({
 	        ...deleteConfirmationModal,
-	        body: `Apakah kamu yakin ingin menghapus item ${item.name}?`,
+	        body: `Apakah kamu yakin ingin menghapus item ${item.name ?? item.code ?? 'ini'}?`,
 	        response: (r) => r && deleteItem(item.code ?? item.name),
         })
     }

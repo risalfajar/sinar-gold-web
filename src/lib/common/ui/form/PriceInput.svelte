@@ -1,11 +1,11 @@
 <script lang="ts">
-    import InputWrapper from "$lib/common/ui/form/InputWrapper.svelte"
+	import InputWrapper from "$lib/common/ui/form/InputWrapper.svelte"
 
-    const formatter = new Intl.NumberFormat('id-ID', {
+	const formatter = new Intl.NumberFormat('id-ID', {
         maximumFractionDigits: 0
     })
 
-    export let value: number
+    export let value: number = 0
     export let label: string = ''
     export let hint: string = 'Masukkan ' + label
     export let dark: boolean = false

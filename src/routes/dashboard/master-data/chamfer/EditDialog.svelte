@@ -1,13 +1,13 @@
 <script lang="ts" context="module">
-    import {readable} from "svelte/store"
-    import WarehouseRepository from "$lib/master-data/warehouse/warehouseRepository"
-    import {Warehouse} from "$lib/master-data/warehouse/warehouse"
+	import {readable} from "svelte/store"
+	import WarehouseRepository from "$lib/master-data/warehouse/warehouseRepository"
+	import {Warehouse} from "$lib/master-data/warehouse/warehouse"
 
-    const warehouseRepository = new WarehouseRepository()
+	const warehouseRepository = new WarehouseRepository()
     const warehouses = readable<Warehouse[]>([], (set) => {
         warehouseRepository
-            .getChildren()
-            .then(warehouses => set(warehouses.map(it => it.name)))
+	        .getChildren()
+	        .then(set)
     })
 </script>
 
@@ -47,7 +47,7 @@
 </script>
 
 <MasterDataEditDialog {isFormValid} {data} {repository}>
-    <Select label="Kode Gudang" options={$warehouses} bind:value={data.warehouseCode}/>
+    <Select label="Kode Gudang" options={$warehouses.map(it => it.code)} bind:value={data.warehouseCode}/>
     <TextInput label="Kode Talang" disabled={isEditMode} bind:value={data.code}/>
     <TextInput label="Nama Talang" bind:value={data.name}/>
     <WeightInput label="Berat Talang" bind:value={data.weight}/>

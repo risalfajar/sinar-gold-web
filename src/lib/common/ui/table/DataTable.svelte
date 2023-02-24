@@ -1,10 +1,10 @@
 <script lang="ts">
-    import {Render, Subscribe, TableViewModel} from "svelte-headless-table"
-    import {fade} from "svelte/transition"
-    import {ProgressRadial} from "@skeletonlabs/skeleton"
-    import {createEventDispatcher} from "svelte"
+	import {Render, Subscribe, TableViewModel} from "svelte-headless-table"
+	import {fade} from "svelte/transition"
+	import {ProgressRadial} from "@skeletonlabs/skeleton"
+	import {createEventDispatcher} from "svelte"
 
-    const dispatch = createEventDispatcher()
+	const dispatch = createEventDispatcher()
 
     export let model: TableViewModel<unknown>
     export let emptyText = "Tidak ada data"
@@ -56,7 +56,7 @@
                     <tr {...rowAttrs} class:clickable on:click={() => dispatch('click', row.original)}>
                         {#each row.cells as cell (cell.id)}
                             <Subscribe attrs={cell.attrs()} let:attrs>
-                                <td {...attrs}>
+                                <td {...attrs} class="whitespace-nowrap">
                                     <Render of={cell.render()}/>
                                 </td>
                             </Subscribe>

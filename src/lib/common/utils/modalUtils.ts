@@ -1,4 +1,4 @@
-import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
+import {ModalSettings, modalStore, ProgressRadial} from "@skeletonlabs/skeleton"
 import {get} from "svelte/store"
 
 export const confirmationModal: ModalSettings = {
@@ -14,6 +14,18 @@ export const deleteConfirmationModal: ModalSettings = {
     ...confirmationModal,
     body: 'Apakah kamu yakin ingin menghapus data ini?',
     buttonTextConfirm: 'Ya, hapus'
+}
+
+export const loadingModal: ModalSettings = {
+    type: 'component',
+    component: {
+        ref: ProgressRadial,
+        props: {
+            class: 'w-8'
+        }
+    },
+    modalClasses: '!w-fit flex justify-center',
+    meta: {mandatory: true}
 }
 
 export function triggerModal(modal: ModalSettings) {

@@ -1,6 +1,6 @@
 <div class="w-full space-y-4">
     <div class="flex flex-row flex-wrap justify-between items-end gap-2">
-        <div class="flex flex-row flex-grow gap-2 items-center">
+        <div class="flex flex-row flex-grow gap-2 items-end">
             <slot name="search"/>
         </div>
         <div class="flex flex-row flex-grow gap-2 justify-end items-center">

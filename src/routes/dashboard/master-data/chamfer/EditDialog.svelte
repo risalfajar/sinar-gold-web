@@ -1,30 +1,13 @@
-<script lang="ts" context="module">
-	import {readable} from "svelte/store"
-	import WarehouseRepository from "$lib/master-data/warehouse/warehouseRepository"
-	import {Warehouse} from "$lib/master-data/warehouse/warehouse"
-
-	const warehouseRepository = new WarehouseRepository()
-    const warehouses = readable<Warehouse[]>([], (set) => {
-        warehouseRepository
-	        .getChildren()
-	        .then(set)
-    })
-</script>
-
 <script lang="ts">
-    import TextInput from "$lib/common/ui/form/TextInput.svelte"
-    import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
-    import Select from "$lib/common/ui/form/Select.svelte"
-    import {modalStore} from "@skeletonlabs/skeleton"
-    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import ChamferRepository from "$lib/master-data/chamfer/chamferRepository"
-    import {Chamfer} from "$lib/master-data/chamfer/chamfer"
-    import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
-    import {Salesman} from "$lib/master-data/salesman/salesman"
-    import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
+	import TextInput from "$lib/common/ui/form/TextInput.svelte"
+	import Select from "$lib/common/ui/form/Select.svelte"
+	import {Chamfer} from "$lib/master-data/chamfer/chamfer"
+	import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
+	import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
+	import MasterDataEditDialog from "$lib/master-data/MasterDataEditDialog.svelte"
+	import {warehouses} from "$lib/stores.js"
 
-    type T = Chamfer
+	type T = Chamfer
 
     const defaultData: T = {
         code: "",

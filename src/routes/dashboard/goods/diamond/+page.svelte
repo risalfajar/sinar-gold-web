@@ -1,0 +1,108 @@
+<script lang="ts">
+	import TableContainer from "$lib/common/ui/container/table/TableContainer.svelte"
+	import Button from "$lib/common/ui/button/Button.svelte"
+	import {derived, Readable, writable} from "svelte/store"
+	import SearchInput from "$lib/common/ui/form/SearchInput.svelte"
+	import {triggerModal} from "$lib/common/utils/modalUtils"
+	import EditDialog from "./EditDialog.svelte"
+	import DiamondGoodsRepository from "./data/repository"
+	import {DiamondGoods} from "./data/goods"
+	import {createRender, createTable} from "svelte-headless-table"
+	import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
+	import {LOCALE_INDONESIA} from "$lib/constants"
+	import DataTable from "$lib/common/ui/table/DataTable.svelte"
+	import TableActions from "$lib/common/ui/table/TableActions.svelte"
+	import {getRowData} from "$lib/common/utils/tableUtils"
+	import DateRangePicker from "$lib/common/ui/form/DateRangePicker.svelte"
+
+	const repository = new DiamondGoodsRepository()
+	const startDate = writable(new Date())
+	const endDate = writable(new Date())
+	const data: Readable<DiamondGoods[]> = derived([startDate, endDate], (values, set) => {
+		const start = values[0]
+		const end = values[1]
+		return repository.listenByDate(start, end, set)
+	}, [])
+	const table = createTable(data, {
+		sort: addSortBy({initialSortKeys: [{id: 'id', order: 'asc'}]}),
+		tableFilter: addTableFilter()
+	})
+	const columns = table.createColumns([
+		table.column({
+			id: 'created',
+			header: 'Tanggal',
+			accessor: (item) => item.created!.toLocaleDateString(LOCALE_INDONESIA),
+		}),
+		table.column({
+			header: 'Kode Barcode',
+			accessor: 'id'
+		}),
+		table.column({
+			id: 'groupCode',
+			header: 'Kode Group',
+			accessor: (item) => item.details.groupCode
+		}),
+		table.column({
+			header: 'Kode Talang',
+			accessor: 'chamferCode'
+		}),
+		table.column({
+			header: 'Kode Jenis',
+			accessor: 'kindCode'
+		}),
+		table.column({
+			id: 'name',
+			header: 'Nama Barang',
+			accessor: (item) => item.details.name
+		}),
+		table.column({
+			id: 'weight',
+			header: 'Berat',
+			accessor: (item) => item.details.weight,
+			cell: (cell) => cell.value + ' gram'
+		}),
+		table.column({
+			id: 'price',
+			header: 'Harga Barang',
+			accessor: (item) => item.diamond.price.toLocaleString(LOCALE_INDONESIA),
+		}),
+		table.display({
+			id: 'actions',
+			header: 'Actions',
+			cell: (cell, state) => createRender(TableActions)
+				.on('edit', () => openEditDialog(getRowData(state, cell)))
+				.on('delete', () => showDeleteConfirmationDialog(getRowData(state, cell)))
+		})
+	])
+	const tableViewModel = table.createViewModel(columns)
+	const {filterValue} = tableViewModel.pluginStates.tableFilter
+
+	function openCreateDialog() {
+		triggerModal({
+			type: 'component',
+			component: {
+				ref: EditDialog,
+				props: {}
+			},
+			meta: {mandatory: true}
+		})
+	}
+
+	function openEditDialog(item: DiamondGoods) {
+
+	}
+
+	function showDeleteConfirmationDialog(item: DiamondGoods) {
+
+	}
+</script>
+
+<TableContainer>
+    <svelte:fragment slot="search">
+        <DateRangePicker label="Tanggal" bind:start={$startDate} bind:end={$endDate}/>
+        <SearchInput bind:value={$filterValue}/>
+    </svelte:fragment>
+    <Button class="variant-filled-primary" slot="buttons" on:click={openCreateDialog}>Tambah Data Barang</Button>
+
+    <DataTable model={tableViewModel}/>
+</TableContainer>

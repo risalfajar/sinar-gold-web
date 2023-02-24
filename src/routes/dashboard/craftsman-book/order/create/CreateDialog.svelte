@@ -1,131 +1,132 @@
 <script lang="ts">
-    import ModalTitle from "$lib/common/ui/dialog/ModalTitle.svelte"
-    import {modalStore} from "@skeletonlabs/skeleton"
-    import DatePicker from "$lib/common/ui/form/DatePicker.svelte"
-    import TextInput from "$lib/common/ui/form/TextInput.svelte"
-    import Select from "$lib/common/ui/form/Select.svelte"
-    import Button from "$lib/common/ui/button/Button.svelte"
-    import {CraftsmanOrder} from "../data/order"
-    import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
-    import {closeModal, triggerModal} from "$lib/common/utils/modalUtils"
-    import {craftsmans, salesmans} from "$lib/stores.js"
-    import {createRender, createTable} from "svelte-headless-table"
-    import {writable} from "svelte/store"
-    import DataTable from "$lib/common/ui/table/DataTable.svelte"
-    import PhotoIcon from "./PhotoIcon.svelte"
-    import TableActions from "$lib/common/ui/table/TableActions.svelte"
-    import {getRowData} from "$lib/common/utils/tableUtils"
-    import {sumBy} from "lodash-es"
-    import {removeIndex} from "$lib/common/utils/arrayUtils"
-    import {OrderModel} from "../data/model"
-    import CraftsmanOrderRepository from "../data/source/orderRepository"
-    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
-    import CraftsmanOrderModelRepository from "../data/source/modelRepository"
-    import EditModelDialog from "./EditModelDialog.svelte"
+	import ModalTitle from "$lib/common/ui/dialog/ModalTitle.svelte"
+	import {modalStore} from "@skeletonlabs/skeleton"
+	import DatePicker from "$lib/common/ui/form/DatePicker.svelte"
+	import TextInput from "$lib/common/ui/form/TextInput.svelte"
+	import Select from "$lib/common/ui/form/Select.svelte"
+	import Button from "$lib/common/ui/button/Button.svelte"
+	import {CraftsmanOrder} from "../data/order"
+	import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
+	import {closeModal, triggerModal} from "$lib/common/utils/modalUtils"
+	import {craftsmans, salesmans} from "$lib/stores.js"
+	import {createRender, createTable} from "svelte-headless-table"
+	import {writable} from "svelte/store"
+	import DataTable from "$lib/common/ui/table/DataTable.svelte"
+	import PhotoIcon from "./PhotoIcon.svelte"
+	import TableActions from "$lib/common/ui/table/TableActions.svelte"
+	import {getRowData} from "$lib/common/utils/tableUtils"
+	import {sumBy} from "lodash-es"
+	import {removeIndex} from "$lib/common/utils/arrayUtils"
+	import {OrderModel} from "../data/model"
+	import CraftsmanOrderRepository from "../data/source/orderRepository"
+	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+	import WeightInput from "$lib/common/ui/form/WeightInput.svelte"
+	import CraftsmanOrderModelRepository from "../data/source/modelRepository"
+	import EditModelDialog from "./EditModelDialog.svelte"
 
-    const title = 'Buat Pesanan Tukang'
-    const repository = new CraftsmanOrderRepository()
-    const data: CraftsmanOrder = {
-        id: generateNumberId(8),
-        craftsman: "",
-        salesman: {
-            code: '',
-            name: ''
-        },
-        modelCount: 0,
-        advancesTotal: 0,
-        finishedWeight: 0,
-        laborCost: 0,
-        totalCost: 0,
-        material: {
-            rate: '',
-            goldWeight: 0,
-            jewelWeight: 0,
-            sampleWeight: 0
-        }
-    }
+	const title = 'Buat Pesanan Tukang'
+	const repository = new CraftsmanOrderRepository()
+	const data: CraftsmanOrder = {
+		id: generateNumberId(8),
+		craftsman: "",
+		salesman: {
+			code: '',
+			name: ''
+		},
+		modelCount: 0,
+		advancesTotal: 0,
+		finishedWeight: 0,
+		laborCost: 0,
+		totalCost: 0,
+		material: {
+			rate: '',
+			goldWeight: 0,
+			jewelWeight: 0,
+			sampleWeight: 0
+		}
+	}
 
-    const models = writable<OrderModel[]>([])
-    const modelsTable = createTable(models)
-    const modelsColumns = modelsTable.createColumns([
-        modelsTable.column({
-            id: 'size',
-            accessor: 'size',
-            header: 'Ukuran'
-        }),
-        modelsTable.column({
-            id: 'details',
-            accessor: 'details',
-            header: 'Rincian Model'
-        }),
-        modelsTable.column({
-            id: 'photo',
-            header: 'Gambar Model',
-            accessor: 'photoFile',
-            cell: cell => createRender(PhotoIcon, {photo: cell.value})
-        }),
-        modelsTable.column({
-            header: 'Jumlah',
-            accessor: 'quantity'
-        }),
-        modelsTable.display({
-            id: 'actions',
-            header: 'Actions',
-            cell: (cell, state) => createRender(TableActions)
-                .on('edit', () => openAddModelDialog(getRowData(state, cell)))
-                .on('delete', () => $models = removeIndex($models, cell.row.id))
-        })
-    ])
+	const models = writable<OrderModel[]>([])
+	const modelsTable = createTable(models)
+	const modelsColumns = modelsTable.createColumns([
+		modelsTable.column({
+			id: 'size',
+			accessor: 'size',
+			header: 'Ukuran'
+		}),
+		modelsTable.column({
+			id: 'details',
+			accessor: 'details',
+			header: 'Rincian Model'
+		}),
+		modelsTable.column({
+			id: 'photo',
+			header: 'Gambar Model',
+			accessor: 'photoFile',
+			cell: cell => createRender(PhotoIcon, {photo: cell.value})
+		}),
+		modelsTable.column({
+			header: 'Jumlah',
+			accessor: 'quantity'
+		}),
+		modelsTable.display({
+			id: 'actions',
+			header: 'Actions',
+			cell: (cell, state) => createRender(TableActions)
+				.on('edit', () => openAddModelDialog(getRowData(state, cell)))
+				.on('delete', () => $models = removeIndex($models, cell.row.id))
+		})
+	])
 
-    let salesmanNames = $salesmans.map(it => it.name)
-    let isFormValid: boolean
-    let editedIndex: number | undefined
-    let isLoading = false
+	let salesmanNames = $salesmans.map(it => it.name)
+	let isFormValid: boolean
+	let editedIndex: number | undefined
+	let isLoading = false
 
-    $: isFormValid = data.salesman.code.length > 0
-        && data.craftsman.length > 0
-        && data.material.rate.length > 0
-        && $models.length > 0
+	$: isFormValid = data.salesman.code.length > 0
+		&& data.craftsman.length > 0
+		&& data.material.rate.length > 0
+		&& $models.length > 0
 
-    function openAddModelDialog(arg?: OrderModel) {
-        editedIndex = arg && $models.findIndex(it => it === arg)
-        triggerModal({
-            type: 'component',
-            component: {
-                ref: EditModelDialog,
-                props: arg && {data: arg}
-            },
-            response: (r: OrderModel) => {
-                if (!r) return
-                if (editedIndex != null)
-                    $models[editedIndex] = r
-                else
-                    $models.push(r)
-                $models = $models
-            }
-        })
-    }
+	function openAddModelDialog(arg?: OrderModel) {
+		editedIndex = arg && $models.findIndex(it => it === arg)
+		triggerModal({
+			type: 'component',
+			component: {
+				ref: EditModelDialog,
+				props: arg && {data: arg}
+			},
+			response: (r: OrderModel) => {
+				if (!r) return
+				if (editedIndex != null)
+					$models[editedIndex] = r
+				else
+					$models.push(r)
+				$models = $models
+			}
+		})
+	}
 
-    function close() {
-        if (confirm('Data yang diinput akan hilang, apakah Anda yakin?'))
-            modalStore.close()
-    }
+	function close() {
+		if (confirm('Data yang diinput akan hilang, apakah Anda yakin?'))
+			modalStore.close()
+	}
 
-    async function save() {
-        isLoading = true
-        try {
-            const orderId = await repository.save(data)
-            const modelRepository = new CraftsmanOrderModelRepository(orderId)
-            await Promise.all($models.map(model => modelRepository.save(model)))
-            successToast('Berhasil membuat pesanan')
-            closeModal()
-        } catch (err) {
-            console.error(err)
-            errorToast('Gagal membuat pesanan')
-        }
-        isLoading = false
-    }
+	async function save() {
+		isLoading = true
+		try {
+			const orderId = await repository.save(data)
+			const modelRepository = new CraftsmanOrderModelRepository(orderId)
+			await Promise.all($models.map(model => modelRepository.save(model)))
+			successToast('Berhasil membuat pesanan')
+			closeModal()
+		} catch (err) {
+			console.error(err)
+			errorToast('Gagal membuat pesanan')
+			data.id = generateNumberId(8)
+		}
+		isLoading = false
+	}
 </script>
 <div>
     <ModalTitle showCloseButton={!isLoading} {title} on:close={close}/>

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import {createEventDispatcher} from 'svelte'
-    import {fade, fly} from 'svelte/transition'
-    import {focusTrap, ModalSettings, modalStore} from "@skeletonlabs/skeleton"
-    import {closeModal} from "$lib/common/utils/modalUtils"
-    // Event Handler
+	import {createEventDispatcher} from 'svelte'
+	import {fade, fly} from 'svelte/transition'
+	import {focusTrap, ModalSettings, modalStore} from "@skeletonlabs/skeleton"
+	import {closeModal} from "$lib/common/utils/modalUtils"
+	// Event Handler
     const dispatch = createEventDispatcher()
     // Props
     /** The open/close animation duration. Set '0' (zero) to disable. */
@@ -144,7 +144,7 @@
     >
         <!-- Modal -->
         <div
-                class="modal {classesModal} {store.classes}"
+                class="modal {classesModal} {store.modalClasses}"
                 transition:fly={{ duration, opacity: 0, y: 100 }}
                 use:focusTrap={true}
                 data-testid="modal"

@@ -3,7 +3,7 @@
 	import Button from "$lib/common/ui/button/Button.svelte"
 	import {derived, Readable, writable} from "svelte/store"
 	import SearchInput from "$lib/common/ui/form/SearchInput.svelte"
-	import {closeModal, loadingModal, triggerModal} from "$lib/common/utils/modalUtils"
+	import {closeModal, deleteConfirmationModal, loadingModal, triggerModal} from "$lib/common/utils/modalUtils"
 	import EditDialog from "./EditDialog.svelte"
 	import DiamondGoodsRepository from "./data/repository"
 	import {DiamondGoods} from "./data/goods"
@@ -115,7 +115,23 @@
 	}
 
 	function showDeleteConfirmationDialog(item: DiamondGoods) {
+		triggerModal({
+			...deleteConfirmationModal,
+			body: `Apakah kamu yakin ingin menghapus item ${item.id}?`,
+			response: (r) => r && deleteItem(item),
+		})
+	}
 
+	async function deleteItem(item: DiamondGoods) {
+		triggerModal(loadingModal)
+		try {
+			await repository.delete(item.id)
+			successToast('Berhasil menghapus data')
+		} catch (err) {
+			console.error(err)
+			errorToast('Gagal menghapus data')
+		}
+		closeModal()
 	}
 </script>
 

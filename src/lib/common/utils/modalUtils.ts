@@ -1,7 +1,7 @@
 import {ModalSettings, modalStore} from "@skeletonlabs/skeleton"
 import {get} from "svelte/store"
 
-export const defaultConfirmationModal: ModalSettings = {
+export const confirmationModal: ModalSettings = {
     type: 'confirm',
     title: '',
     body: 'Apakah anda yakin ingin meneruskan?',
@@ -11,7 +11,7 @@ export const defaultConfirmationModal: ModalSettings = {
 }
 
 export const deleteConfirmationModal: ModalSettings = {
-    ...defaultConfirmationModal,
+    ...confirmationModal,
     body: 'Apakah kamu yakin ingin menghapus data ini?',
     buttonTextConfirm: 'Ya, hapus'
 }

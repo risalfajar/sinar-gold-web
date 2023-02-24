@@ -104,7 +104,14 @@
 	}
 
 	function openEditDialog(item: DiamondGoods) {
-
+		triggerModal({
+			type: 'component',
+			component: {
+				ref: EditDialog,
+				props: {data: item}
+			},
+			meta: {mandatory: true}
+		})
 	}
 
 	function showDeleteConfirmationDialog(item: DiamondGoods) {

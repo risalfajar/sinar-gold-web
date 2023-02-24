@@ -63,13 +63,14 @@
 		} catch (err) {
 			console.error(err)
 			errorToast('Gagal menyimpan data')
-			data.id = generateNumberId()
+			if (!isEditMode)
+				data.id = generateNumberId() // there could be a possibility of id clash
 		}
 		closeModal()
 	}
 </script>
 
-<ModalTitle title="Tambah Data Barang (Berlian)" showCloseButton
+<ModalTitle title="{isEditMode ? 'Edit' : 'Tambah'} Data Barang (Berlian)" showCloseButton
             on:close={() => confirm('Data yang belum disimpan akan hilang, apakah anda yakin?') && closeModal()}/>
 <Stepper
         buttonNextLabel="Selanjutnya"

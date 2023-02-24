@@ -3,7 +3,7 @@
 	import Button from "$lib/common/ui/button/Button.svelte"
 	import {derived, Readable, writable} from "svelte/store"
 	import SearchInput from "$lib/common/ui/form/SearchInput.svelte"
-	import {triggerModal} from "$lib/common/utils/modalUtils"
+	import {closeModal, loadingModal, triggerModal} from "$lib/common/utils/modalUtils"
 	import EditDialog from "./EditDialog.svelte"
 	import DiamondGoodsRepository from "./data/repository"
 	import {DiamondGoods} from "./data/goods"
@@ -11,9 +11,11 @@
 	import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
 	import {LOCALE_INDONESIA} from "$lib/constants"
 	import DataTable from "$lib/common/ui/table/DataTable.svelte"
-	import TableActions from "$lib/common/ui/table/TableActions.svelte"
+	import TableActions from "./TableActions.svelte"
 	import {getRowData} from "$lib/common/utils/tableUtils"
 	import DateRangePicker from "$lib/common/ui/form/DateRangePicker.svelte"
+	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+	import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
 
 	const repository = new DiamondGoodsRepository()
 	const startDate = writable(new Date())
@@ -70,6 +72,7 @@
 			id: 'actions',
 			header: 'Actions',
 			cell: (cell, state) => createRender(TableActions)
+				.on('copy', () => copy(getRowData(state, cell)))
 				.on('edit', () => openEditDialog(getRowData(state, cell)))
 				.on('delete', () => showDeleteConfirmationDialog(getRowData(state, cell)))
 		})
@@ -86,6 +89,18 @@
 			},
 			meta: {mandatory: true}
 		})
+	}
+
+	async function copy(item: DiamondGoods) {
+		triggerModal(loadingModal)
+		try {
+			await repository.save({...item, id: generateNumberId(), created: null})
+			successToast('Berhasil menduplikat data')
+		} catch (err) {
+			console.error(err)
+			errorToast('Gagal menduplikat data')
+		}
+		closeModal()
 	}
 
 	function openEditDialog(item: DiamondGoods) {

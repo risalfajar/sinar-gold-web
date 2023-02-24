@@ -39,8 +39,8 @@
 			weight: 0
 		},
 		diamond: {
-			amounts: new Array(4),
-			giaCode: new Array(2),
+			amounts: Array(4).fill(""),
+			giaCode: Array(2).fill(""),
 			stoneType: "",
 			weight: 0,
 			price: 0

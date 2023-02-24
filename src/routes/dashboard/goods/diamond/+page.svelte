@@ -16,6 +16,7 @@
 	import DateRangePicker from "$lib/common/ui/form/DateRangePicker.svelte"
 	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 	import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
+	import DetailsDialog from "./DetailsDialog.svelte"
 
 	const repository = new DiamondGoodsRepository()
 	const startDate = writable(new Date())
@@ -133,6 +134,17 @@
 		}
 		closeModal()
 	}
+
+	function showDetailsDialog(item: DiamondGoods) {
+		triggerModal({
+			type: 'component',
+			component: {
+				ref: DetailsDialog,
+				props: {data: item}
+			},
+			modalClasses: 'w-[32em]'
+		})
+	}
 </script>
 
 <TableContainer>
@@ -142,5 +154,5 @@
     </svelte:fragment>
     <Button class="variant-filled-primary" slot="buttons" on:click={openCreateDialog}>Tambah Data Barang</Button>
 
-    <DataTable model={tableViewModel}/>
+    <DataTable model={tableViewModel} clickable on:click={(e) => showDetailsDialog(e.detail)}/>
 </TableContainer>

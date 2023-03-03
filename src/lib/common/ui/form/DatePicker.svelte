@@ -1,10 +1,10 @@
 <script lang="ts">
-    import InputWrapper from "$lib/common/ui/form/InputWrapper.svelte"
-    import SveltyPicker, {formatDate, parseDate} from 'svelty-picker'
-    import {id} from "svelty-picker/i18n"
-    import {SvelteComponentTyped} from "svelte"
+	import InputWrapper from "$lib/common/ui/form/InputWrapper.svelte"
+	import SveltyPicker, {formatDate, parseDate} from 'svelty-picker'
+	import {id} from "svelty-picker/i18n"
+	import {SvelteComponentTyped} from "svelte"
 
-    const locale: any = id
+	const locale: any = id
 
     export let value: Date = new Date()
     export let label: string = ''
@@ -26,6 +26,6 @@
 </script>
 
 <InputWrapper let:classes {label}>
-    <SveltyPicker {...$$restProps} {format} inputClasses="input {classes} min-w-[10em]" bind:value={valueString} bind:this={picker}/>
+    <SveltyPicker {...$$restProps} {format} i18n={locale} inputClasses="input {classes} min-w-[10em]" bind:value={valueString} bind:this={picker}/>
     <i slot="end" class="material-icons">calendar_month</i>
 </InputWrapper>

@@ -90,6 +90,7 @@
         <ImageInput bind:value={photo} placeholderUrl={data.photoUrl}/>
         <div class="grid grid-cols-2 gap-4">
             <TextInput label="Nama Barang" bind:value={data.details.name}/>
+            <!--     TODO check      -->
             <!--            <Select label="Kode Grup" options={$groupCodes} bind:value={data.details.groupCode}/>-->
             <TextInput label="Kode Intern" bind:value={data.details.internCode}/>
             <Select label="Markis" options={$markis.map(it => it.code)} bind:value={data.details.markis}/>

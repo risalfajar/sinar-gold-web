@@ -39,6 +39,7 @@
 			header: 'Kode Barcode',
 			accessor: 'id'
 		}),
+		// TODO check
 		// table.column({
 		// 	id: 'groupCode',
 		// 	header: 'Kode Group',
@@ -63,6 +64,7 @@
 			accessor: (item) => item.details.weight,
 			cell: (cell) => cell.value + ' gram'
 		}),
+		// TODO check
 		// table.column({
 		// 	id: 'price',
 		// 	header: 'Harga Barang',

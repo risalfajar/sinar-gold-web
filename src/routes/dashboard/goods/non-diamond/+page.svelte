@@ -6,7 +6,6 @@
 	import {closeModal, deleteConfirmationModal, loadingModal, triggerModal} from "$lib/common/utils/modalUtils"
 	import EditDialog from "./EditDialog.svelte"
 	import DiamondGoodsRepository from "./data/repository"
-	import {DiamondGoods} from "./data/goods"
 	import {createRender, createTable} from "svelte-headless-table"
 	import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
 	import {LOCALE_INDONESIA} from "$lib/constants"
@@ -16,12 +15,12 @@
 	import DateRangePicker from "$lib/common/ui/form/DateRangePicker.svelte"
 	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 	import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
-	import DetailsDialog from "./DetailsDialog.svelte"
+	import {NonDiamondGoods} from "./data/goods"
 
 	const repository = new DiamondGoodsRepository()
 	const startDate = writable(new Date())
 	const endDate = writable(new Date())
-	const data: Readable<DiamondGoods[]> = derived([startDate, endDate], (values, set) => {
+	const data: Readable<NonDiamondGoods[]> = derived([startDate, endDate], (values, set) => {
 		const start = values[0]
 		const end = values[1]
 		return repository.listenByDate(start, end, set)
@@ -40,11 +39,11 @@
 			header: 'Kode Barcode',
 			accessor: 'id'
 		}),
-		table.column({
-			id: 'groupCode',
-			header: 'Kode Group',
-			accessor: (item) => item.details.groupCode
-		}),
+		// table.column({
+		// 	id: 'groupCode',
+		// 	header: 'Kode Group',
+		// 	accessor: (item) => item.details.groupCode
+		// }),
 		table.column({
 			header: 'Kode Talang',
 			accessor: 'chamferCode'
@@ -64,11 +63,11 @@
 			accessor: (item) => item.details.weight,
 			cell: (cell) => cell.value + ' gram'
 		}),
-		table.column({
-			id: 'price',
-			header: 'Harga Barang',
-			accessor: (item) => item.diamond.price.toLocaleString(LOCALE_INDONESIA),
-		}),
+		// table.column({
+		// 	id: 'price',
+		// 	header: 'Harga Barang',
+		// 	accessor: (item) => item.price.toLocaleString(LOCALE_INDONESIA),
+		// }),
 		table.display({
 			id: 'actions',
 			header: 'Actions',
@@ -92,7 +91,7 @@
 		})
 	}
 
-	async function copy(item: DiamondGoods) {
+	async function copy(item: NonDiamondGoods) {
 		triggerModal(loadingModal)
 		try {
 			await repository.save({...item, id: generateNumberId(), created: null})
@@ -104,7 +103,7 @@
 		closeModal()
 	}
 
-	function openEditDialog(item: DiamondGoods) {
+	function openEditDialog(item: NonDiamondGoods) {
 		triggerModal({
 			type: 'component',
 			component: {
@@ -115,7 +114,7 @@
 		})
 	}
 
-	function showDeleteConfirmationDialog(item: DiamondGoods) {
+	function showDeleteConfirmationDialog(item: NonDiamondGoods) {
 		triggerModal({
 			...deleteConfirmationModal,
 			body: `Apakah kamu yakin ingin menghapus item ${item.id}?`,
@@ -123,7 +122,7 @@
 		})
 	}
 
-	async function deleteItem(item: DiamondGoods) {
+	async function deleteItem(item: NonDiamondGoods) {
 		triggerModal(loadingModal)
 		try {
 			await repository.delete(item.id)
@@ -134,17 +133,6 @@
 		}
 		closeModal()
 	}
-
-	function showDetailsDialog(item: DiamondGoods) {
-		triggerModal({
-			type: 'component',
-			component: {
-				ref: DetailsDialog,
-				props: {data: item}
-			},
-			modalClasses: 'w-[32em]'
-		})
-	}
 </script>
 
 <TableContainer>
@@ -154,5 +142,5 @@
     </svelte:fragment>
     <Button class="variant-filled-primary" slot="buttons" on:click={openCreateDialog}>Tambah Data Barang</Button>
 
-    <DataTable model={tableViewModel} clickable on:click={(e) => showDetailsDialog(e.detail)}/>
+    <DataTable model={tableViewModel}/>
 </TableContainer>

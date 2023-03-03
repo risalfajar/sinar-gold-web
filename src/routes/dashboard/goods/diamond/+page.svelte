@@ -142,7 +142,7 @@
 				ref: DetailsDialog,
 				props: {data: item}
 			},
-			modalClasses: 'w-[32em]'
+			modalClasses: '!w-fit'
 		})
 	}
 </script>

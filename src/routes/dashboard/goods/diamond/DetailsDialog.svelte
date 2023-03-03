@@ -21,7 +21,7 @@
 	}
 </script>
 
-<BaseInfoDialog title="Detail Barang">
+<BaseInfoDialog class="w-[32em]" title="Detail Barang">
     <DataText title="Nama Barang" content={data.details.name}/>
     <img src={data.photoUrl} class="w-full"/>
     <div class="grid grid-cols-2 gap-4">

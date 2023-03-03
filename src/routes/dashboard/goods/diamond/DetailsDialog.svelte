@@ -4,8 +4,21 @@
 	import {DiamondGoods} from "./data/goods"
 	import {LOCALE_INDONESIA} from "$lib/constants.js"
 	import Button from "$lib/common/ui/button/Button.svelte"
+	import {triggerModal} from "$lib/common/utils/modalUtils"
+	import CertificateDialog from "./CertificateDialog.svelte"
 
 	export let data: DiamondGoods
+
+	function downloadCertificate() {
+		triggerModal({
+			type: 'component',
+			component: {
+				ref: CertificateDialog,
+				props: {data},
+			},
+			modalClasses: '!w-[32em]'
+		})
+	}
 </script>
 
 <BaseInfoDialog title="Detail Barang">
@@ -29,5 +42,5 @@
         <DataText title="Harga Atribut" content={data.details.attributePrice.toLocaleString(LOCALE_INDONESIA)}/>
         <DataText title="Berat Plastik" content={data.details.plasticWeight}/>
     </div>
-    <Button class="variant-filled-primary">Download Sertifikat Berlian</Button>
+    <Button class="variant-filled-primary" on:click={downloadCertificate}>Download Sertifikat Berlian</Button>
 </BaseInfoDialog>

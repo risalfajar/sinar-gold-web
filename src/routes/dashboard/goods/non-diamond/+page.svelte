@@ -16,6 +16,7 @@
 	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 	import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
 	import {NonDiamondGoods} from "./data/goods"
+	import DetailsDialog from "./DetailsDialog.svelte"
 
 	const repository = new DiamondGoodsRepository()
 	const startDate = writable(new Date())
@@ -135,6 +136,17 @@
 		}
 		closeModal()
 	}
+
+	function openDetailsDialog(item: NonDiamondGoods) {
+		triggerModal({
+			type: 'component',
+			component: {
+				ref: DetailsDialog,
+				props: {data: item}
+			},
+			modalClasses: '!w-fit'
+		})
+	}
 </script>
 
 <TableContainer>
@@ -144,5 +156,5 @@
     </svelte:fragment>
     <Button class="variant-filled-primary" slot="buttons" on:click={openCreateDialog}>Tambah Data Barang</Button>
 
-    <DataTable model={tableViewModel}/>
+    <DataTable model={tableViewModel} clickable on:click={(e) => openDetailsDialog(e.detail)}/>
 </TableContainer>

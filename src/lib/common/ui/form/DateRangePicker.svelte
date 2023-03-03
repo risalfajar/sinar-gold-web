@@ -1,8 +1,8 @@
 <script lang="ts">
-    import DatePicker from "$lib/common/ui/form/DatePicker.svelte"
-    import Label from "$lib/common/ui/form/Label.svelte"
+	import DatePicker from "$lib/common/ui/form/DatePicker.svelte"
+	import Label from "$lib/common/ui/form/Label.svelte"
 
-    export let start: Date
+	export let start: Date
     export let end: Date
     export let label: string = ''
 </script>
@@ -14,6 +14,6 @@
     <div class="flex flex-row gap-2 items-center">
         <DatePicker bind:value={start} endDate={end}/>
         -
-        <DatePicker bind:value={end} startDate={start}/>
+        <DatePicker bind:value={end} startDate={start} endDate={new Date()}/>
     </div>
 </div>

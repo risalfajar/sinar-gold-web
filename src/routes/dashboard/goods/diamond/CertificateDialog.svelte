@@ -31,7 +31,7 @@
 	}
 </script>
 
-<div class="grid grid-cols-5 items-center bg-primary-500 rounded-lg py-2 px-4" bind:this={certificateBody}>
+<div class="w-[32em] grid grid-cols-5 items-center bg-primary-500 rounded-lg py-2 px-4" bind:this={certificateBody}>
     <div class="col-span-2 relative py-6">
         <div class="w-full rounded-lg aspect-square bg-white flex items-center justify-center p-1">
             <img src={data.photoUrl} alt="foto berlian"/>

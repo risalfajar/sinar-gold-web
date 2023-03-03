@@ -16,7 +16,7 @@
 				ref: CertificateDialog,
 				props: {data},
 			},
-			modalClasses: '!w-[32em]'
+			modalClasses: '!w-fit'
 		})
 	}
 </script>

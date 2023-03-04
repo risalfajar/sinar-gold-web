@@ -10,6 +10,7 @@ export const COLLECTION_CRAFTSMAN_ORDER_MODEL = 'models'
 export const COLLECTION_CRAFTSMAN_ORDER_ADVANCE = 'cashAdvances'
 export const COLLECTION_CRAFTSMAN_ORDER_DEPOSIT = 'deposits'
 export const COLLECTION_GOODS = 'goods'
+export const COLLECTION_GOODS_HISTORY = 'goodsHistory'
 
 // Database
 export const NODE_MASTER_DATA = 'masterData'

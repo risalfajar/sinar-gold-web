@@ -1,6 +1,6 @@
 import {FirestoreRepository} from "$lib/common/data/firestoreRepository"
 import {DiamondGoods, diamondGoodsConverter} from "./goods"
-import {collection, CollectionReference} from "firebase/firestore"
+import {collection, CollectionReference, onSnapshot, query, where} from "firebase/firestore"
 import {Firestore, Storage} from "$lib/firebase"
 import {COLLECTION_GOODS_DIAMOND} from "$lib/constants"
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
@@ -13,6 +13,19 @@ export default class DiamondGoodsRepository extends FirestoreRepository<DiamondG
 
 	getId(item: DiamondGoods): string {
 		return item.id
+	}
+
+	listenByChamfer(storefront: string, chamfer: string, itemType: string, onChange: (data: DiamondGoods[]) => any) {
+		const q = query(
+			this.getQuery('details.name'),
+			where('storefrontCode', '==', storefront),
+			where('chamferCode', '==', chamfer),
+			where('itemType', '==', itemType),
+		)
+		return onSnapshot(q, (snapshot) => {
+			const data = this.convertObjects(snapshot)
+			onChange(data)
+		})
 	}
 
 	async saveWithImage(item: DiamondGoods, photo?: File) {

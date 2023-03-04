@@ -1,7 +1,7 @@
 <script lang="ts">
-    import InputWrapper from "$lib/common/ui/form/InputWrapper.svelte"
+	import InputWrapper from "$lib/common/ui/form/InputWrapper.svelte"
 
-    export let value: string | null
+	export let value: string | null
     export let options: string[]
     export let values: string[] | null = null
     export let label: string = ''
@@ -10,7 +10,7 @@
     $: _values = values ?? options
 </script>
 
-<InputWrapper let:classes {label}>
+<InputWrapper let:classes {label} class={$$props.class}>
     <select
             bind:value
             on:input

@@ -13,10 +13,12 @@
 	import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
 	import DiamondGoodsRepository from "./data/repository"
 	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+	import {GoodsType} from "../data/goodsType"
 
 	const defaultData: DiamondGoods = {
 		id: generateNumberId(),
 		created: null,
+		type: GoodsType.DIAMOND,
 		category: "",
 		chamferCode: "",
 		kindCode: "",

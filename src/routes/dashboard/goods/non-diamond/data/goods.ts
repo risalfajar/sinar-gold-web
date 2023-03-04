@@ -1,15 +1,6 @@
-import {DocumentData, FirestoreDataConverter, PartialWithFieldValue, QueryDocumentSnapshot, serverTimestamp} from "firebase/firestore"
+import {Goods} from "../../data/goods"
 
-export type NonDiamondGoods = {
-	id: string
-	created: Date | null
-	category: string
-	kindCode: string
-	chamferCode: string
-	storefrontCode: string
-	supplierCode: string
-	itemType: string
-	photoUrl: string
+export type NonDiamondGoods = Goods & {
 	details: {
 		name: string
 		internCode: string
@@ -21,17 +12,5 @@ export type NonDiamondGoods = {
 		attributeWeight: number
 		attributeName: string
 		attributePrice: number
-	}
-}
-
-export const nonDiamondGoodsConverter: FirestoreDataConverter<NonDiamondGoods> = {
-	toFirestore(data: PartialWithFieldValue<NonDiamondGoods>): DocumentData {
-		delete data.id
-		if (!data.created) data.created = serverTimestamp()
-		return data
-	},
-	fromFirestore(snapshot: QueryDocumentSnapshot): NonDiamondGoods {
-		const data = snapshot.data({serverTimestamps: 'estimate'})
-		return {...data, id: snapshot.id, created: data.created?.toDate()} as NonDiamondGoods
 	}
 }

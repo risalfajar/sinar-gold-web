@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Label from "$lib/common/ui/form/Label.svelte"
+	import Label from "$lib/common/ui/form/Label.svelte"
 
-    export let label: string = ''
+	export let label: string = ''
     export let helper: string = ''
     export let dark: boolean = false
 
@@ -10,7 +10,7 @@
 
 <div class="w-full {$$props.class}">
     {#if label.length > 0}
-        <Label {dark}>{label}</Label>
+        <Label {dark} class="whitespace-nowrap overflow-hidden overflow-ellipsis">{label}</Label>
     {/if}
     <div class="relative w-full">
         {#if $$slots.start}

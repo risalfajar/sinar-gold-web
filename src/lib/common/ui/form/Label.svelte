@@ -2,6 +2,6 @@
     export let dark: boolean = false
 </script>
 
-<label class="label {dark ? 'text-white' : ''}">
+<label class="label {dark ? 'text-white' : ''} {$$props.class}">
     <slot/>
 </label>

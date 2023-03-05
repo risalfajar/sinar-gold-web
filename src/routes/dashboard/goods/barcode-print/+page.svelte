@@ -2,7 +2,6 @@
 	import TableContainer from "$lib/common/ui/container/table/TableContainer.svelte"
 	import DataTable from "$lib/common/ui/table/DataTable.svelte"
 	import SearchInput from "$lib/common/ui/form/SearchInput.svelte"
-	import DateRangePicker from "$lib/common/ui/form/DateRangePicker.svelte"
 	import DiamondGoodsRepository from "../diamond/data/repository"
 	import {derived, Readable, writable} from "svelte/store"
 	import {DiamondGoods} from "../diamond/data/goods"
@@ -13,14 +12,21 @@
 	import {getRowData} from "$lib/common/utils/tableUtils"
 	import {triggerModal} from "$lib/common/utils/modalUtils"
 	import PrintDialog from "./PrintDialog.svelte"
+	import {chamfers, storefronts} from "$lib/stores"
+	import Select from "$lib/common/ui/form/Select.svelte"
+	import {GoodsType} from "../data/goodsType"
+	import {NonDiamondGoods} from "../non-diamond/data/goods"
+	import NonDiamondGoodsRepository from "../non-diamond/data/repository"
 
 	const repository = new DiamondGoodsRepository()
-	const startDate = writable(new Date())
-	const endDate = writable(new Date())
-	const data: Readable<DiamondGoods[]> = derived([startDate, endDate], (values, set) => {
-		const start = values[0]
-		const end = values[1]
-		return repository.listenByDate(start, end, set)
+	const storefront = writable('')
+	const chamfer = writable('')
+	const type = writable('')
+	const data: Readable<DiamondGoods[] | NonDiamondGoods[]> = derived([storefront, chamfer, type], ([storefront, chamfer, type], set) => {
+		if (type == GoodsType.DIAMOND)
+			return new DiamondGoodsRepository().listenByStorefront(storefront, chamfer, set)
+		else if (type == GoodsType.NON_DIAMOND)
+			return new NonDiamondGoodsRepository().listenByStorefront(storefront, chamfer, set)
 	}, [])
 	const table = createTable(data, {
 		sort: addSortBy({initialSortKeys: [{id: 'id', order: 'asc'}]}),
@@ -39,15 +45,11 @@
 		table.column({
 			id: 'groupCode',
 			header: 'Kode Group',
-			accessor: (item) => item.details.groupCode
+			accessor: (item) => item.groupCode
 		}),
 		table.column({
 			header: 'Kode Talang',
 			accessor: 'chamferCode'
-		}),
-		table.column({
-			header: 'Kode Jenis',
-			accessor: 'kindCode'
 		}),
 		table.column({
 			id: 'name',
@@ -63,7 +65,12 @@
 		table.column({
 			id: 'price',
 			header: 'Harga Barang',
-			accessor: (item) => item.diamond.price.toLocaleString(LOCALE_INDONESIA),
+			accessor: (item) => {
+				if (item.type === GoodsType.NON_DIAMOND)
+					return (item as NonDiamondGoods).details.price.toLocaleString(LOCALE_INDONESIA)
+				else if (item.type === GoodsType.DIAMOND)
+					return (item as DiamondGoods).diamond.price.toLocaleString(LOCALE_INDONESIA)
+			},
 		}),
 		table.display({
 			id: 'actions',
@@ -89,7 +96,10 @@
 
 <TableContainer>
     <svelte:fragment slot="search">
-        <DateRangePicker label="Tanggal" bind:start={$startDate} bind:end={$endDate}/>
+        <Select label="Etalase" class="!w-auto" options={$storefronts.map(it => it.code)} bind:value={$storefront}/>
+        <Select label="Talang" class="!w-auto" options={$chamfers.map(it => it.code)} bind:value={$chamfer}/>
+        <Select label="Jenis" class="!w-auto" options={['Berlian', 'Non Berlian']} values={[GoodsType.DIAMOND, GoodsType.NON_DIAMOND]}
+                bind:value={$type}/>
         <SearchInput bind:value={$filterValue}/>
     </svelte:fragment>
 

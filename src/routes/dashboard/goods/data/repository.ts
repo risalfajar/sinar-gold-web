@@ -16,6 +16,18 @@ export default class GoodsRepository<T extends Goods = Goods> extends FirestoreR
 		return item.id
 	}
 
+	listenByStorefront(storefront: string, chamfer: string, onChange: (data: T[]) => any) {
+		const q = query(
+			this.getQuery(),
+			where('storefrontCode', '==', storefront),
+			where('chamferCode', '==', chamfer),
+		)
+		return onSnapshot(q, (snapshot) => {
+			const data = this.convertObjects(snapshot)
+			onChange(data)
+		})
+	}
+
 	listenByChamfer(storefront: string, chamfer: string, itemType: string, onChange: (data: T[]) => any) {
 		const q = query(
 			this.getQuery('details.name'),

@@ -16,5 +16,6 @@
            on:input
            on:keydown
            {...$$restProps}
+           {required}
            class="input {classes}">
 </InputWrapper>

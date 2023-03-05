@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {closeModal} from "$lib/common/utils/modalUtils"
-	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
+	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContentContent.svelte"
 	import DatePicker from "$lib/common/ui/form/DatePicker.svelte"
 	import PriceInput from "$lib/common/ui/form/PriceInput.svelte"
 	import CashAdvanceRepository from "../data/source/advanceRepository"
@@ -27,7 +27,7 @@
     }
 </script>
 
-<FormDialog isFormValid={amount > 0} {isSaving} on:save={save}>
+<FormDialogContent isFormValid={amount > 0} {isSaving} on:save={save}>
     <DatePicker disabled value={new Date()} label="Tanggal"/>
     <PriceInput label="Jumlah" bind:value={amount}/>
-</FormDialog>
+</FormDialogContent>

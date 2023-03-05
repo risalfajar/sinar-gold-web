@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TextInput from "$lib/common/ui/form/TextInput.svelte"
-	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
+	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContentContent.svelte"
 	import PasswordInput from "$lib/common/ui/form/PasswordInput.svelte"
 	import {onMount} from "svelte"
 	import {MIN_PASSWORD_LENGTH} from "$lib/constants"
@@ -78,7 +78,7 @@
     }
 </script>
 
-<FormDialog {isFormValid} {isSaving} on:save={save}>
+<FormDialogContent {isFormValid} {isSaving} on:save={save}>
     <TextInput label="Username" disabled={isEditMode} bind:value={data.username}/>
     <TextInput label="Nama Lengkap" bind:value={data.name}/>
     <PasswordInput bind:value={data.password}/>
@@ -110,4 +110,4 @@
             </div>
         </div>
     {/if}
-</FormDialog>
+</FormDialogContent>

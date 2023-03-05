@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
+	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContentContent.svelte"
 	import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
 	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 	import {modalStore} from "@skeletonlabs/skeleton"
@@ -49,7 +49,7 @@
     }
 </script>
 
-<FormDialog {isFormValid} {isSaving} on:save={save}>
+<FormDialogContent {isFormValid} {isSaving} on:save={save}>
     <TextInput disabled label={labels[0]} bind:value={data.code}/>
     <TextInput label={labels[1]} bind:value={data.name}/>
-</FormDialog>
+</FormDialogContent>

@@ -5,7 +5,7 @@
 	import {Writable, writable} from "svelte/store"
 	import {createDataTable} from "$lib/common/utils/tableUtils"
 	import DataTable from "$lib/common/ui/table/DataTable.svelte"
-	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
+	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContentContent.svelte"
 	import {modalStore} from "@skeletonlabs/skeleton"
 	import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
 
@@ -66,7 +66,7 @@
     }
 </script>
 
-<FormDialog {isSaving} isFormValid={$data.length > 0} on:save={save}>
+<FormDialogContent {isSaving} isFormValid={$data.length > 0} on:save={save}>
     <p>Anda akan mengimport {$data.length} item</p>
     <DataTable model={table}/>
-</FormDialog>
+</FormDialogContent>

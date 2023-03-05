@@ -94,7 +94,6 @@
         <div class="grid grid-cols-2 gap-4">
             <TextInput label="Nama Barang" bind:value={data.details.name}/>
             <PriceInput label="Harga Barang" bind:value={data.details.price}/>
-            <TextInput label="Kode Intern" bind:value={data.details.internCode}/>
             <Select label="Markis" options={$markis.map(it => it.code)} bind:value={data.details.markis}/>
             <WeightInput label="Berat Asli" bind:value={data.details.realWeight}/>
             <WeightInput label="Berat" bind:value={data.details.weight}/>
@@ -103,6 +102,7 @@
             <WeightInput label="Berat Atribut" bind:value={data.details.attributeWeight}/>
             <PriceInput label="Harga Atribut" bind:value={data.details.attributePrice}/>
             <WeightInput label="Berat Plastik" bind:value={data.details.plasticWeight}/>
+            <TextInput label="Kode Intern" bind:value={data.details.internCode}/>
         </div>
     </Step>
 </Stepper>

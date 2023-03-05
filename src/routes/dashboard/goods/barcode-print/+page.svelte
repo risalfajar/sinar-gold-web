@@ -17,6 +17,8 @@
 	import {GoodsType} from "../data/goodsType"
 	import {NonDiamondGoods} from "../non-diamond/data/goods"
 	import NonDiamondGoodsRepository from "../non-diamond/data/repository"
+	import DiamondDetailsDialog from "../diamond/DetailsDialog.svelte"
+	import NonDiamondDetailsDialog from "../non-diamond/DetailsDialog.svelte"
 
 	const repository = new DiamondGoodsRepository()
 	const storefront = writable('')
@@ -92,6 +94,17 @@
 			modalClasses: '!w-fit'
 		})
 	}
+
+	function openDetailsDialog(item: DiamondGoods | NonDiamondGoods) {
+		triggerModal({
+			type: 'component',
+			component: {
+				ref: item.type === GoodsType.DIAMOND ? DiamondDetailsDialog : NonDiamondDetailsDialog,
+				props: {data: item}
+			},
+			modalClasses: '!w-fit'
+		})
+	}
 </script>
 
 <TableContainer>
@@ -103,5 +116,5 @@
         <SearchInput bind:value={$filterValue}/>
     </svelte:fragment>
 
-    <DataTable model={tableViewModel}/>
+    <DataTable model={tableViewModel} clickable on:click={(e) => openDetailsDialog(e.detail)}/>
 </TableContainer>

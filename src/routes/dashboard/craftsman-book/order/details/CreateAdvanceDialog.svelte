@@ -1,12 +1,12 @@
 <script lang="ts">
-    import {closeModal} from "$lib/common/utils/modalUtils"
-    import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
-    import DatePicker from "$lib/common/ui/form/DatePicker.svelte"
-    import PriceInput from "$lib/common/ui/form/PriceInput.svelte"
-    import CashAdvanceRepository from "../data/source/advanceRepository"
-    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+	import {closeModal} from "$lib/common/utils/modalUtils"
+	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
+	import DatePicker from "$lib/common/ui/form/DatePicker.svelte"
+	import PriceInput from "$lib/common/ui/form/PriceInput.svelte"
+	import CashAdvanceRepository from "../data/source/advanceRepository"
+	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 
-    export let orderId: string
+	export let orderId: string
 
     const repository = new CashAdvanceRepository(orderId)
 

@@ -1,15 +1,15 @@
 <script lang="ts">
-    import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
-    import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
-    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import {modalStore} from "@skeletonlabs/skeleton"
-    import {ItemAlreadyExistError} from "$lib/errors"
-    import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
-    import TextInput from "$lib/common/ui/form/TextInput.svelte"
-    import {ObjectSchema} from "$lib/common/types/objectSchema"
-    import {Diamond} from "$lib/diamond/diamond"
+	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
+	import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
+	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+	import {modalStore} from "@skeletonlabs/skeleton"
+	import {ItemAlreadyExistError} from "$lib/errors"
+	import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
+	import TextInput from "$lib/common/ui/form/TextInput.svelte"
+	import {ObjectSchema} from "$lib/common/types/objectSchema"
+	import {Diamond} from "$lib/diamond/diamond"
 
-    const defaultData: Diamond = {
+	const defaultData: Diamond = {
         code: generateNumberId(),
         name: ""
     }

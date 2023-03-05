@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
+	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
 	import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
 	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 	import {modalStore} from "@skeletonlabs/skeleton"

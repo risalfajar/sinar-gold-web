@@ -1,15 +1,15 @@
 <script lang="ts">
-    import {onMount} from "svelte"
-    import readXlsxFile, {Schema} from "read-excel-file"
-    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import {Writable, writable} from "svelte/store"
-    import {createDataTable} from "$lib/common/utils/tableUtils"
-    import DataTable from "$lib/common/ui/table/DataTable.svelte"
-    import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
-    import {modalStore} from "@skeletonlabs/skeleton"
-    import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
+	import {onMount} from "svelte"
+	import readXlsxFile, {Schema} from "read-excel-file"
+	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+	import {Writable, writable} from "svelte/store"
+	import {createDataTable} from "$lib/common/utils/tableUtils"
+	import DataTable from "$lib/common/ui/table/DataTable.svelte"
+	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
+	import {modalStore} from "@skeletonlabs/skeleton"
+	import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
 
-    export let file: File
+	export let file: File
     export let schema: Schema
     export let repository: MapDatabaseRepository<any>
 

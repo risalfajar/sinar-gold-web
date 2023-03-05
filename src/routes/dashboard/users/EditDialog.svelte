@@ -1,23 +1,23 @@
 <script lang="ts">
-    import TextInput from "$lib/common/ui/form/TextInput.svelte"
-    import FormDialog from "$lib/common/ui/dialog/FormDialog.svelte"
-    import PasswordInput from "$lib/common/ui/form/PasswordInput.svelte"
-    import {onMount} from "svelte"
-    import {MIN_PASSWORD_LENGTH} from "$lib/constants"
-    import Select from "$lib/common/ui/form/Select.svelte"
-    import Label from "$lib/common/ui/form/Label.svelte"
-    import Checkbox from "$lib/common/ui/form/Checkbox.svelte"
-    import CheckboxGroup from "$lib/common/ui/form/CheckboxGroup.svelte"
-    import {difference, uniq} from "lodash-es"
-    import {AccordionItem, modalStore} from "@skeletonlabs/skeleton"
-    import {errorToast, successToast} from "$lib/common/utils/toastUtils"
-    import {Role} from "$lib/users/types/role"
-    import {UserRepository} from "$lib/users/data/userRepository"
-    import {User} from "$lib/users/types/user"
-    import {menus as menusSource} from "$lib/dashboard/menus"
-    import {slide} from "svelte/transition"
+	import TextInput from "$lib/common/ui/form/TextInput.svelte"
+	import FormDialog from "$lib/common/ui/dialog/FormDialogContent.svelte"
+	import PasswordInput from "$lib/common/ui/form/PasswordInput.svelte"
+	import {onMount} from "svelte"
+	import {MIN_PASSWORD_LENGTH} from "$lib/constants"
+	import Select from "$lib/common/ui/form/Select.svelte"
+	import Label from "$lib/common/ui/form/Label.svelte"
+	import Checkbox from "$lib/common/ui/form/Checkbox.svelte"
+	import CheckboxGroup from "$lib/common/ui/form/CheckboxGroup.svelte"
+	import {difference, uniq} from "lodash-es"
+	import {AccordionItem, modalStore} from "@skeletonlabs/skeleton"
+	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
+	import {Role} from "$lib/users/types/role"
+	import {UserRepository} from "$lib/users/data/userRepository"
+	import {User} from "$lib/users/types/user"
+	import {menus as menusSource} from "$lib/dashboard/menus"
+	import {slide} from "svelte/transition"
 
-    const repository = new UserRepository()
+	const repository = new UserRepository()
     const menus = menusSource.filter(it => it.title !== 'Beranda')
     const menuGroups = getMenuGroups()
     const defaultData: Omit<User, "role"> & { role: string } = {

@@ -41,9 +41,8 @@
 			accessor: 'id'
 		}),
 		table.column({
-			id: 'groupCode',
 			header: 'Kode Group',
-			accessor: (item) => item.details.groupCode
+			accessor: 'groupCode',
 		}),
 		table.column({
 			header: 'Kode Talang',

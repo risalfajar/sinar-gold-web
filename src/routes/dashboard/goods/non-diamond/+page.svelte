@@ -40,12 +40,10 @@
 			header: 'Kode Barcode',
 			accessor: 'id'
 		}),
-		// TODO check
-		// table.column({
-		// 	id: 'groupCode',
-		// 	header: 'Kode Group',
-		// 	accessor: (item) => item.details.groupCode
-		// }),
+		table.column({
+			header: 'Kode Group',
+			accessor: 'groupCode'
+		}),
 		table.column({
 			header: 'Kode Talang',
 			accessor: 'chamferCode'

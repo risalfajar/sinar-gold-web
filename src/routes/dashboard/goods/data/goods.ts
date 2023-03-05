@@ -5,13 +5,25 @@ export type Goods = {
 	id: string
 	created: Date | null
 	type: GoodsType
-	category: string
+	groupCode: string
 	kindCode: string
 	chamferCode: string
 	storefrontCode: string
 	supplierCode: string
 	itemType: string
 	photoUrl: string
+	details: {
+		name: string
+		internCode: string
+		markis: string
+		weight: number
+		realWeight: number
+		stockWeight: number
+		plasticWeight: number
+		attributeWeight: number
+		attributeName: string
+		attributePrice: number
+	}
 }
 
 export const goodsConverter: FirestoreDataConverter<Goods> = {

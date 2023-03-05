@@ -27,7 +27,7 @@
     <div class="grid grid-cols-2 gap-4">
         <DataText title="Tanggal" content={data.created.toLocaleDateString(LOCALE_INDONESIA, {dateStyle: "long"})}/>
         <DataText title="Kode Barcode" content={data.id}/>
-        <DataText title="Kategori" content={data.category}/>
+        <DataText title="Kode Group" content={data.groupCode}/>
         <DataText title="Kode Jenis" content={data.kindCode}/>
         <DataText title="Kode Talang" content={data.chamferCode}/>
         <DataText title="Kode Etalase" content={data.storefrontCode}/>

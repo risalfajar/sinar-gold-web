@@ -19,7 +19,7 @@
 		id: generateNumberId(),
 		created: null,
 		type: GoodsType.DIAMOND,
-		category: "",
+		groupCode: "",
 		chamferCode: "",
 		kindCode: "",
 		storefrontCode: "",
@@ -30,14 +30,12 @@
 			attributeName: "",
 			attributePrice: 0,
 			attributeWeight: 0,
-			groupCode: "",
 			internCode: "",
 			markis: "",
 			name: "",
 			plasticWeight: 0,
 			realWeight: 0,
 			stockWeight: 0,
-			type: "",
 			weight: 0
 		},
 		diamond: {
@@ -87,7 +85,7 @@
         <div class="grid grid-cols-2 gap-4">
             <DatePicker label="Tanggal" disabled value={new Date()}/>
             <TextInput label="Kode Barcode" disabled value={data.id}/>
-            <Select label="Kategori" options={["TODO"]} bind:value={data.category}/>
+            <Select label="Kode Group" options={$groupCodes} bind:value={data.groupCode}/>
             <Select label="Kode Jenis" options={$kinds.map(it => it.code)} bind:value={data.kindCode}/>
             <Select label="Kode Talang" options={$chamfers.map(it => it.code)} bind:value={data.chamferCode}/>
             <Select label="Kode Etalase" options={$storefronts.map(it => it.code)} bind:value={data.storefrontCode}/>
@@ -101,7 +99,6 @@
         <ImageInput bind:value={photo} placeholderUrl={data.photoUrl}/>
         <div class="grid grid-cols-2 gap-4">
             <TextInput label="Nama Barang" bind:value={data.details.name}/>
-            <Select label="Kode Grup" options={$groupCodes} bind:value={data.details.groupCode}/>
             <TextInput label="Kode Intern" bind:value={data.details.internCode}/>
             <Select label="Markis" options={$markis.map(it => it.code)} bind:value={data.details.markis}/>
             <WeightInput label="Berat Asli" bind:value={data.details.realWeight}/>

@@ -9,7 +9,7 @@
 	import PriceInput from "$lib/common/ui/form/PriceInput.svelte"
 	import {NonDiamondGoods} from "./data/goods"
 	import {Step, Stepper} from "@skeletonlabs/skeleton"
-	import {chamfers, itemTypes, kinds, markis, storefronts, suppliers} from "$lib/stores.js"
+	import {chamfers, groupCodes, itemTypes, kinds, markis, storefronts, suppliers} from "$lib/stores.js"
 	import {generateNumberId} from "$lib/common/utils/uniqueIdGenerator"
 	import NonDiamondGoodsRepository from "./data/repository"
 	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
@@ -19,7 +19,7 @@
 		id: generateNumberId(),
 		created: null,
 		type: GoodsType.NON_DIAMOND,
-		category: "",
+		groupCode: "",
 		chamferCode: "",
 		kindCode: "",
 		storefrontCode: "",
@@ -78,7 +78,7 @@
         <div class="grid grid-cols-2 gap-4">
             <DatePicker label="Tanggal" disabled value={new Date()}/>
             <TextInput label="Kode Barcode" disabled value={data.id}/>
-            <Select label="Kategori" options={["TODO"]} bind:value={data.category}/>
+            <Select label="Kode Group" options={$groupCodes} bind:value={data.groupCode}/>
             <Select label="Kode Jenis" options={$kinds.map(it => it.code)} bind:value={data.kindCode}/>
             <Select label="Kode Talang" options={$chamfers.map(it => it.code)} bind:value={data.chamferCode}/>
             <Select label="Kode Etalase" options={$storefronts.map(it => it.code)} bind:value={data.storefrontCode}/>
@@ -92,8 +92,6 @@
         <ImageInput bind:value={photo} placeholderUrl={data.photoUrl}/>
         <div class="grid grid-cols-2 gap-4">
             <TextInput label="Nama Barang" bind:value={data.details.name}/>
-            <!--     TODO check      -->
-            <!--            <Select label="Kode Grup" options={$groupCodes} bind:value={data.details.groupCode}/>-->
             <TextInput label="Kode Intern" bind:value={data.details.internCode}/>
             <Select label="Markis" options={$markis.map(it => it.code)} bind:value={data.details.markis}/>
             <WeightInput label="Berat Asli" bind:value={data.details.realWeight}/>

@@ -56,7 +56,7 @@
         </div>
         <div class="w-full flex gap-2 px-4 justify-between">
             <span>{data.created.toLocaleDateString(LOCALE_INDONESIA)}</span>
-            <!--       TODO Maryam     -->
+            <span>{data.diamond.stoneType}</span>
         </div>
     </div>
 </div>

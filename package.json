@@ -33,6 +33,8 @@
   "type": "module",
   "dependencies": {
     "@egjs/svelte-conveyer": "^1.4.8",
+    "@sentry/svelte": "^7.40.0",
+    "@sentry/tracing": "^7.40.0",
     "compressorjs": "^1.1.1",
     "firebase": "^9.17.1",
     "jsbarcode": "^3.11.5",

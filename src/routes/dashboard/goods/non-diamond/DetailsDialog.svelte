@@ -8,11 +8,14 @@
 </script>
 
 <BaseInfoDialog class="w-[32em]" title="Detail Barang">
-    <DataText title="Nama Barang" content={data.details.name}/>
+    <div class="grid grid-cols-2 gap-4">
+        <DataText title="Nama Barang" content={data.details.name}/>
+        <DataText title="Kode Barcode" content={data.id}/>
+    </div>
     <img src={data.photoUrl} class="w-full"/>
     <div class="grid grid-cols-2 gap-4">
         <DataText title="Tanggal" content={data.created.toLocaleDateString(LOCALE_INDONESIA, {dateStyle: "long"})}/>
-        <DataText title="Kode Barcode" content={data.id}/>
+        <DataText title="Harga Barang" content={data.details.price.toLocaleString(LOCALE_INDONESIA)}/>
         <DataText title="Kode Group" content={data.groupCode}/>
         <DataText title="Kode Jenis" content={data.kindCode}/>
         <DataText title="Kode Talang" content={data.chamferCode}/>

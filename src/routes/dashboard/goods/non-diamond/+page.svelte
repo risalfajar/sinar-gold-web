@@ -63,12 +63,11 @@
 			accessor: (item) => item.details.weight,
 			cell: (cell) => cell.value + ' gram'
 		}),
-		// TODO check
-		// table.column({
-		// 	id: 'price',
-		// 	header: 'Harga Barang',
-		// 	accessor: (item) => item.price.toLocaleString(LOCALE_INDONESIA),
-		// }),
+		table.column({
+			id: 'price',
+			header: 'Harga Barang',
+			accessor: (item) => item.details.price.toLocaleString(LOCALE_INDONESIA),
+		}),
 		table.display({
 			id: 'actions',
 			header: 'Actions',

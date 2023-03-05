@@ -1,3 +1,3 @@
-import {Goods} from "../../data/goods"
+import {Goods, GoodsDetails} from "../../data/goods"
 
-export type NonDiamondGoods = Goods
+export type NonDiamondGoods = Omit<Goods, "details"> & { details: GoodsDetails & { price: number } }

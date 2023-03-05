@@ -31,6 +31,7 @@
 			internCode: "",
 			markis: "",
 			attributeName: "",
+			price: 0,
 			attributePrice: 0,
 			attributeWeight: 0,
 			plasticWeight: 0,
@@ -92,6 +93,7 @@
         <ImageInput bind:value={photo} placeholderUrl={data.photoUrl}/>
         <div class="grid grid-cols-2 gap-4">
             <TextInput label="Nama Barang" bind:value={data.details.name}/>
+            <PriceInput label="Harga Barang" bind:value={data.details.price}/>
             <TextInput label="Kode Intern" bind:value={data.details.internCode}/>
             <Select label="Markis" options={$markis.map(it => it.code)} bind:value={data.details.markis}/>
             <WeightInput label="Berat Asli" bind:value={data.details.realWeight}/>

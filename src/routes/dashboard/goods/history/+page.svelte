@@ -9,19 +9,19 @@
 	import {LOCALE_INDONESIA} from "$lib/constants"
 	import DataTable from "$lib/common/ui/table/DataTable.svelte"
 	import DateRangePicker from "$lib/common/ui/form/DateRangePicker.svelte"
-	import {GoodsHistory} from "./data/history"
+	import {GoodsHistory, HistoryType} from "./data/history"
 	import TypeLabel from "./TypeLabel.svelte"
 	import {GoodsType} from "../data/goodsType"
 	import DiamondDetailsDialog from '../diamond/DetailsDialog.svelte'
 	import NonDiamondDetailsDialog from '../non-diamond/DetailsDialog.svelte'
+	import Select from "$lib/common/ui/form/Select.svelte"
 
 	const repository = new GoodsHistoryRepository()
+	const type = writable('')
 	const startDate = writable(new Date())
 	const endDate = writable(new Date())
-	const data: Readable<GoodsHistory[]> = derived([startDate, endDate], (values, set) => {
-		const start = values[0]
-		const end = values[1]
-		return repository.listenByDate(start, end, set)
+	const data: Readable<GoodsHistory[]> = derived([type, startDate, endDate], ([type, start, end], set) => {
+		return repository.listenByTypeAndDate(type, start, end, set)
 	}, [])
 	const table = createTable(data, {
 		sort: addSortBy({initialSortKeys: [{id: 'created', order: 'asc'}]}),
@@ -77,6 +77,8 @@
 
 <TableContainer>
     <svelte:fragment slot="search">
+        <Select label="Jenis Transaksi" options={["Barang Masuk", "Barang Pindah", "Barang Terjual"]}
+                values={[HistoryType.IN, HistoryType.MOVE, HistoryType.SOLD]} bind:value={$type}/>
         <DateRangePicker label="Tanggal" bind:start={$startDate} bind:end={$endDate}/>
         <SearchInput bind:value={$filterValue}/>
     </svelte:fragment>

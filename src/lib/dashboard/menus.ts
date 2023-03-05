@@ -143,7 +143,20 @@ export const menus: Menu[] = [
     },
     {
         title: 'Member',
-        link: '/dashboard/member'
+        subMenus: [
+            {
+                title: 'Data Member',
+                link: '/dashboard/member/member'
+            },
+            {
+                title: 'Data Non Member',
+                link: '/dashboard/member/non-member'
+            },
+            {
+                title: 'Transaksi Member',
+                link: '/dashboard/member/transactions'
+            }
+        ]
     },
     {
         title: 'Barang',

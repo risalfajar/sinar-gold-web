@@ -2,15 +2,21 @@
 	import Label from "$lib/common/ui/form/Label.svelte"
 
 	export let label: string = ''
-    export let helper: string = ''
-    export let dark: boolean = false
+	export let helper: string = ''
+	export let dark: boolean = false
+	export let required: boolean = false
 
-    let classes = `${$$slots.start && 'pl-10'} ${$$slots.end && 'pr-10'}`
+	let classes = `${$$slots.start && 'pl-10'} ${$$slots.end && 'pr-10'}`
 </script>
 
 <div class="w-full {$$props.class}">
     {#if label.length > 0}
-        <Label {dark} class="whitespace-nowrap overflow-hidden overflow-ellipsis">{label}</Label>
+        <div class="flex">
+            <Label {dark} class="whitespace-nowrap overflow-hidden overflow-ellipsis">{label}</Label>
+            {#if required}
+                <span class="text-error-500">*</span>
+            {/if}
+        </div>
     {/if}
     <div class="relative w-full">
         {#if $$slots.start}

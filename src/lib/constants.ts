@@ -12,6 +12,7 @@ export const COLLECTION_CRAFTSMAN_ORDER_DEPOSIT = 'deposits'
 export const COLLECTION_GOODS = 'goods'
 export const COLLECTION_GOODS_HISTORY = 'goodsHistory'
 export const COLLECTION_MEMBERS = 'members'
+export const COLLECTION_NON_MEMBERS = 'nonMembers'
 
 // Database
 export const NODE_MASTER_DATA = 'masterData'

@@ -6,7 +6,6 @@
 	import {readable} from "svelte/store"
 	import {createRender, createTable} from "svelte-headless-table"
 	import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
-	import {LOCALE_INDONESIA} from "$lib/constants"
 	import {getRowData} from "$lib/common/utils/tableUtils"
 	import {Member} from "./data/member"
 	import TableActions from "$lib/common/ui/table/TableActions.svelte"
@@ -24,9 +23,8 @@
 	})
 	const columns = table.createColumns([
 		table.column({
-			id: 'created',
-			header: 'Tanggal',
-			accessor: (item) => item.created!.toLocaleDateString(LOCALE_INDONESIA),
+			header: 'Kode Member',
+			accessor: 'id'
 		}),
 		table.column({
 			header: 'Nama',

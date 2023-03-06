@@ -59,7 +59,24 @@ export const menus: Menu[] = [
     },
     {
         title: 'Penjualan',
-        link: '/dashboard/sale'
+        subMenus: [
+            {
+                title: 'Data Penjualan',
+                link: '/dashboard/sale/sales'
+            },
+            {
+                title: 'Data Batal Penjualan',
+                link: '/dashboard/sale/cancels'
+            },
+            {
+                title: 'Data Panjar',
+                link: '/dashboard/sale/down-payment'
+            },
+            {
+                title: 'Riwayat Penjualan',
+                link: '/dashboard/sale/history'
+            },
+        ]
     },
     {
         title: 'Pembelian',

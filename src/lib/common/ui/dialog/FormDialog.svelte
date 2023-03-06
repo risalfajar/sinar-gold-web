@@ -14,7 +14,7 @@
 </script>
 
 <div class="space-y-2 {$$props.class}">
-    <ModalTitle {title} {showCloseButton} on:close/>
+    <ModalTitle {title} {showCloseButton} on:close={() => isSaving || dispatch('close')}/>
     <FormDialogContent {isFormValid} {isSaving} {showDivider} on:save>
         <slot/>
         <slot slot="buttons" name="buttons">

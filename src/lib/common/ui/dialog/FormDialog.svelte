@@ -18,6 +18,7 @@
     <FormDialogContent {isFormValid} {isSaving} {showDivider} on:save>
         <slot/>
         <slot slot="buttons" name="buttons">
+            <!-- Workaround until https://github.com/sveltejs/svelte/issues/6059 implemented -->
             <Button type="button" on:click={() => isSaving || dispatch('close')}>Kembali</Button>
             <Button type="submit" isLoading={isSaving} disabled={!isFormValid} class="variant-filled-secondary">
                 Simpan

@@ -5,7 +5,7 @@
 	import {Writable, writable} from "svelte/store"
 	import {createDataTable} from "$lib/common/utils/tableUtils"
 	import DataTable from "$lib/common/ui/table/DataTable.svelte"
-	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContentContent.svelte"
+	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContent.svelte"
 	import {modalStore} from "@skeletonlabs/skeleton"
 	import MapDatabaseRepository from "$lib/common/data/mapDatabaseRepository"
 

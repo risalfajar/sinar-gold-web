@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {closeModal} from "$lib/common/utils/modalUtils"
-	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContentContent.svelte"
+	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContent.svelte"
 	import DatePicker from "$lib/common/ui/form/DatePicker.svelte"
 	import PriceInput from "$lib/common/ui/form/PriceInput.svelte"
 	import CashAdvanceRepository from "../data/source/advanceRepository"

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TextInput from "$lib/common/ui/form/TextInput.svelte"
-	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContentContent.svelte"
+	import FormDialogContent from "$lib/common/ui/dialog/FormDialogContent.svelte"
 	import PasswordInput from "$lib/common/ui/form/PasswordInput.svelte"
 	import {onMount} from "svelte"
 	import {MIN_PASSWORD_LENGTH} from "$lib/constants"

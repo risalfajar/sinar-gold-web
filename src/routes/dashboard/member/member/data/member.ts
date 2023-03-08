@@ -13,6 +13,7 @@ export type Member = {
 	urbanVillage: string
 	city: string
 	point: number
+	keywords: string[]
 }
 
 export const memberConverter: FirestoreDataConverter<Member> = {

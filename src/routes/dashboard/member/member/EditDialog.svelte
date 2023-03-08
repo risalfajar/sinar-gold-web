@@ -21,7 +21,8 @@
 		phoneNumber: "",
 		point: 0,
 		subDistrict: "",
-		urbanVillage: ""
+		urbanVillage: "",
+		keywords: []
 	}
 
 	const repository = new MemberRepository()

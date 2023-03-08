@@ -15,6 +15,7 @@ import {
     where,
 } from 'firebase/firestore'
 import {DateTime} from 'luxon'
+import firebase from "firebase/compat"
 
 export abstract class ReadOnlyFirestoreRepository<T> {
     abstract getId(item: T): string
@@ -34,17 +35,15 @@ export abstract class ReadOnlyFirestoreRepository<T> {
         return this.convertObject(snapshot)
     }
 
-    async getAll(): Promise<T[]> {
-        const snapshot = await getDocs(await this.getQuery())
-        return this.convertObjects(snapshot)
+    getAll(): Promise<T[]> {
+        return this.getDocs(this.getQuery())
     }
 
     async getByDate(start: Date, end: Date) {
         const startDate = DateTime.fromJSDate(start).startOf('day').toJSDate()
         const endDate = DateTime.fromJSDate(end).endOf('day').toJSDate()
         const q = query(this.getQuery('created'), where('created', '>=', startDate), where('created', '<=', endDate))
-        const snapshot = await getDocs(q)
-        return this.convertObjects(snapshot)
+        return this.getDocs(q)
     }
 
     listen(itemId: string, onChange: (data: T | null) => any): Unsubscribe {
@@ -79,6 +78,11 @@ export abstract class ReadOnlyFirestoreRepository<T> {
         return snapshot.docs
             .map(val => this.convertObject(val))
             .filter(val => val != null) as T[]
+    }
+
+    protected async getDocs(query: Query<T>) {
+        const snapshot = await getDocs(query)
+        return this.convertObjects(snapshot)
     }
 
     protected getDocRefForItem(item: T) {

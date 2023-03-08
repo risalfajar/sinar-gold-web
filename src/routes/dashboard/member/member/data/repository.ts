@@ -1,6 +1,6 @@
 import {FirestoreRepository} from "$lib/common/data/firestoreRepository"
 import {Member, memberConverter} from "./member"
-import {collection, CollectionReference, getDocs, query, SetOptions, where} from "firebase/firestore"
+import {collection, CollectionReference, query, SetOptions, where} from "firebase/firestore"
 import {Firestore} from "$lib/firebase"
 import {COLLECTION_MEMBERS} from "$lib/constants"
 
@@ -13,13 +13,12 @@ export default class MemberRepository extends FirestoreRepository<Member> {
 		return item.id
 	}
 
-	async getByKeyword(keyword: string) {
+	getByKeyword(keyword: string) {
 		const q = query(
 			this.getQuery('name'),
 			where('keywords', 'array-contains-any', keyword.toLowerCase().split(' '))
 		)
-		const snapshot = await getDocs(q)
-		return this.convertObjects(snapshot)
+		return this.getDocs(q)
 	}
 
 	async save(item: Member, options: SetOptions = {merge: true}): Promise<string> {

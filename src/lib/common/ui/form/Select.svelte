@@ -6,16 +6,18 @@
     export let values: string[] | null = null
     export let label: string = ''
     export let hint: string = '-Pilih ' + label + '-'
+	export let required: boolean = false
 
     $: _values = values ?? options
 </script>
 
-<InputWrapper let:classes {label} class={$$props.class}>
+<InputWrapper let:classes {label} {required} class={$$props.class}>
     <select
             bind:value
             on:input
             on:keydown
             {...$$restProps}
+            {required}
             name={label}
             class="input {classes}"
             class:text-gray-500={value.length === 0}>

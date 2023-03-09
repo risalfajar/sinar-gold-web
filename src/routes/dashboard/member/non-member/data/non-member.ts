@@ -6,6 +6,7 @@ export type NonMember = {
 	name: string
 	phoneNumber: string
 	address: string
+	keywords?: string[]
 }
 
 export const nonMemberConverter: FirestoreDataConverter<NonMember> = {

@@ -9,6 +9,7 @@
     export let label: string = ''
     export let hint: string = 'Masukkan ' + label
     export let dark: boolean = false
+	export let required: boolean = false
 
     let input: HTMLInputElement
     let formattedValue: string
@@ -33,11 +34,12 @@
     }
 </script>
 
-<InputWrapper let:classes {label} {dark}>
+<InputWrapper let:classes {label} {dark} {required}>
     <input type="tel"
            placeholder={hint}
            bind:this={input}
            on:input={handleInput}
+           {required}
            {...$$restProps}
            class="input {classes}">
 </InputWrapper>

@@ -18,9 +18,9 @@
     $: if (formattedValue && input) input.value = formattedValue
 
     function handleInput() {
-        const cleanedValue = cleanValue(input.value)
-        value = cleanedValue.length === 0 ? 0 : parseInt(cleanedValue, 10)
-        formattedValue = formatValue(value)
+	    const cleanedValue = cleanValue(input.value)
+	    input.value = ''
+	    value = cleanedValue.length === 0 ? 0 : parseInt(cleanedValue, 10)
     }
 
     function cleanValue(value: string) {

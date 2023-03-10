@@ -15,7 +15,7 @@
 
 <div class="space-y-2 {$$props.class}">
     <ModalTitle {title} {showCloseButton} on:close={() => isSaving || dispatch('close')}/>
-    <FormDialogContent {isFormValid} {isSaving} {showDivider} on:save>
+    <FormDialogContent {isFormValid} {isSaving} {showDivider} on:save on:submit>
         <slot/>
         <slot slot="buttons" name="buttons">
             <!-- Workaround until https://github.com/sveltejs/svelte/issues/6059 implemented -->

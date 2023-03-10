@@ -27,24 +27,25 @@
 		itemType: "",
 		photoUrl: "",
 		details: {
-			attributeName: "",
-			attributePrice: 0,
-			attributeWeight: 0,
 			internCode: "",
 			markis: "",
 			name: "",
 			plasticWeight: 0,
 			realWeight: 0,
 			stockWeight: 0,
-			weight: 0
-		},
-		diamond: {
-			amounts: Array(4).fill(""),
-			giaCode: Array(2).fill(""),
-			stoneType: "",
 			weight: 0,
-			price: 0
-		}
+			price: 0,
+			diamond: {
+				amounts: Array(4).fill(""),
+				giaCode: Array(2).fill(""),
+				stoneType: "",
+			},
+			attribute: {
+				name: "",
+				weight: 0,
+				price: 0
+			}
+		},
 	}
 
 	export let data: DiamondGoods = defaultData
@@ -104,9 +105,9 @@
             <WeightInput label="Berat Asli" bind:value={data.details.realWeight}/>
             <WeightInput label="Berat" bind:value={data.details.weight}/>
             <WeightInput label="Berat Stock" bind:value={data.details.stockWeight}/>
-            <TextInput label="Nama Atribut" bind:value={data.details.attributeName}/>
-            <WeightInput label="Berat Atribut" bind:value={data.details.attributeWeight}/>
-            <PriceInput label="Harga Atribut" bind:value={data.details.attributePrice}/>
+            <TextInput label="Nama Atribut" bind:value={data.details.attribute.name}/>
+            <WeightInput label="Berat Atribut" bind:value={data.details.attribute.weight}/>
+            <PriceInput label="Harga Atribut" bind:value={data.details.attribute.price}/>
             <WeightInput label="Berat Plastik" bind:value={data.details.plasticWeight}/>
         </div>
     </Step>
@@ -115,15 +116,15 @@
         <svelte:fragment slot="header">Data Berlian</svelte:fragment>
         <div class="grid grid-cols-2 gap-4 items-end">
             <TextInput label="Kode Barcode" disabled value={data.id}/>
-            <Select label="Jenis Batu" options={$stoneTypes.map(it => it.name)} bind:value={data.diamond.stoneType}/>
-            <TextInput label="Jumlah Berlian" bind:value={data.diamond.amounts[0]}/>
-            <TextInput hint="Masukkan Jumlah Berlian" bind:value={data.diamond.amounts[1]}/>
-            <TextInput hint="Masukkan Jumlah Berlian" bind:value={data.diamond.amounts[2]}/>
-            <TextInput hint="Masukkan Jumlah Berlian" bind:value={data.diamond.amounts[3]}/>
-            <TextInput label="Kode GIA" bind:value={data.diamond.giaCode[0]}/>
-            <TextInput hint="Masukkan Kode GIA" bind:value={data.diamond.giaCode[1]}/>
-            <WeightInput label="Berat" bind:value={data.diamond.weight}/>
-            <PriceInput label="Harga" bind:value={data.diamond.price}/>
+            <Select label="Jenis Batu" options={$stoneTypes.map(it => it.name)} bind:value={data.details.diamond.stoneType}/>
+            <TextInput label="Jumlah Berlian" bind:value={data.details.diamond.amounts[0]}/>
+            <TextInput hint="Masukkan Jumlah Berlian" bind:value={data.details.diamond.amounts[1]}/>
+            <TextInput hint="Masukkan Jumlah Berlian" bind:value={data.details.diamond.amounts[2]}/>
+            <TextInput hint="Masukkan Jumlah Berlian" bind:value={data.details.diamond.amounts[3]}/>
+            <TextInput label="Kode GIA" bind:value={data.details.diamond.giaCode[0]}/>
+            <TextInput hint="Masukkan Kode GIA" bind:value={data.details.diamond.giaCode[1]}/>
+            <WeightInput label="Berat" bind:value={data.details.weight}/>
+            <PriceInput label="Harga" bind:value={data.details.price}/>
         </div>
     </Step>
 </Stepper>

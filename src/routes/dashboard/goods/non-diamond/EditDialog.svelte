@@ -30,14 +30,16 @@
 			name: "",
 			internCode: "",
 			markis: "",
-			attributeName: "",
 			price: 0,
-			attributePrice: 0,
-			attributeWeight: 0,
 			plasticWeight: 0,
 			realWeight: 0,
 			stockWeight: 0,
-			weight: 0
+			weight: 0,
+			attribute: {
+				name: "",
+				weight: 0,
+				price: 0
+			}
 		}
 	}
 

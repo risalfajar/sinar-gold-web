@@ -45,18 +45,18 @@
         <div class="w-full bg-gray-50 px-4 py-1 space-y-2">
             <p class="unstyled">Barcode: {data.id}</p>
             <div class="grid grid-cols-2 gap-x-2">
-                <span>{data.diamond.amounts[0]}</span>
-                <span>Weight: {data.diamond.weight}gr</span>
-                <span>{data.diamond.amounts[1]}</span>
-                <span>GIA: {data.diamond.giaCode[0]}</span>
-                <span>{data.diamond.amounts[2]}</span>
-                <span>GIA: {data.diamond.giaCode[1]}</span>
+                <span>{data.details.diamond.amounts[0]}</span>
+                <span>Weight: {data.details.weight}gr</span>
+                <span>{data.details.diamond.amounts[1]}</span>
+                <span>GIA: {data.details.diamond.giaCode[0]}</span>
+                <span>{data.details.diamond.amounts[2]}</span>
+                <span>GIA: {data.details.diamond.giaCode[1]}</span>
             </div>
-            <p class="unstyled w-full text-center">Rp {data.diamond.price.toLocaleString(LOCALE_INDONESIA)}</p>
+            <p class="unstyled w-full text-center">Rp {data.details.price.toLocaleString(LOCALE_INDONESIA)}</p>
         </div>
         <div class="w-full flex gap-2 px-4 justify-between">
             <span>{data.created.toLocaleDateString(LOCALE_INDONESIA)}</span>
-            <span>{data.diamond.stoneType}</span>
+            <span>{data.details.diamond.stoneType}</span>
         </div>
     </div>
 </div>

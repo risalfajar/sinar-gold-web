@@ -66,7 +66,7 @@
 		table.column({
 			id: 'price',
 			header: 'Harga Barang',
-			accessor: (item) => item.diamond.price.toLocaleString(LOCALE_INDONESIA),
+			accessor: (item) => item.details.price.toLocaleString(LOCALE_INDONESIA),
 		}),
 		table.display({
 			id: 'actions',

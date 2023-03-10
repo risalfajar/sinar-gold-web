@@ -37,9 +37,9 @@
         <DataText title="Markis" content={data.details.markis}/>
         <DataText title="Berat Asli" content={data.details.realWeight}/>
         <DataText title="Berat" content={data.details.weight}/>
-        <DataText title="Nama Atribut" content={data.details.attributeName}/>
-        <DataText title="Berat Atribut" content={data.details.attributeWeight}/>
-        <DataText title="Harga Atribut" content={data.details.attributePrice.toLocaleString(LOCALE_INDONESIA)}/>
+        <DataText title="Nama Atribut" content={data.details.attribute.name}/>
+        <DataText title="Berat Atribut" content={data.details.attribute.weight}/>
+        <DataText title="Harga Atribut" content={data.details.attribute.price.toLocaleString(LOCALE_INDONESIA)}/>
         <DataText title="Berat Plastik" content={data.details.plasticWeight}/>
     </div>
     <Button class="variant-filled-primary" on:click={downloadCertificate}>Download Sertifikat Berlian</Button>

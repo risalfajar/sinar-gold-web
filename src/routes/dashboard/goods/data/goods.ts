@@ -20,12 +20,15 @@ export type GoodsDetails = {
 	internCode: string
 	markis: string
 	weight: number
+	price: number
 	realWeight: number
 	stockWeight: number
 	plasticWeight: number
-	attributeWeight: number
-	attributeName: string
-	attributePrice: number
+	attribute: {
+		name: string
+		weight: number
+		price: number
+	}
 }
 
 export const goodsConverter: FirestoreDataConverter<Goods> = {

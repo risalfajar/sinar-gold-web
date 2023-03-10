@@ -15,7 +15,7 @@
     {#if showDivider}
         <hr/>
     {/if}
-    <form class="min-w-fit flex flex-col overflow-y-hidden" on:submit|preventDefault={() => isFormValid && dispatch('save') && dispatch('submit')}>
+    <form class="flex flex-col overflow-y-hidden" on:submit|preventDefault={() => isFormValid && dispatch('save') && dispatch('submit')}>
         <div class="flex flex-col gap-4 px-1 overflow-y-auto">
             <slot></slot>
         </div>

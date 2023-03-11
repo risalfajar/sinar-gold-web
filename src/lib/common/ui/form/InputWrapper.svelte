@@ -20,13 +20,13 @@
     {/if}
     <div class="relative w-full">
         {#if $$slots.start}
-            <div class="absolute overflow-hidden inset-y-0 left-0 z-5 pl-2 flex items-center text-gray-400">
+            <div class="absolute overflow-hidden inset-y-0 left-0 z-10 pl-2 flex items-center text-gray-400">
                 <slot name="start"/>
             </div>
         {/if}
         <slot {classes}/>
         {#if $$slots.end}
-            <div class="absolute overflow-hidden inset-y-0 right-0 z-5 pr-2 flex items-center text-gray-400">
+            <div class="absolute overflow-hidden inset-y-0 right-0 z-10 pr-2 flex items-center text-gray-400">
                 <slot name="end"/>
             </div>
         {/if}

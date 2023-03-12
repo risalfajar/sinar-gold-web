@@ -10,6 +10,6 @@
 </script>
 
 <label class="flex items-center space-x-2">
-    <input class="radio transition-all" type="radio" {checked} {disabled} {name} {value} bind:group/>
+    <input class="radio transition-all" type="radio" {checked} {disabled} {name} {value} on:click bind:group/>
     <p>{label}</p>
 </label>

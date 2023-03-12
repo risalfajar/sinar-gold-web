@@ -131,6 +131,6 @@
     </DataTable>
 
     <svelte:fragment slot="buttons">
-        <Button class="variant-filled-secondary" disabled={paymentTotal === 0} on:click={save}>Bayar</Button>
+        <Button class="variant-filled-secondary" disabled={remainingBill > 0} on:click={save}>Bayar</Button>
     </svelte:fragment>
 </FormDialog>

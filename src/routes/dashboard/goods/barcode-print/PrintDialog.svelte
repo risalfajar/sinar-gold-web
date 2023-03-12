@@ -1,9 +1,10 @@
 <script lang="ts">
 	import {DiamondGoods} from "../diamond/data/goods"
+	import {NonDiamondGoods} from "../non-diamond/data/goods"
 	import Button from "$lib/common/ui/button/Button.svelte"
 	import {jsPDF} from "jspdf"
 
-	export let data: DiamondGoods
+	export let data: DiamondGoods | NonDiamondGoods
 
 	let content: HTMLElement
 
@@ -29,7 +30,7 @@
                 <span>SINAR</span>
                 <span>MAS</span>
             </div>
-            <p class="unstyled text-sm">{data.details.name} - {data.diamond.weight}gr</p>
+            <p class="unstyled text-sm">{data.details.name} - {data.details.weight}gr</p>
             <p class="unstyled text-sm text-gray-600">{data.id}</p>
         </div>
     </div>

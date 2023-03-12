@@ -67,12 +67,7 @@
 		table.column({
 			id: 'price',
 			header: 'Harga Barang',
-			accessor: (item) => {
-				if (item.type === GoodsType.NON_DIAMOND)
-					return (item as NonDiamondGoods).details.price.toLocaleString(LOCALE_INDONESIA)
-				else if (item.type === GoodsType.DIAMOND)
-					return (item as DiamondGoods).diamond.price.toLocaleString(LOCALE_INDONESIA)
-			},
+			accessor: (item) => item.details.price.toLocaleString(LOCALE_INDONESIA),
 		}),
 		table.display({
 			id: 'actions',
@@ -84,7 +79,7 @@
 	const tableViewModel = table.createViewModel(columns)
 	const {filterValue} = tableViewModel.pluginStates.tableFilter
 
-	function print(data: DiamondGoods) {
+	function print(data: DiamondGoods | NonDiamondGoods) {
 		triggerModal({
 			type: 'component',
 			component: {

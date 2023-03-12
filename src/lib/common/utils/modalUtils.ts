@@ -16,6 +16,13 @@ export const deleteConfirmationModal: ModalSettings = {
     buttonTextConfirm: 'Ya, hapus'
 }
 
+export const errorModal: ModalSettings = {
+    type: 'alert',
+    title: 'Terjadi Kesalahan',
+    body: '',
+    buttonTextCancel: 'Oke'
+}
+
 export const loadingModal: ModalSettings = {
     type: 'component',
     component: {
@@ -41,4 +48,8 @@ export function closeModal(response?: any) {
         store.pop()
         return store
     })
+}
+
+export function closeAllModals() {
+    modalStore.set([])
 }

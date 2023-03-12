@@ -14,11 +14,13 @@
 	import NonDiamondGoodsRepository from "./data/repository"
 	import {errorToast, successToast} from "$lib/common/utils/toastUtils"
 	import {GoodsType} from "../data/goodsType"
+	import {GoodsStatus} from "../data/goodsStatus"
 
 	const defaultData: NonDiamondGoods = {
 		id: generateNumberId(),
 		created: null,
 		type: GoodsType.NON_DIAMOND,
+		status: GoodsStatus.AVAILABLE,
 		groupCode: "",
 		chamferCode: "",
 		kindCode: "",

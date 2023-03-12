@@ -1,10 +1,12 @@
 import {GoodsType} from "./goodsType"
 import {DocumentData, FirestoreDataConverter, PartialWithFieldValue, QueryDocumentSnapshot, serverTimestamp} from "firebase/firestore"
+import {GoodsStatus} from "./goodsStatus"
 
 export type Goods = {
 	id: string
 	created: Date | null
 	type: GoodsType
+	status: GoodsStatus
 	groupCode: string
 	kindCode: string
 	chamferCode: string

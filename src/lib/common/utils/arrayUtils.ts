@@ -1,4 +1,4 @@
-export function removeIndex(array: any[], index: number | string) {
+export function removeIndex<T>(array: T[], index: number | string) {
     if (typeof index === "number")
         array.splice(index, 1)
     else

@@ -61,6 +61,7 @@
 
 	function add() {
 		$payments = $payments.concat({...payment, amount: clamp(payment.amount, 0, remainingBill)})
+		data.payments = $payments
 		payment.amount = 0
 		payment.details = {storeAccount: '', customerAccount: '', cardNumber: '', fee: 0}
 	}

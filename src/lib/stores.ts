@@ -23,6 +23,8 @@ import MarkisRepository from "$lib/master-data/markis/markisRepository"
 import {Markis} from "$lib/master-data/markis/markis"
 import DiamondStoneTypeRepository from "$lib/diamond/stone-type/repository"
 import {Diamond} from "$lib/diamond/diamond"
+import {BankAccountNumber} from "$lib/master-data/bank-account-number/bankAccountNumber"
+import BankAccountNumberRepository from "$lib/master-data/bank-account-number/bankAccountNumberRepository"
 
 export const currentUser: Readable<User | null> = readable(null, function start(set: Subscriber<User | null>) {
 	const repository = new UserRepository()
@@ -51,6 +53,7 @@ export const itemTypes = readable<ItemType[]>([], set => new ItemTypeRepository(
 export const suppliers = readable<Supplier[]>([], set => new SupplierRepository().listenChildren(set))
 export const warehouses = readable<Warehouse[]>([], set => new WarehouseRepository().listenChildren(set))
 export const markis = readable<Markis[]>([], set => new MarkisRepository().listenChildren(set))
+export const bankAccounts = readable<BankAccountNumber[]>([], set => new BankAccountNumberRepository().listenChildren(set))
 
 // Diamond stores
 export const stoneTypes = readable<Diamond[]>([], set => new DiamondStoneTypeRepository().listenChildren(set))

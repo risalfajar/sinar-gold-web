@@ -8,7 +8,6 @@
 	import {createRender, createTable} from "svelte-headless-table"
 	import {addSortBy, addTableFilter} from "svelte-headless-table/plugins"
 	import {LOCALE_INDONESIA} from "$lib/constants"
-	import TableActions from "./TableActions.svelte"
 	import {getRowData} from "$lib/common/utils/tableUtils"
 	import {triggerModal} from "$lib/common/utils/modalUtils"
 	import PrintDialog from "./PrintDialog.svelte"
@@ -19,6 +18,7 @@
 	import NonDiamondGoodsRepository from "../non-diamond/data/repository"
 	import DiamondDetailsDialog from "../diamond/DetailsDialog.svelte"
 	import NonDiamondDetailsDialog from "../non-diamond/DetailsDialog.svelte"
+	import PrintTableActions from "$lib/common/ui/table/PrintTableActions.svelte"
 
 	const repository = new DiamondGoodsRepository()
 	const storefront = writable('')
@@ -72,7 +72,7 @@
 		table.display({
 			id: 'actions',
 			header: 'Actions',
-			cell: (cell, state) => createRender(TableActions)
+			cell: (cell, state) => createRender(PrintTableActions)
 				.on('print', () => print(getRowData(state, cell)))
 		})
 	])

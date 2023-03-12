@@ -15,9 +15,10 @@ import {
     where,
 } from 'firebase/firestore'
 import {DateTime} from 'luxon'
-import firebase from "firebase/compat"
 
 export abstract class ReadOnlyFirestoreRepository<T> {
+    protected readonly dateField: string = 'created'
+
     abstract getId(item: T): string
 
     abstract getCollectionRef(): CollectionReference<T>
@@ -42,7 +43,7 @@ export abstract class ReadOnlyFirestoreRepository<T> {
     async getByDate(start: Date, end: Date) {
         const startDate = DateTime.fromJSDate(start).startOf('day').toJSDate()
         const endDate = DateTime.fromJSDate(end).endOf('day').toJSDate()
-        const q = query(this.getQuery('created'), where('created', '>=', startDate), where('created', '<=', endDate))
+        const q = query(this.getQuery(this.dateField), where(this.dateField, '>=', startDate), where(this.dateField, '<=', endDate))
         return this.getDocs(q)
     }
 
@@ -63,7 +64,7 @@ export abstract class ReadOnlyFirestoreRepository<T> {
     listenByDate(start: Date, end: Date, onChange: (data: T[]) => any) {
         const startDate = DateTime.fromJSDate(start).startOf('day').toJSDate()
         const endDate = DateTime.fromJSDate(end).endOf('day').toJSDate()
-        const q = query(this.getQuery('created'), where('created', '>=', startDate), where('created', '<=', endDate))
+        const q = query(this.getQuery(this.dateField), where(this.dateField, '>=', startDate), where(this.dateField, '<=', endDate))
         return onSnapshot(q, (snapshot) => {
             const data: T[] = this.convertObjects(snapshot)
             onChange(data)

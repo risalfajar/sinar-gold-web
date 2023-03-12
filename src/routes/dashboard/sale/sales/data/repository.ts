@@ -6,6 +6,8 @@ import {COLLECTION_SALES} from "$lib/constants"
 import {httpsCallable, HttpsCallableResult} from "firebase/functions"
 
 export default class SalesRepository extends ReadOnlyFirestoreRepository<Sales> {
+	protected readonly dateField: string = 'createdAt'
+
 	getCollectionRef(): CollectionReference<Sales> {
 		return collection(Firestore, COLLECTION_SALES).withConverter(salesConverter)
 	}

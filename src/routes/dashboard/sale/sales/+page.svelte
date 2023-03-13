@@ -26,6 +26,10 @@
 			accessor: (item) => item.createdAt!.toLocaleDateString(LOCALE_INDONESIA)
 		}),
 		table.column({
+			header: 'Nomor Faktur',
+			accessor: 'id'
+		}),
+		table.column({
 			id: 'salesmanCode',
 			header: 'Kode Sales',
 			accessor: (item) => item.customer.salesmanCode

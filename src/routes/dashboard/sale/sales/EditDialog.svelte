@@ -83,7 +83,7 @@
 		createdAt: null,
 		createdBy: '', // will be reassigned by back-end
 		status: SalesStatus.WAITING,
-		customer: {address: "", name: "", phoneNumber: "", salesmanCode: "", type: CustomerType.MEMBER},
+		customer: {id: "", address: "", name: "", phoneNumber: "", salesmanCode: "", type: CustomerType.MEMBER},
 		goods: {},
 		priceDetails: {
 			sale: 0,

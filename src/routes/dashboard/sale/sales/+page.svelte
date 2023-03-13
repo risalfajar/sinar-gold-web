@@ -12,6 +12,7 @@
 	import {LOCALE_INDONESIA} from "$lib/constants"
 	import PrintTableActions from "$lib/common/ui/table/PrintTableActions.svelte"
 	import DataTable from "$lib/common/ui/table/DataTable.svelte"
+	import DetailsDialog from "./DetailsDialog.svelte"
 
 	const repository = new SalesRepository()
 	const startDate = writable(new Date())
@@ -67,6 +68,16 @@
 			meta: {mandatory: true}
 		})
 	}
+
+	function openDetailsDialog(data: Sales) {
+		triggerModal({
+			type: 'component',
+			component: {
+				ref: DetailsDialog,
+				props: {data}
+			}
+		})
+	}
 </script>
 
 <TableContainer>
@@ -76,5 +87,5 @@
     </svelte:fragment>
     <Button slot="buttons" class="variant-filled-primary" on:click={openCreateDialog}>Buat Penjualan</Button>
 
-    <DataTable model={table.createViewModel(columns)} clickable/>
+    <DataTable model={table.createViewModel(columns)} clickable on:click={(e) => openDetailsDialog(e.detail)}/>
 </TableContainer>
